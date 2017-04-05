@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Grundfarben-->
+    <color name="colorPrimary">#ff0099cc</color>
+    <color name="colorPrimaryDark">#ff0088cc</color>
+    <color name="colorAccent">#ff91d50d</color>
+
+    <!--Hintergrundfarbe-->
+    <color name="colorBackground">#ffaecfe2</color>
+
+    <!--Spielsteinfarben-->
+    <color name="colorRed">#ffcc0000</color>
+    <color name="colorYellow">#ffffbb33</color>
+    <color name="colorRedHint">#66cc0000</color>
+    <color name="colorYellowHint">#88ffbb33</color>
+
+    <!--Textfarben-->
+    <color name="colorButtonText">#ffe6eff4</color>
+
+</resources>

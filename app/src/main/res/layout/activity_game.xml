@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="7"
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.GameActivity">
+
+    <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
+    <LinearLayout
+        style="@style/LinearLayoutColumn"
+        android:id="@+id/linearlayout1"
+        android:tag="0"/>
+
+    <LinearLayout
+        android:id="@+id/linearlayout2"
+        style="@style/LinearLayoutColumn"
+        android:tag="1" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout3"
+        style="@style/LinearLayoutColumn"
+        android:tag="2" />
+
+    <LinearLayout
+        style="@style/LinearLayoutColumn"
+        android:id="@+id/linearlayout4"
+        android:tag="3" />
+
+    <LinearLayout
+        style="@style/LinearLayoutColumn"
+        android:id="@+id/linearlayout5"
+        android:tag="4"/>
+
+    <LinearLayout
+        style="@style/LinearLayoutColumn"
+        android:id="@+id/linearlayout6"
+        android:tag="5" />
+
+    <LinearLayout
+        style="@style/LinearLayoutColumn"
+        android:id="@+id/linearlayout7"
+        android:tag="6" />
+
+</LinearLayout>

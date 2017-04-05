@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Name der App-->
+    <string name="app_name">4.1 Gewinnt</string>
+
+    <!--Buttons-->
+    <string name="button_start">Start Game</string>
+    <string name="button_visit">Visit Game</string>
+    <string name="button_highscores">Highscores</string>
+
+    <!--TextViews-->
+    <string name="textview_score">0</string>
+    <string name="textview_vs">:</string>
+
+    <!--EditTexts-->
+    <string name="edittext_player1">Player 1</string>
+    <string name="edittext_player2">Player 2</string>
+
+</resources>

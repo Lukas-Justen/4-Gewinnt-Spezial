@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Style für die App-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--Style für die EditTexts zur Eingabe der Spielernamen im Startmenu-->
+    <style name="EditTextPlayer">
+        <item name="android:layout_width">0sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/edittext_player_text</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--Style für die TextViews zur Anzeige des aktuellen Punktestands-->
+    <style name="TextViewScore">
+        <item name="android:layout_width">0sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:textSize">@dimen/textView_score_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/textview_score</item>
+    </style>
+
+    <!--Style für die Button die im Startmenu angebracht sind-->
+    <style name="ButtonStartActivity">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+        <item name="android:paddingBottom">@dimen/button_startactivity_padding_topbottom</item>
+        <item name="android:paddingRight">@dimen/button_startactivity_padding_leftright</item>
+        <item name="android:paddingLeft">@dimen/button_startactivity_padding_leftright</item>
+        <item name="android:paddingTop">@dimen/button_startactivity_padding_topbottom</item>
+        <item name="android:textSize">@dimen/button_startactivity_text</item>
+        <item name="android:layout_margin">@dimen/button_startactivity_margin</item>
+    </style>
+
+    <!--Das Style für die Spalten des Spielfeldes-->
+    <style name="LinearLayoutColumn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:weightSum">6</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+</resources>

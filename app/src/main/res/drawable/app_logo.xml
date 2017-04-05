@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="150dp"
+    android:viewportHeight="1024"
+    android:viewportWidth="1024">
+    <path
+        android:name="Form 1"
+        android:fillColor="#0099cc"
+        android:pathData="m512 35.1c263.4 0 476.9 213.5 476.9 476.9c0 263.4 -213.5 476.9 -476.9 476.9c-263.4 0 -476.9 -213.5 -476.9 -476.9c0 -263.4 213.5 -476.9 476.9 -476.9z" />
+    <path
+        android:name="Form 14"
+        android:fillColor="#0088cc"
+        android:pathData="m179.3 354.9 68.3 -73.1 593.7 554.7 -68.3 73.1 -593.7 -554.7z" />
+    <path
+        android:name="Form 15"
+        android:fillColor="#0088cc"
+        android:pathData="m177.8 549.9 68.1 -73.2 452.8 421.3 -68.1 73.2 -452.8 -421.3z" />
+    <path
+        android:name="Form 16"
+        android:fillColor="#0088cc"
+        android:pathData="m383.3 355 67.9 -73.4 484.3 448.3 -67.9 73.4 -484.3 -448.3z" />
+    <path
+        android:name="Form 17"
+        android:fillColor="#0088cc"
+        android:pathData="m582.2 355.9 66.1 -75.1 337.3 296.9 -66.1 75.1 -337.3 -296.9z" />
+    <path
+        android:name="Form 19"
+        android:fillColor="#0088cc"
+        android:pathData="m182.2 745.9 68.6 -72.7 249 235 -68.6 72.7 -249 -235z" />
+    <path
+        android:name="Form 20"
+        android:fillColor="#0088cc"
+        android:pathData="m330.4 763.1 6.8 -7.3 236.7 222.3 -6.8 7.3 -236.7 -222.3z" />
+    <path
+        android:name="Form 21"
+        android:fillColor="#0088cc"
+        android:pathData="m583.2 803.8 6.9 -7.3 142.5 134.3 -6.9 7.3 -142.5 -134.3z" />
+    <path
+        android:name="Form 22"
+        android:fillColor="#0088cc"
+        android:pathData="m689.2 903 6.9 -7.3 36.5 34.5 -6.9 7.3 -36.5 -34.5z" />
+    <path
+        android:name="Form 23"
+        android:fillColor="#0088cc"
+        android:pathData="m739.5 756 6.8 -7.3 105 97.5 -6.8 7.3 -105 -97.5z" />
+    <path
+        android:name="Form 24"
+        android:fillColor="#0088cc"
+        android:pathData="m756.2 700.5 6.8 -7.3 123.8 114.3 -6.8 7.3 -123.8 -114.3z" />
+    <path
+        android:name="Form 18"
+        android:fillColor="#0088cc"
+        android:pathData="m784.8 355.3 65.5 -75.6 120 104 -65.5 75.6 -120 -104z" />
+    <path
+        android:name="Form 2"
+        android:fillColor="#cc0000"
+        android:pathData="m216 269c27.6 0 50 22.4 50 50c0 27.6 -22.4 50 -50 50c-27.6 0 -50 -22.4 -50 -50c0 -27.6 22.4 -50 50 -50z" />
+    <path
+        android:name="Form 3"
+        android:fillColor="#cc0000"
+        android:pathData="m421 461.1c27.6 0 49.9 22.3 49.9 49.9c0 27.6 -22.3 49.9 -49.9 49.9c-27.6 0 -49.9 -22.3 -49.9 -49.9c0 -27.6 22.3 -49.9 49.9 -49.9z" />
+    <path
+        android:name="Form 4"
+        android:fillColor="#cc0000"
+        android:pathData="m625.5 460.9c27.6 0 50.1 22.4 50.1 50.1c0 27.6 -22.4 50.1 -50.1 50.1c-27.6 0 -50.1 -22.4 -50.1 -50.1c0 -27.6 22.4 -50.1 50.1 -50.1z" />
+    <path
+        android:name="Form 5"
+        android:fillColor="#cc0000"
+        android:pathData="m836.5 461.8c27.8 0 50.2 22.5 50.2 50.2c0 27.8 -22.5 50.2 -50.2 50.2c-27.8 0 -50.2 -22.5 -50.2 -50.2c0 -27.8 22.5 -50.2 50.2 -50.2z" />
+    <path
+        android:name="Form 6"
+        android:fillColor="#cc0000"
+        android:pathData="m625 654.3c27.1 0 49.2 22 49.2 49.2c0 27.1 -22 49.2 -49.2 49.2c-27.1 0 -49.2 -22 -49.2 -49.2c0 -27.1 22 -49.2 49.2 -49.2z" />
+    <path
+        android:name="Form 7"
+        android:fillColor="#ffbb33"
+        android:pathData="m419 268.4c27.9 0 50.6 22.6 50.6 50.6c0 27.9 -22.6 50.6 -50.6 50.6c-27.9 0 -50.6 -22.6 -50.6 -50.6c0 -27.9 22.6 -50.6 50.6 -50.6z" />
+    <path
+        android:name="Form 8"
+        android:fillColor="#ffbb33"
+        android:pathData="m617.7 269.3c27.5 0 49.7 22.3 49.7 49.7c0 27.5 -22.3 49.7 -49.7 49.7c-27.5 0 -49.7 -22.3 -49.7 -49.7c0 -27.5 22.3 -49.7 49.7 -49.7z" />
+    <path
+        android:name="Form 9"
+        android:fillColor="#ffbb33"
+        android:pathData="m818.7 268.7c27.8 0 50.3 22.5 50.3 50.3c0 27.8 -22.5 50.3 -50.3 50.3c-27.8 0 -50.3 -22.5 -50.3 -50.3c0 -27.8 22.5 -50.3 50.3 -50.3z" />
+    <path
+        android:name="Form 10"
+        android:fillColor="#ffbb33"
+        android:pathData="m212.7 464.1c27.4 0 49.6 22.2 49.6 49.6c0 27.4 -22.2 49.6 -49.6 49.6c-27.4 0 -49.6 -22.2 -49.6 -49.6c0 -27.4 22.2 -49.6 49.6 -49.6z" />
+    <path
+        android:name="Form 11"
+        android:fillColor="#ffbb33"
+        android:pathData="m216 659c27.6 0 50 22.4 50 50c0 27.6 -22.4 50 -50 50c-27.6 0 -50 -22.4 -50 -50c0 -27.6 22.4 -50 50 -50z" />
+    <path
+        android:name="Form 12"
+        android:fillColor="#ffbb33"
+        android:pathData="m420.7 657.8c27.7 0 50.2 22.5 50.2 50.2c0 27.7 -22.5 50.2 -50.2 50.2c-27.7 0 -50.2 -22.5 -50.2 -50.2c0 -27.7 22.5 -50.2 50.2 -50.2z" />
+    <path
+        android:name="Form 13"
+        android:fillColor="#ffbb33"
+        android:pathData="m836.7 656.9c27.3 0 49.4 22.1 49.4 49.4c0 27.3 -22.1 49.4 -49.4 49.4c-27.3 0 -49.4 -22.1 -49.4 -49.4c0 -27.3 22.1 -49.4 49.4 -49.4z" />
+    <path
+        android:name="Form 25"
+        android:fillColor="#0088cc"
+        android:pathData="m837.1 579.4 6.6 -7.5 116.3 103.3 -6.6 7.5 -116.3 -103.3z" />
+    <path
+        android:name="Form 26"
+        android:fillColor="#0088cc"
+        android:pathData="m832.6 397.2 6.5 -7.6 150 127.8 -6.5 7.6 -150 -127.8z" />
+    <path
+        android:name="Form 27"
+        android:fillColor="#0088cc"
+        android:pathData="m493.7 966c36.6 0 66.3 4.7 66.3 10.5c0 5.8 -29.7 10.5 -66.3 10.5c-36.6 0 -66.3 -4.7 -66.3 -10.5c0 -5.8 29.7 -10.5 66.3 -10.5z" />
+    <path
+        android:name="Form 27 Kopie 4"
+        android:fillColor="#0088cc"
+        android:pathData="m506.3 966.3c36.6 2.3 65.9 8.9 65.5 14.7c-0.4 5.8 -30.3 8.6 -66.9 6.3c-36.6 -2.3 -65.9 -8.9 -65.5 -14.7c0.4 -5.8 30.3 -8.6 66.9 -6.3z" />
+    <path
+        android:name="Form 28"
+        android:fillColor="#0088cc"
+        android:pathData="m437 915h62v60.8h-62v-60.8z" />
+    <path
+        android:name="Form 29"
+        android:fillColor="#0088cc"
+        android:pathData="m545.4 957 -19 23.2 -51.5 -42.3 19 -23.2 51.5 42.3z" />
+    <path
+        android:name="Form 30"
+        android:fillColor="#0088cc"
+        android:pathData="m478.9 966.5 15.5 -25.7 24.8 15 -15.5 25.7 -24.8 -15z" />
+    <path
+        android:name="Form 31"
+        android:fillColor="#0088cc"
+        android:pathData="m547.3 981.2 -21.8 -20.6 9.3 -9.8 21.8 20.6 -9.3 9.8z" />
+    <path
+        android:name="Form 32"
+        android:fillColor="#0088cc"
+        android:pathData="m662.9 956.2 -15.6 -25.6 46.5 -28.3 15.6 25.6 -46.5 28.3z" />
+    <path
+        android:name="Form 33"
+        android:fillColor="#0088cc"
+        android:pathData="m716 935.2 -21.8 -20.6 4.5 -4.8 21.8 20.6 -4.5 4.8z" />
+    <path
+        android:name="Form 27 Kopie"
+        android:fillColor="#0088cc"
+        android:pathData="m674.5 937.1c28.4 -9.6 53 -12.9 54.8 -7.4c1.9 5.5 -19.7 17.7 -48.1 27.3c-28.4 9.6 -53 12.9 -54.8 7.4c-1.9 -5.5 19.7 -17.7 48.1 -27.3z" />
+    <path
+        android:name="Form 27 Kopie 5"
+        android:fillColor="#0088cc"
+        android:pathData="m672.5 937.3c26.7 -12.1 50.2 -17.8 52.6 -12.6c2.3 5.2 -17.4 19.2 -44.1 31.3c-26.7 12.1 -50.2 17.8 -52.6 12.6c-2.3 -5.2 17.4 -19.2 44.1 -31.3z" />
+    <path
+        android:name="Form 27 Kopie 2"
+        android:fillColor="#0088cc"
+        android:pathData="m804.4 864.5c20.3 -14.9 39 -23.8 41.9 -19.9c2.9 3.9 -11.2 19.2 -31.5 34.1c-20.3 14.9 -39 23.8 -41.9 19.9c-2.9 -3.9 11.2 -19.2 31.5 -34.1z" />
+    <path
+        android:name="Form 27 Kopie 3"
+        android:fillColor="#0088cc"
+        android:pathData="m798.2 868.5c18.1 -17.5 35.5 -28.9 38.9 -25.4c3.4 3.5 -8.5 20.5 -26.6 38c-18.1 17.5 -35.5 28.9 -38.9 25.4c-3.4 -3.5 8.5 -20.5 26.6 -38z" />
+    <path
+        android:name="Form 34"
+        android:fillColor="#0088cc"
+        android:pathData="m568.8 981.6 3.2 -3.9 4.3 3.5 -3.2 3.9 -4.3 -3.5z" />
+    <path
+        android:name="Form 35"
+        android:fillColor="#0088cc"
+        android:pathData="m727.5 931.6 4.3 -2.5 2.5 4.3 -4.3 2.5 -2.5 -4.3z" />
+    <path
+        android:name="Form 36"
+        android:fillColor="#0088cc"
+        android:pathData="m629.2 969.2 3.9 -3.1 3 3.8 -3.9 3.1 -3 -3.8z" />
+    <path
+        android:name="Form 37"
+        android:fillColor="#0088cc"
+        android:pathData="m568.9 984.6 -0.1 -2 8.3 -0.5 0.1 2 -8.3 0.5z" />
+    <path
+        android:name="Form 38"
+        android:fillColor="#0088cc"
+        android:pathData="m932.6 728.2c3.9 3.1 -6.1 22.3 -22.3 43c-16.2 20.7 -32.6 35 -36.5 31.9c-3.9 -3.1 6.1 -22.3 22.3 -43c16.2 -20.7 32.6 -35 36.5 -31.9z" />
+    <path
+        android:name="Form 38 Kopie"
+        android:fillColor="#0088cc"
+        android:pathData="m927.1 726.4c4.2 2.7 -3.4 23.5 -17 46.6c-13.7 23 -28.2 39.5 -32.4 36.8c-4.2 -2.7 3.4 -23.5 17 -46.6c13.7 -23 28.2 -39.5 32.4 -36.8z" />
+    <path
+        android:name="Form 39"
+        android:fillColor="#0088cc"
+        android:pathData="m968 383.8c6.3 0 11.4 26.5 11.4 59.2c0 32.7 -5.1 59.2 -11.4 59.2c-6.3 0 -11.4 -26.5 -11.4 -59.2c0 -32.7 5.1 -59.2 11.4 -59.2z" />
+    <path
+        android:name="Form 39 Kopie"
+        android:fillColor="#0088cc"
+        android:pathData="m962 405.8c6.2 -1.2 16.1 23.9 22.2 56c6.1 32.1 6 59.1 -0.2 60.3c-6.2 1.2 -16.1 -23.9 -22.2 -56c-6.1 -32.1 -6 -59.1 0.2 -60.3z" />
+    <path
+        android:name="Form 39 Kopie 2"
+        android:fillColor="#0088cc"
+        android:pathData="m966.1 393.4c6.3 -0.8 14.3 26.4 18.1 60.7c3.7 34.3 1.7 62.7 -4.6 63.5c-6.3 0.8 -14.3 -26.4 -18.1 -60.7c-3.7 -34.3 -1.7 -62.7 4.6 -63.5z" />
+    <path
+        android:name="Form 40"
+        android:fillColor="#0088cc"
+        android:pathData="m982 523.6 1.5 -1.4 5 5.4 -1.5 1.4 -5 -5.4z" />
+    <path
+        android:name="Form 41"
+        android:fillColor="#0088cc"
+        android:pathData="m987.9 527.1 -2 -0 0.2 -10.4 2 0 -0.2 10.4z" />
+    <path
+        android:name="Form 42"
+        android:fillColor="#0088cc"
+        android:pathData="m986.7 524 -1.9 0.5 -1.2 -4.4 1.9 -0.5 1.2 4.4z" />
+    <path
+        android:name="Form 43"
+        android:fillColor="#0088cc"
+        android:pathData="m940.2 477.5 -39 -31.2 35.2 -44 39 31.2 -35.2 44z" />
+    <path
+        android:name="Form 44"
+        android:fillColor="#0088cc"
+        android:pathData="m940.2 435.4 5.3 -49.7 22.4 2.4 -5.3 49.7 -22.4 -2.4z" />
+    <path
+        android:name="Form 45"
+        android:fillColor="#0088cc"
+        android:pathData="m945.6 445 38.6 31.8 -19.8 24 -38.6 -31.8 19.8 -24z" />
+    <path
+        android:name="Form 46"
+        android:fillColor="#0088cc"
+        android:pathData="m978.2 573.6c6.4 2.1 3.8 26.1 -5.7 53.5c-9.5 27.4 -22.4 48 -28.7 45.8c-6.4 -2.1 -3.8 -26.1 5.7 -53.5c9.5 -27.4 22.4 -48 28.7 -45.8z" />
+    <path
+        android:name="Form 47"
+        android:fillColor="#0088cc"
+        android:pathData="m915.3 647.1 32.9 -37.7 22 19.2 -32.9 37.7 -22 -19.2z" />
+    <path
+        android:name="Form 48"
+        android:fillColor="#0088cc"
+        android:pathData="m981.5 579.9 2 0.3 -2.2 13.6 -2 -0.3 2.2 -13.6z" />
+    <path
+        android:name="Form 49"
+        android:fillColor="#0088cc"
+        android:pathData="m952.9 680.7 1.5 -1.3 2.8 3.4 -1.5 1.3 -2.8 -3.4z" />
+    <path
+        android:name="Form 50"
+        android:fillColor="#0088cc"
+        android:pathData="m956.4 682.5 -1.8 -0.8 2.4 -5.6 1.8 0.8 -2.4 5.6z" />
+    <path
+        android:name="Form 51"
+        android:fillColor="#0088cc"
+        android:pathData="m978.9 580.7c3 0.8 -0.1 23.8 -7 51.5c-6.9 27.7 -14.9 49.5 -18 48.8c-3 -0.8 0.1 -23.8 7 -51.5c6.9 -27.7 14.9 -49.5 18 -48.8z" />
+    <path
+        android:name="Form 52"
+        android:fillColor="#0088cc"
+        android:pathData="m952.1 665.9h2v4.4h-2v-4.4z" />
+</vector>

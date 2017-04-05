@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--TextSizes-->
+    <dimen name="textView_score_text">64sp</dimen>
+    <dimen name="edittext_player_text">32sp</dimen>
+    <dimen name="button_startactivity_text">25sp</dimen>
+
+    <!--Paddings-->
+    <dimen name="button_startactivity_padding_leftright">32sp</dimen>
+    <dimen name="button_startactivity_padding_topbottom">8sp</dimen>
+
+    <!--Margins-->
+    <dimen name="button_startactivity_margin">8sp</dimen>
+
+</resources>

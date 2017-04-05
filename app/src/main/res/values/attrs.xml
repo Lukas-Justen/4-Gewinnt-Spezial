@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Die zusätzlichen Attribute, die für den CustomEditText benötigt werden-->
+    <declare-styleable name="CustomEditText">
+        <attr name="exchangeColor" format="color" />
+        <attr name="standardColor" format="color" />
+    </declare-styleable>
+
+</resources>
