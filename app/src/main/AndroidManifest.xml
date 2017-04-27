@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".StartActivity"
-            android:screenOrientation="portrait">
+            android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -22,6 +21,10 @@
         <activity
             android:name=".GameActivity"
             android:screenOrientation="landscape" />
+
+        <activity android:name=".StartLocalActivity" />
+
+        <activity android:name=".StartOnlineActivity" />
 
     </application>
 

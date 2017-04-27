@@ -51,7 +51,7 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
                 0, 0);
 
         try {
-            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, getResources().getColor(R.color.colorBackground));
+            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, getResources().getColor(R.color.windowBackgroundColor));
             standardColor = a.getColor(R.styleable.CustomEditText_standardColor, getResources().getColor(R.color.colorPrimaryDark));
         } finally {
             a.recycle();
@@ -77,7 +77,7 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
                 0, 0);
 
         try {
-            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, getResources().getColor(R.color.colorBackground));
+            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, getResources().getColor(R.color.windowBackgroundColor));
             standardColor = a.getColor(R.styleable.CustomEditText_standardColor, getResources().getColor(R.color.colorPrimaryDark));
         } finally {
             a.recycle();
