@@ -22,9 +22,9 @@
             android:name=".GameActivity"
             android:screenOrientation="landscape" />
 
-        <activity android:name=".StartLocalActivity" />
+        <activity android:name=".LocalActivity" />
 
-        <activity android:name=".StartOnlineActivity" />
+        <activity android:name=".OnlineActivity" />
 
     </application>
 

@@ -13,7 +13,7 @@
 
     <!--TextViews-->
     <string name="textview_score">0</string>
-    <string name="textview_vs">:</string>
+    <string name="textview_colon">:</string>
 
     <!--EditTexts-->
     <string name="edittext_this_player">Dein Spielername</string>
