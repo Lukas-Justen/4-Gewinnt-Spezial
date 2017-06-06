@@ -12,15 +12,15 @@
     <string name="button_start">Start</string>
 
     <!--TextViews-->
-    <string name="textview_score">0</string>
-    <string name="textview_colon">:</string>
+    <string name="textView_score">0</string>
+    <string name="textView_colon">:</string>
 
     <!--EditTexts-->
-    <string name="edittext_this_player">Dein Spielername</string>
-    <string name="edittext_player1">Player 1</string>
-    <string name="edittext_player2">Player 2</string>
+    <string name="editText_thisPlayer">Dein Spielername</string>
+    <string name="editText_player1">Player 1</string>
+    <string name="editText_player2">Player 2</string>
 
     <!--Content Descriptions-->
-    <string name="content_description_applogo">Shows the logo of the app</string>
+    <string name="contentDescription_applogo">Shows the logo of the app</string>
 
 </resources>

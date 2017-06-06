@@ -1,4 +1,4 @@
-package de.thbingen.movs.lukas.a4gewinntspezial;
+package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

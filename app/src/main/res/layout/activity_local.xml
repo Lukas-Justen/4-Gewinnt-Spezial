@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.StartActivity">
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.StartActivity">
 
 
     <!--Die Oberen 40% des Bildschirms stellen lediglich das App-Logo dar-->
@@ -20,8 +20,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="@string/content_description_applogo"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        android:contentDescription="@string/contentDescription_applogo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/app_logo" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guideline_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -40,7 +40,7 @@
     <!--In der unteren Hälfte findet der jeweilige Spieler die Schaltflächen zum Starten des Spiels bzw.-->
     <!--zum Einsehen des aktuellen Spielstandes-->
     <TextView
-        android:id="@+id/textview_score_player1"
+        android:id="@+id/textview_scorePlayer1"
         style="@style/TextViewScore"
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="8dp"
@@ -62,16 +62,16 @@
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/textview_colon"
+        android:text="@string/textView_colon"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/textView_score_text"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_1" />
 
     <TextView
-        android:id="@+id/textview_score_player2"
+        android:id="@+id/textview_scorePlayer2"
         style="@style/TextViewScore"
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="8dp"
@@ -91,14 +91,14 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
-        android:hint="@string/edittext_player1"
+        android:hint="@string/editText_player1"
         android:textColor="@color/colorRed"
         android:textColorHint="@color/colorRedTransparent"
         app:exchangeColor="@color/windowBackgroundColor"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/textview_score_player1"
-        app:layout_constraintRight_toRightOf="@+id/textview_score_player1"
-        app:layout_constraintTop_toBottomOf="@+id/textview_score_player1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_scorePlayer1"
+        app:layout_constraintRight_toRightOf="@+id/textview_scorePlayer1"
+        app:layout_constraintTop_toBottomOf="@+id/textview_scorePlayer1"
         app:standardColor="@color/colorRed" />
 
     <de.thbingen.movs.lukas.a4gewinntspezial.CustomEditText
@@ -107,27 +107,29 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
-        android:hint="@string/edittext_player2"
+        android:hint="@string/editText_player2"
         android:textColor="@color/colorYellow"
         android:textColorHint="@color/colorYellowTransparent"
         app:exchangeColor="@color/windowBackgroundColor"
-        app:layout_constraintLeft_toLeftOf="@+id/textview_score_player2"
-        app:layout_constraintRight_toRightOf="@+id/textview_score_player2"
-        app:layout_constraintTop_toBottomOf="@+id/textview_score_player2"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_scorePlayer2"
+        app:layout_constraintRight_toRightOf="@+id/textview_scorePlayer2"
+        app:layout_constraintTop_toBottomOf="@+id/textview_scorePlayer2"
         app:standardColor="@color/colorYellow" />
 
     <Button
-        android:id="@+id/button_local"
+        android:id="@+id/button_startLocal"
         style="@style/ButtonStartActivity"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/button_start"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_player1" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_player1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>

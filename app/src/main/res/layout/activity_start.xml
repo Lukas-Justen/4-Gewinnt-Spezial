@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.StartActivity">
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.StartActivity">
 
 
     <!--Die Oberen 40% des Bildschirms stellen lediglich das App-Logo dar-->
@@ -20,8 +20,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="@string/content_description_applogo"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        android:contentDescription="@string/contentDescription_applogo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/app_logo" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guideline_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -38,27 +38,7 @@
 
 
     <!--In der unteren Hälfte findet der jeweilige Spieler die Schaltflächen zum Starten des Spiels bzw.-->
-    <!--zum Einsehen der Highscores und eine Möglichkeit zur Eingabe seines Spielername-->
-    <de.thbingen.movs.lukas.a4gewinntspezial.CustomEditText
-        android:id="@+id/edittext_this_player"
-        style="@style/EditTextPlayer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:hint="@string/edittext_this_player"
-        android:textColor="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimaryTransparent"
-        app:exchangeColor="@color/windowBackgroundColor"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:standardColor="@color/colorPrimaryTransparent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintBottom_toTopOf="@+id/button_local"
-        app:layout_constraintTop_toBottomOf="@+id/guideline1" />
-
+    <!--zum Einsehen der Highscores-->
     <Button
         android:id="@+id/button_local"
         style="@style/ButtonStartActivity"
@@ -69,11 +49,13 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/button_local"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/button_online"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_this_player"
-        app:layout_constraintBottom_toTopOf="@+id/button_online" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="@+id/guideline_1"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/button_online"
@@ -85,11 +67,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/button_online"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/button_highscores"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_local"
-        app:layout_constraintBottom_toTopOf="@+id/button_highscores" />
+        app:layout_constraintTop_toBottomOf="@+id/button_local" />
 
     <Button
         android:id="@+id/button_highscores"
@@ -101,10 +83,10 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/button_highscores"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_online"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button_online" />
 
 </android.support.constraint.ConstraintLayout>

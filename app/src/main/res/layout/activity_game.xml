@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:weightSum="7"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.GameActivity">
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.GameActivity">
 
     <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
     <LinearLayout

@@ -1,7 +1,9 @@
-package de.thbingen.movs.lukas.a4gewinntspezial;
+package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import de.thbingen.movs.lukas.a4gewinntspezial.R;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -24,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
      * beispielsweise das Spielfeld generiert, aber auch die Kommunikation zu dem anderen Gerät
      * gehandelt.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState Kann benutzt werden, um Inhalte der App wieder herzustellen
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
