@@ -14,7 +14,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          <p>
  *          Die Klasse StartActivity stellt den StartScreen der App zur Verfügung. Zusätzlich bietet
  *          die Oberfläche Möglichkeiten zum Starten eines neuen Online-Games bzw. eines neuen
- *          lokalenSpiels. Neben dem Startenneuer Spiele wird aber auch eine Liste aller Highscores
+ *          Lokalen-Games. Neben dem Startenneuer Spiele wird aber auch eine Liste aller Highscores
  *          angeboten, die man über den Button "Highscores" einsehen kann.
  */
 public class StartActivity extends FullscreenActivity implements View.OnClickListener {

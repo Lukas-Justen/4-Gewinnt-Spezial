@@ -6,8 +6,8 @@
     <string name="app_name">4.1 Gewinnt</string>
 
     <!--Buttons-->
-    <string name="button_local">Local Game</string>
-    <string name="button_online">Online Game</string>
+    <string name="button_local">Lokal</string>
+    <string name="button_online">Online</string>
     <string name="button_highscores">Highscores</string>
     <string name="button_start">Start</string>
 
@@ -17,10 +17,10 @@
 
     <!--EditTexts-->
     <string name="editText_thisPlayer">Dein Spielername</string>
-    <string name="editText_player1">Player 1</string>
-    <string name="editText_player2">Player 2</string>
+    <string name="editText_player1">Spieler 1</string>
+    <string name="editText_player2">Spieler 2</string>
 
-    <!--Content Descriptions-->
-    <string name="contentDescription_applogo">Shows the logo of the app</string>
+    <!--ImageViews-->
+    <string name="imageView_applogo">Shows the logo of the app</string>
 
 </resources>

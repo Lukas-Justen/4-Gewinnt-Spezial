@@ -7,42 +7,42 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:weightSum="7"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.GameActivity">
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineGameActivity">
 
     <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
     <LinearLayout
         style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayout1"
+        android:id="@+id/linearlayoutOnline1"
         android:tag="0"/>
 
     <LinearLayout
-        android:id="@+id/linearlayout2"
+        android:id="@+id/linearlayoutOnline2"
         style="@style/LinearLayoutColumn"
         android:tag="1" />
 
     <LinearLayout
-        android:id="@+id/linearlayout3"
+        android:id="@+id/linearlayoutOnline3"
         style="@style/LinearLayoutColumn"
         android:tag="2" />
 
     <LinearLayout
         style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayout4"
+        android:id="@+id/linearlayoutOnline4"
         android:tag="3" />
 
     <LinearLayout
         style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayout5"
+        android:id="@+id/linearlayoutOnline5"
         android:tag="4"/>
 
     <LinearLayout
         style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayout6"
+        android:id="@+id/linearlayoutOnline6"
         android:tag="5" />
 
     <LinearLayout
         style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayout7"
+        android:id="@+id/linearlayoutOnline7"
         android:tag="6" />
 
 </LinearLayout>

@@ -20,6 +20,16 @@ public abstract class FullscreenActivity extends AppCompatActivity {
     private View decorView;
 
     /**
+     * Wenn sich der Fokus auf die Activity ändert müssen die UI-Elemente wieder versteckt werden.
+     *
+     * @param hasFocus Der neue Fokus
+     */
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        hideSystemUI();
+    }
+
+    /**
      * Die onCreate wird von der Superclass aufgerufen und versteckt direkt zu Beginn alle UI-
      * Elemente des Systems. Die abgeleitete Klasse muss lediglich noch setContentView aufrufen, um
      * das zugrunde liegende Layout festzulegen.
@@ -51,16 +61,6 @@ public abstract class FullscreenActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
-
-    /**
-     * Wenn sich der Fokus auf die Activity ändert müssen die UI-Elemente wieder versteckt werden.
-     *
-     * @param hasFocus Der neue Fokus
-     */
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        hideSystemUI();
     }
 
 }
