@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import de.thbingen.movs.lukas.a4gewinntspezial.R;
+
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
  * @version 1.0
@@ -38,10 +40,11 @@ public abstract class FullscreenActivity extends AppCompatActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
         // Versteckt die Statusbar der App
         decorView = getWindow().getDecorView();
-        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             public void onSystemUiVisibilityChange(int visibility) {
                 hideSystemUI();
             }
@@ -61,6 +64,15 @@ public abstract class FullscreenActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    /**
+     * Überschreibt die Methode sodass beim Schließen einer Activity ebenfalls nur eine schlichte
+     * Animation erscheint.
+     */
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
 }

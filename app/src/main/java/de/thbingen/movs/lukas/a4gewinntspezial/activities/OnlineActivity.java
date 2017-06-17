@@ -16,7 +16,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          Gegner wählen. Die Actvity etabliert daraughin eine Datenverbindung zwischen den beiden
  *          Geräten, die zur Kommunikation benötigt wird.
  */
-public class OnlineActivity extends AppCompatActivity {
+public class OnlineActivity extends FullscreenActivity {
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als

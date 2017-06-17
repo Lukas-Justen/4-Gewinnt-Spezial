@@ -17,7 +17,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          Spiels. Neben dem Einsortieren der Spielsteine in die jeweiligen Spalten ist die Game-
  *          Activity auch für die Kommunikation zu dem Partnergerät verantwortlich.
  */
-public class OnlineGameActivity extends AppCompatActivity {
+public class OnlineGameActivity extends FullscreenActivity {
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als

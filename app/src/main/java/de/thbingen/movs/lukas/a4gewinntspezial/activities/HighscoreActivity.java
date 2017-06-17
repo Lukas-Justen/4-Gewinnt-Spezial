@@ -15,7 +15,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          wobei es zusätzlich die Möglichkeit gibt sich die Spielstände graphisch darstellen zu
  *          lassen.
  */
-public class HighscoreActivity extends AppCompatActivity {
+public class HighscoreActivity extends FullscreenActivity {
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als

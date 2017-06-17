@@ -15,7 +15,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          Highscores detailiert an. Hierzu werden Graphen und andere Textfelder verwendet. Neben
  *          denb Rohdaten kann es auch eine Platzierung anhand des Servers geben.
  */
-public class HighscoreDetailActivity extends AppCompatActivity {
+public class HighscoreDetailActivity extends FullscreenActivity {
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als

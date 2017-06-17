@@ -16,7 +16,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          Ergebnis in der Datenbank festgeschrieben. Bei einem solchen Spiel kann es während des
  *          Spiels eher weniger zu Störungen kommen als bei einem Online-Game.
  */
-public class LocalGameActivity extends AppCompatActivity {
+public class LocalGameActivity extends FullscreenActivity {
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als

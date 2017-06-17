@@ -41,7 +41,6 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_local);
 
         // Initialisiert die benötigten Views
