@@ -2,10 +2,14 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
+import de.thbingen.movs.lukas.a4gewinntspezial.TextWatcherAdapter;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -19,9 +23,14 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  */
 public class LocalActivity extends FullscreenActivity implements View.OnClickListener {
 
-    // Die beiden Textfelder zur Eingabe der Spielernamen
+    // Der Button zum Starten des Spiels
+    private View button_startLocal;
+
+    // Die beiden Textfelder und Variablen zur Überwachung der Eingabe der Spielernamen
     private EditText editText_player1;
+    private boolean player1 = false;
     private EditText editText_player2;
+    private boolean player2 = false;
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -32,15 +41,34 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_local);
 
-        // Initialisiert dden Button zum Starten des Spiels
-        View button_local = findViewById(R.id.button_startLocal);
-        button_local.setOnClickListener(this);
-
-        // Initialisiert die Textfelder zur EIngabe der Namen
+        // Initialisiert die benötigten Views
+        button_startLocal = findViewById(R.id.button_startLocal);
+        button_startLocal.setOnClickListener(this);
         editText_player1 = (EditText) findViewById(R.id.edittext_player1);
+        editText_player1.addTextChangedListener(new TextWatcherAdapter() {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                player1 = s.length() > 0;
+                if (player1 && player2) {
+                    button_startLocal.setVisibility(View.VISIBLE);
+                } else {
+                    button_startLocal.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
         editText_player2 = (EditText) findViewById(R.id.edittext_player2);
+        editText_player2.addTextChangedListener(new TextWatcherAdapter() {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                player2 = s.length() > 0;
+                if (player1 && player2) {
+                    button_startLocal.setVisibility(View.VISIBLE);
+                } else {
+                    button_startLocal.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     /**
@@ -53,6 +81,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         Intent startLocalGame = new Intent(this,LocalGameActivity.class);
         startLocalGame.putExtra("player1", editText_player1.getText().toString());
         startLocalGame.putExtra("player2", editText_player2.getText().toString());
+        startActivity(startLocalGame);
     }
 
 }
