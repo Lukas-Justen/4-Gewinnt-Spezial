@@ -40,7 +40,7 @@
     <!--In der unteren Hälfte findet der jeweilige Spieler die Schaltflächen zum Starten des Spiels bzw.-->
     <!--zum Einsehen des aktuellen Spielstandes-->
     <TextView
-        android:id="@+id/textview_scorePlayer1"
+        android:id="@+id/textview_localPlayer1"
         style="@style/TextViewScore"
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="8dp"
@@ -71,7 +71,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_1" />
 
     <TextView
-        android:id="@+id/textview_scorePlayer2"
+        android:id="@+id/textview_localPlayer2"
         style="@style/TextViewScore"
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="8dp"
@@ -96,9 +96,9 @@
         android:textColorHint="@color/colorRedTransparent"
         app:exchangeColor="@color/windowBackgroundColor"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/textview_scorePlayer1"
-        app:layout_constraintRight_toRightOf="@+id/textview_scorePlayer1"
-        app:layout_constraintTop_toBottomOf="@+id/textview_scorePlayer1"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_localPlayer1"
+        app:layout_constraintRight_toRightOf="@+id/textview_localPlayer1"
+        app:layout_constraintTop_toBottomOf="@+id/textview_localPlayer1"
         app:standardColor="@color/colorRed" />
 
     <de.thbingen.movs.lukas.a4gewinntspezial.CustomEditText
@@ -111,9 +111,9 @@
         android:textColor="@color/colorYellow"
         android:textColorHint="@color/colorYellowTransparent"
         app:exchangeColor="@color/windowBackgroundColor"
-        app:layout_constraintLeft_toLeftOf="@+id/textview_scorePlayer2"
-        app:layout_constraintRight_toRightOf="@+id/textview_scorePlayer2"
-        app:layout_constraintTop_toBottomOf="@+id/textview_scorePlayer2"
+        app:layout_constraintLeft_toLeftOf="@+id/textview_localPlayer2"
+        app:layout_constraintRight_toRightOf="@+id/textview_localPlayer2"
+        app:layout_constraintTop_toBottomOf="@+id/textview_localPlayer2"
         app:standardColor="@color/colorYellow" />
 
     <Button

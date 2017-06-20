@@ -14,23 +14,26 @@ import android.graphics.Point;
  *          zusätzlich die Position der Spielsteine mit der der Spieler gewonnen hat ausgegeben und
  *          angezeigt werden.
  */
-class Game {
-
-    private enum Player {P1, P2}
+public class Game {
 
     private final int COLUMNS;
     private final int ROWS;
+    private final String PLAYER_1;
+    private final String PLAYER_2;
+
     private Player turn = Player.P1;
     private Player[][] positions;
     private Point[] winPositions = new Point[4];
 
-    public Game() {
-        this(7, 6);
+    public Game(String player1, String player2) {
+        this(7, 6,player1, player2);
     }
 
-    public Game(int columns, int rows) {
+    private Game(int columns, int rows, String player1, String player2) {
         this.COLUMNS = columns;
         this.ROWS = rows;
+        this.PLAYER_1 = player1;
+        this.PLAYER_2 = player2;
         positions = new Player[COLUMNS][ROWS];
     }
 
@@ -40,7 +43,7 @@ class Game {
      * @param column Die Spalte in die man den Spielstein wirft.
      * @return -1, wenn der Spielstein nicht eingeworfen werden kann, sonst die Höhe von 0 an.
      */
-    int insert(int column) {
+    public int insert(int column) {
         int row = 0;
         while (row + 1 < ROWS && positions[column][row + 1] == null)
             row++;
@@ -58,12 +61,12 @@ class Game {
      *
      * @return true, wenn einer gewonnen hat, sonst false
      */
-    boolean checkWin() {
+    public boolean checkWin() {
         // Horizontal
         for(int i = 0; i < positions[0].length; i++)
         {
             int c = 0;
-            for(int x = 0; x < 7; x++)
+            for(int x = 0; x < COLUMNS; x++)
             {
                 Player[] p = positions[x];
                 if( p[i] == turn )
@@ -80,11 +83,11 @@ class Game {
         }
 
         // Vertikal
-        for(int x = 0; x < 7; x++)
+        for(int x = 0; x < COLUMNS; x++)
         {
             Player[] pc = positions[x];
             int c = 0;
-            for(int y = 0; y < 6; y++)
+            for(int y = 0; y < ROWS; y++)
             {
                 Player p = pc[y];
                 if( p == turn )
@@ -179,16 +182,36 @@ class Game {
     /**
      * Lässt den nächsten Spieler an die Reihe kommen.
      */
-    void nextPlayer() {
+    public void nextPlayer() {
         turn = turn == Player.P1 ? Player.P2 : Player.P1;
     }
 
-    Player getPlayerTurn() {
+    /**
+     * Gibt Auskunft darüber, welcher Spieler zur Zeit an der Reihe ist.
+     *
+     * @return Der Spieler der mit Einwerfen dran ist.
+     */
+    public Player getPlayerTurn() {
         return turn;
     }
 
+    /**
+     * Die Position der Spielsteine mit deren Hilfe der Sieger gewinnen konnte.
+     *
+     * @return Die 4 Positionen als Array
+     */
     public Point[] getWinPositions()
     {
         return winPositions;
     }
+
+    /**
+     * Gibt den Namen des aktuellen Spielers zurück.
+     *
+     * @return Der Name als String.
+     */
+    public String getPlayerName() {
+        return turn == Player.P1 ? PLAYER_1 : PLAYER_2;
+    }
+
 }

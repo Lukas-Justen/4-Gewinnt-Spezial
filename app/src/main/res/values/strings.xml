@@ -3,7 +3,7 @@
 <resources>
 
     <!--Name der App-->
-    <string name="app_name">4.1 Gewinnt</string>
+    <string name="app_name">4 Gewinnt</string>
 
     <!--Buttons-->
     <string name="button_local">Lokal</string>
