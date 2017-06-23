@@ -3,6 +3,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.LinearLayout;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
+import icepick.Icepick;
+import icepick.State;
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
@@ -32,6 +35,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     // Das Spielffeld
     private LinearLayout[] linearLayouts_Columns = new LinearLayout[7];
     private ImageView[][] imageViews_fields = new ImageView[7][6];
+    private KonfettiView konfettiView_local;
 
     // Die Spielvariable
     private Game game;
@@ -47,6 +51,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_game);
+        konfettiView_local = (KonfettiView) findViewById(R.id.konfettiView_local);
 
         // Legt ein neues Spiel an und Initialisiert die LinearLayouts für die Spalten
         Bundle receivedData = getIntent().getExtras();
@@ -91,18 +96,14 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
             int row = game.insert(column);
 
             if (row >= 0) {
-                if (game.getPlayerTurn() == Player.P1) {
-                    imageViews_fields[column][row].setImageDrawable(getResources().getDrawable(R.drawable.stone_red));
-                } else {
-                    imageViews_fields[column][row].setImageDrawable(getResources().getDrawable(R.drawable.stone_yellow));
-                }
+                imageViews_fields[column][row].setImageDrawable(getResources().getDrawable(game.getPlayerTurn().getImage()));
 
                 if (game.checkWin()) {
                     for (Point p : game.getWinPositions()) {
                         imageViews_fields[p.x][p.y].setImageDrawable(getResources().getDrawable(R.drawable.stone_green));
+                        makeKonfetti(p, game.getPlayerTurn().getColor());
                     }
                     winner = game.getPlayerTurn();
-                    makeKonfetti();
                 } else {
                     game.nextPlayer();
                 }
@@ -115,18 +116,18 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     /**
      * Lässt gelbes und rotes Konfetti über das Spielfeld regnen.
      */
-    private void makeKonfetti() {
-        KonfettiView konfettiView = (KonfettiView) findViewById(R.id.konfettiView_local);
-        konfettiView.build()
-                .addColors(getResources().getColor(R.color.colorRed), getResources().getColor(R.color.colorYellow))
+    private void makeKonfetti(Point point, int color) {
+        konfettiView_local.build()
+                .addColors(getResources().getColor(color), getResources().getColor(R.color.colorAccent))
                 .setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f)
                 .setFadeOutEnabled(true)
-                .setTimeToLive(2000L)
+                .setTimeToLive(1000L)
                 .addShapes(Shape.CIRCLE, Shape.RECT)
                 .addSizes(new Size(12, 5f))
-                .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
-                .stream(500, 5000L);
+                .setPosition(linearLayouts_Columns[point.x].getX() + linearLayouts_Columns[point.x].getWidth()/2, imageViews_fields[point.x][point.y].getY() + imageViews_fields[point.x][point.y].getHeight()/2)
+                .burst(100);
+
     }
 
     /**

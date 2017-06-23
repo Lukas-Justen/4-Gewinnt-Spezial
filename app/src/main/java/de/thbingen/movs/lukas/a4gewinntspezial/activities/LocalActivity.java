@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.TextWatcherAdapter;
+import icepick.Icepick;
+import icepick.State;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -29,11 +31,11 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     private EditText editText_player1;
     private boolean player1 = false;
     private TextView textView_localPlayer1;
-    private int scorePlayer1 = 0;
+    @State int scorePlayer1 = 0;
     private EditText editText_player2;
     private boolean player2 = false;
     private TextView textView_localPlayer2;
-    private int scorePlayer2 = 0;
+    @State int scorePlayer2 = 0;
 
     // Request_Code um das Ergebnis des Spiels zu erhalten
     private final int START_GAME_CODE = 1234;
@@ -77,10 +79,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
             }
         });
 
-        if (savedInstanceState != null) {
-            textView_localPlayer1.setText(String.valueOf(savedInstanceState.getInt("player1")));
-            textView_localPlayer1.setText(String.valueOf(savedInstanceState.getInt("player2")));
-        }
+        Icepick.restoreInstanceState(this,savedInstanceState);
     }
 
     /**
@@ -106,7 +105,6 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == START_GAME_CODE) {
             if (resultCode == RESULT_OK) {
-                Log.d("RESULT", String.valueOf(data.getExtras().getInt("player1")));
                 scorePlayer1 += data.getExtras().getInt("player1");
                 scorePlayer2 += data.getExtras().getInt("player2");
                 textView_localPlayer1.setText(String.valueOf(scorePlayer1));
@@ -122,9 +120,8 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      * @param outState Das Bundle in dem die Daten gespeichert werden.
      */
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("player1", scorePlayer1);
-        outState.putInt("player2", scorePlayer2);
         super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this,outState);
     }
 
 }
