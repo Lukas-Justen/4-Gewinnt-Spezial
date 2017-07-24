@@ -1,6 +1,7 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.game;
 
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -24,6 +25,7 @@ public class Game {
     private Player turn = Player.P1;
     private Player[][] positions;
     private Point[] winPositions = new Point[4];
+    private int round = 0;
 
     public Game(String player1, String player2) {
         this(7, 6,player1, player2);
@@ -50,6 +52,7 @@ public class Game {
 
         if (positions[column][row] == null) {
             positions[column][row] = turn;
+            round++;
             return row;
         }
 
@@ -212,6 +215,15 @@ public class Game {
      */
     public String getPlayerName() {
         return turn == Player.P1 ? PLAYER_1 : PLAYER_2;
+    }
+
+    /**
+     * Gibt die aktuelle Spielrunde zurück.
+     *
+     * @return Die Speilrunde als int
+     */
+    public int getCurrentRound() {
+        return (round / 2) + 1;
     }
 
 }

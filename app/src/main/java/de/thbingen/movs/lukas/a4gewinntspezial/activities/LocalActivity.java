@@ -92,6 +92,8 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         Intent startLocalGame = new Intent(this,LocalGameActivity.class);
         startLocalGame.putExtra("player1", editText_player1.getText().toString());
         startLocalGame.putExtra("player2", editText_player2.getText().toString());
+        startLocalGame.putExtra("score1", scorePlayer1);
+        startLocalGame.putExtra("score2", scorePlayer2);
         startActivityForResult(startLocalGame, START_GAME_CODE);
     }
 

@@ -5,7 +5,8 @@
     <!--Grundfarben-->
     <color name="colorPrimary">#ff0099cc</color>
     <color name="colorPrimaryTransparent">#ffaecfe2</color>
-    <color name="colorPrimaryDark">#ff0088cc</color>
+    <color name="colorPrimaryDark">#037DA5</color>
+    <color name="colorDivider">#03698b</color>
     <color name="colorAccent">#ff91d50d</color>
     <color name="windowBackgroundColor">#fafafa</color>
 

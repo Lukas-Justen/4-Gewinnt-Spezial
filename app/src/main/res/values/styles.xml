@@ -16,7 +16,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">3</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/edittext_player_text</item>
+        <item name="android:textSize">@dimen/editText_playerText</item>
         <item name="android:singleLine">true</item>
         <item name="android:maxLines">1</item>
         <item name="android:textCursorDrawable">@null</item>
@@ -28,7 +28,7 @@
         <item name="android:layout_width">0sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">3</item>
-        <item name="android:textSize">@dimen/textView_score_text</item>
+        <item name="android:textSize">@dimen/textView_scoreText</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
@@ -43,12 +43,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@color/colorButtonText</item>
-        <item name="android:paddingBottom">@dimen/button_startactivity_padding_topbottom</item>
-        <item name="android:paddingRight">@dimen/button_startactivity_padding_leftright</item>
-        <item name="android:paddingLeft">@dimen/button_startactivity_padding_leftright</item>
-        <item name="android:paddingTop">@dimen/button_startactivity_padding_topbottom</item>
-        <item name="android:textSize">@dimen/button_startactivity_text</item>
-        <item name="android:layout_margin">@dimen/button_startactivity_margin</item>
+        <item name="android:paddingBottom">@dimen/button_startActivityPadding_topbottom</item>
+        <item name="android:paddingRight">@dimen/button_startActivityPadding_leftright</item>
+        <item name="android:paddingLeft">@dimen/button_startActivityPadding_leftright</item>
+        <item name="android:paddingTop">@dimen/button_startActivityPadding_topbottom</item>
+        <item name="android:textSize">@dimen/button_startActivityText</item>
+        <item name="android:layout_margin">@dimen/button_startActivityMargin</item>
     </style>
 
     <!--Das Style für die Spalten des Spielfeldes-->
