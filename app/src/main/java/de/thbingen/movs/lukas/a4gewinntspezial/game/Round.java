@@ -42,7 +42,7 @@ public class Round extends RealmObject {
         this.roundsNeeded = roundsNeeded;
     }
 
-    public boolean setDraw() {
+    public boolean getDraw() {
         return draw;
     }
 
