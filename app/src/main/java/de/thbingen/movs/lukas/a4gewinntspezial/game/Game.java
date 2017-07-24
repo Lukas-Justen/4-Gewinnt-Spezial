@@ -26,6 +26,7 @@ public class Game {
     private Player[][] positions;
     private Point[] winPositions = new Point[4];
     private int round = 0;
+    private int fieldsLeft = 42;
 
     public Game(String player1, String player2) {
         this(7, 6,player1, player2);
@@ -53,6 +54,7 @@ public class Game {
         if (positions[column][row] == null) {
             positions[column][row] = turn;
             round++;
+            fieldsLeft--;
             return row;
         }
 
@@ -220,10 +222,19 @@ public class Game {
     /**
      * Gibt die aktuelle Spielrunde zurück.
      *
-     * @return Die Speilrunde als int
+     * @return Die Speilrunde als int.
      */
     public int getCurrentRound() {
         return (round / 2) + 1;
+    }
+
+    /**
+     * Liefert die Anzahl der Felder, auf denen sich noch kein Spielstein befindet.
+     *
+     * @return Anzahl der freien Felder.
+     */
+    public int getFieldsLeft() {
+        return fieldsLeft;
     }
 
 }

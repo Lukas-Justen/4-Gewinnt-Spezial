@@ -129,9 +129,9 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
                     game.nextPlayer();
                     textView_localPlayer.setText(game.getPlayerName());
                     textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+                    textView_localRound.setText(String.valueOf(game.getCurrentRound()));
                 }
 
-                textView_localRound.setText(String.valueOf(game.getCurrentRound()));
             }
         } else {
             finish();
@@ -156,28 +156,19 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     }
 
     /**
-     * Speichert die Daten im Zusammenhang zu der gespielten Runde in der Datenbank ab. Neben den
-     * Gewinnern & Verlieren sollen auch Daten zur Anzahl der benötigten Züge & die Namen der Spieler
-     * vermerkt werden.
-     */
-    private void saveGameResult() {
-        // TODO speichern aller relevanter Daten in der Datenbank
-    }
-
-    /**
      * Schließt die Activity, Liefert das Ergebnis der Partie an die aufrufende Activity zurück und
      * speichert das Ergebnis der Partie in der Realm-Datenbank.
      */
     public void finish() {
-        if (winner == null) {
+        if (winner == null && !(game.getFieldsLeft() == 0)) {
             setResult(RESULT_CANCELED);
         } else {
             Intent data = new Intent();
             data.putExtra("player1", (winner == Player.P1) ? 1 : 0);
             data.putExtra("player2", (winner == Player.P2) ? 1 : 0);
+            data.putExtra("round", Integer.parseInt(textView_localRound.getText().toString()));
             setResult(RESULT_OK, data);
         }
-        saveGameResult();
         super.finish();
     }
 

@@ -7,10 +7,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.TextWatcherAdapter;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.Result;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.Round;
 import icepick.Icepick;
 import icepick.State;
+import io.realm.Realm;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -31,11 +37,15 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     private EditText editText_player1;
     private boolean player1 = false;
     private TextView textView_localPlayer1;
-    @State int scorePlayer1 = 0;
+    private int scorePlayer1 = 0;
     private EditText editText_player2;
     private boolean player2 = false;
     private TextView textView_localPlayer2;
-    @State int scorePlayer2 = 0;
+    private int scorePlayer2 = 0;
+    private Result result = new Result();
+    private int roundCount = 0;
+    private Realm realm;
+
 
     // Request_Code um das Ergebnis des Spiels zu erhalten
     private final int START_GAME_CODE = 1234;
@@ -79,7 +89,13 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
             }
         });
 
-        Icepick.restoreInstanceState(this, savedInstanceState);
+        result.setId(System.currentTimeMillis());
+        result.setLocal(true);
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.insertOrUpdate(result);
+        realm.commitTransaction();
     }
 
     /**
@@ -95,6 +111,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         startLocalGame.putExtra("score1", scorePlayer1);
         startLocalGame.putExtra("score2", scorePlayer2);
         startActivityForResult(startLocalGame, START_GAME_CODE);
+        roundCount++;
     }
 
     /**
@@ -111,19 +128,38 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 scorePlayer2 += data.getExtras().getInt("player2");
                 textView_localPlayer1.setText(String.valueOf(scorePlayer1));
                 textView_localPlayer2.setText(String.valueOf(scorePlayer2));
+                Round round = new Round();
+                round.setDraw(data.getExtras().getInt("player1") == data.getExtras().getInt("player2"));
+                round.setNumberOfRound(roundCount);
+                round.setRedScore(scorePlayer1);
+                round.setYellowScore(scorePlayer2);
+                round.setRoundsNeeded(data.getExtras().getInt("round"));
+                realm.beginTransaction();
+                realm.insertOrUpdate(round);
+                result.getRounds().add(round);
+                realm.commitTransaction();
             }
         }
     }
 
     /**
-     * Speichert den aktuellen Spielstand, um bei einer Rotation des Smartphones die Werte des
-     * aktuellen Spielstands nicht zu verlieren.
-     *
-     * @param outState Das Bundle in dem die Daten gespeichert werden.
+     * Speichert die Daten im Zusammenhang zu der gespielten Runde in der Datenbank ab. Neben den
+     * Gewinnern & Verlieren sollen auch Daten zur Anzahl der benötigten Züge & die Namen der Spieler
+     * vermerkt werden.
      */
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
+    private void saveGameResult() {
+        result.setRedName(editText_player1.getText().toString());
+        result.setYellowName(editText_player2.getText().toString());
+        result.setRedScore(scorePlayer1);
+        result.setYellowScore(scorePlayer2);
+    }
+
+    /**
+     * Schließt die Activity und speichert das Ergebnis der Partien in der Realm-Datenbank.
+     */
+    public void finish() {
+        saveGameResult();
+        super.finish();
     }
 
 }
