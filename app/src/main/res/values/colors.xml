@@ -7,7 +7,7 @@
     <color name="colorPrimaryTransparent">#ffaecfe2</color>
     <color name="colorPrimaryDark">#ff0088cc</color>
     <color name="colorAccent">#ff91d50d</color>
-    <color name="windowBackgroundColor">#fafafa</color>
+    <color name="windowBackgroundColor">#d4e3f1</color>
 
     <!--Spielsteinfarben-->
     <color name="colorRed">#ffcc0000</color>

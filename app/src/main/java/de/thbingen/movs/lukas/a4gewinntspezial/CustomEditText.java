@@ -91,10 +91,10 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
      * Wird automatisch aufgerufen sobald sich der Text in dem CustomEditText ändert. Wenn das der
      * Fall ist wird die Linie des EditTexts entsprechend angepasst.
      *
-     * @param text
-     * @param start
-     * @param lengthBefore
-     * @param lengthAfter
+     * @param text Der Text nach der Veränderung
+     * @param start Start der Veränderung
+     * @param lengthBefore Länge vor der Veränderung
+     * @param lengthAfter Länge nach der Veränderung
      */
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);

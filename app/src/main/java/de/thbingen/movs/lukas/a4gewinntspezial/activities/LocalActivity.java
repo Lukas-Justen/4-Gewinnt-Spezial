@@ -2,7 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -79,7 +79,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
             }
         });
 
-        Icepick.restoreInstanceState(this,savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
     }
 
     /**
@@ -89,7 +89,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      * @param v Der View, der angeclickt wurde
      */
     public void onClick(View v) {
-        Intent startLocalGame = new Intent(this,LocalGameActivity.class);
+        Intent startLocalGame = new Intent(this, LocalGameActivity.class);
         startLocalGame.putExtra("player1", editText_player1.getText().toString());
         startLocalGame.putExtra("player2", editText_player2.getText().toString());
         startActivityForResult(startLocalGame, START_GAME_CODE);
@@ -99,8 +99,8 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      * Wird aufgerufen, wenn ein Ergebnis zurückgeliefert wird nach dem Starten eines neuen Spiels.
      *
      * @param requestCode Der Code um identifizieren zu können von welchem Aufruf Ergebnis stammt
-     * @param resultCode Ergebnis Ok oder Cancled?
-     * @param data Die Übertragenen Daten.
+     * @param resultCode  Ergebnis Ok oder Cancled?
+     * @param data        Die Übertragenen Daten.
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == START_GAME_CODE) {
@@ -121,7 +121,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      */
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this,outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
 }

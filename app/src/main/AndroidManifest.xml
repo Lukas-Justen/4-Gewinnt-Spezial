@@ -9,23 +9,30 @@
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.OnlineGameActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activities.LocalActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <activity android:name=".activities.LocalActivity" />
+
         <activity android:name=".activities.OnlineActivity" />
+
         <activity android:name=".activities.HighscoreActivity" />
+
         <activity
             android:name=".activities.LocalGameActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+
         <activity android:name=".activities.HighscoreDetailActivity" />
+
     </application>
 
 </manifest>

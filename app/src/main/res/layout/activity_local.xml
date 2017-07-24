@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
+    android:background="@drawable/window_background"
     tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.StartActivity">
 
 
@@ -94,7 +95,7 @@
         android:hint="@string/editText_player1"
         android:textColor="@color/colorRed"
         android:textColorHint="@color/colorRedTransparent"
-        app:exchangeColor="@color/windowBackgroundColor"
+        app:exchangeColor="@color/colorRed"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/textview_localPlayer1"
         app:layout_constraintRight_toRightOf="@+id/textview_localPlayer1"
@@ -110,7 +111,7 @@
         android:hint="@string/editText_player2"
         android:textColor="@color/colorYellow"
         android:textColorHint="@color/colorYellowTransparent"
-        app:exchangeColor="@color/windowBackgroundColor"
+        app:exchangeColor="@color/colorYellow"
         app:layout_constraintLeft_toLeftOf="@+id/textview_localPlayer2"
         app:layout_constraintRight_toRightOf="@+id/textview_localPlayer2"
         app:layout_constraintTop_toBottomOf="@+id/textview_localPlayer2"
