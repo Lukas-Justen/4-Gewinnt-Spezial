@@ -65,7 +65,7 @@
         android:gravity="center"
         android:text="@string/textView_colon"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/textView_score_text"
+        android:textSize="@dimen/textView_scoreText"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

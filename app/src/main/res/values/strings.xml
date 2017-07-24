@@ -14,6 +14,7 @@
     <!--TextViews-->
     <string name="textView_score">0</string>
     <string name="textView_colon">:</string>
+    <string name="textView_localAction">Am Zug :</string>
 
     <!--EditTexts-->
     <string name="editText_thisPlayer">Dein Spielername</string>

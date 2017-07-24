@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
@@ -36,6 +37,11 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     private LinearLayout[] linearLayouts_Columns = new LinearLayout[7];
     private ImageView[][] imageViews_fields = new ImageView[7][6];
     private KonfettiView konfettiView_local;
+    private TextView textView_localPlayer;
+    private TextView textView_localRound;
+    private TextView textView_localScore1;
+    private TextView textView_localScore2;
+
 
     // Die Spielvariable
     private Game game;
@@ -52,6 +58,13 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_game);
         konfettiView_local = (KonfettiView) findViewById(R.id.konfettiView_local);
+        textView_localPlayer = (TextView) findViewById(R.id.textView_localPlayer);
+        textView_localRound = (TextView) findViewById(R.id.textView_localRound);
+        textView_localScore1 = (TextView) findViewById(R.id.textView_localScore1);
+        textView_localScore2 = (TextView) findViewById(R.id.textView_localScore2);
+        textView_localScore1.setText(String.valueOf(getIntent().getExtras().getInt("score1")));
+        textView_localScore2.setText(String.valueOf(getIntent().getExtras().getInt("score2")));
+
 
         // Legt ein neues Spiel an und Initialisiert die LinearLayouts für die Spalten
         Bundle receivedData = getIntent().getExtras();
@@ -76,6 +89,9 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
             linearLayouts_Columns[j].setTag(j);
             linearLayouts_Columns[j].setOnClickListener(this);
         }
+
+        textView_localPlayer.setText(game.getPlayerName());
+        textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
     }
 
     /**
@@ -104,9 +120,18 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
                         makeKonfetti(p, game.getPlayerTurn().getColor());
                     }
                     winner = game.getPlayerTurn();
+                    if (winner == Player.P1) {
+                        textView_localScore1.setText(String.valueOf(getIntent().getExtras().getInt("score1") +1));
+                    } else {
+                        textView_localScore2.setText(String.valueOf(getIntent().getExtras().getInt("score2") +1));
+                    }
                 } else {
                     game.nextPlayer();
+                    textView_localPlayer.setText(game.getPlayerName());
+                    textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
                 }
+
+                textView_localRound.setText(String.valueOf(game.getCurrentRound()));
             }
         } else {
             finish();
