@@ -37,7 +37,7 @@
 
     <!--In der unteren Hälfte findet der jeweilige Spieler die Schaltflächen zum Starten des Spiels bzw.-->
     <!--zum Einsehen der Highscores und eine Möglichkeit zur Eingabe seines Spielername-->
-    <de.thbingen.movs.lukas.a4gewinntspezial.CustomEditText
+    <de.thbingen.movs.lukas.a4gewinntspezial.custom.CustomEditText
         android:id="@+id/editText_thisPlayer"
         style="@style/EditTextPlayer"
         android:layout_width="0dp"

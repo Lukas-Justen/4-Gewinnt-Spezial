@@ -1,4 +1,4 @@
-package de.thbingen.movs.lukas.a4gewinntspezial;
+package de.thbingen.movs.lukas.a4gewinntspezial.application;
 
 import io.realm.DynamicRealm;
 import io.realm.RealmMigration;

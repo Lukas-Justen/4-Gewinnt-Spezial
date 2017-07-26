@@ -1,4 +1,4 @@
-package de.thbingen.movs.lukas.a4gewinntspezial;
+package de.thbingen.movs.lukas.a4gewinntspezial.application;
 
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;

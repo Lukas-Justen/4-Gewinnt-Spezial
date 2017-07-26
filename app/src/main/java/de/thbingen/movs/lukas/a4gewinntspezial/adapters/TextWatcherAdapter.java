@@ -1,4 +1,4 @@
-package de.thbingen.movs.lukas.a4gewinntspezial;
+package de.thbingen.movs.lukas.a4gewinntspezial.adapters;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +17,6 @@ public abstract class TextWatcherAdapter implements TextWatcher {
 
     // Muss implenentiert werden zur Überwachung der Eingabe ins Textfeld
     public abstract void onTextChanged(CharSequence s, int start, int before, int count);
-
 
     // Werden nicht benötigt daher leer implentiert
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

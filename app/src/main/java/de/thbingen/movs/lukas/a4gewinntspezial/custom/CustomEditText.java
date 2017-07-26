@@ -1,9 +1,11 @@
-package de.thbingen.movs.lukas.a4gewinntspezial;
+package de.thbingen.movs.lukas.a4gewinntspezial.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+
+import de.thbingen.movs.lukas.a4gewinntspezial.R;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -24,7 +26,6 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
     // Die Farben durch die die Linie ersetzt werden sollen
     private int exchangeColor;
     private int standardColor;
-
 
     /**
      * 1. Custom Ctor legt nur ein CustomEditText ohne spezielle Attribute an

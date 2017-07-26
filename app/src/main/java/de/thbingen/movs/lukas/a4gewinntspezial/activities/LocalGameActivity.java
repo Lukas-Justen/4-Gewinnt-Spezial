@@ -14,8 +14,6 @@ import android.widget.TextView;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
-import icepick.Icepick;
-import icepick.State;
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
@@ -160,15 +158,19 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
      * speichert das Ergebnis der Partie in der Realm-Datenbank.
      */
     public void finish() {
-        if (winner == null && !(game.getFieldsLeft() == 0)) {
+        boolean draw = game.getFieldsLeft() == 0;
+
+        if (winner == null && !draw) {
             setResult(RESULT_CANCELED);
         } else {
             Intent data = new Intent();
             data.putExtra("player1", (winner == Player.P1) ? 1 : 0);
             data.putExtra("player2", (winner == Player.P2) ? 1 : 0);
             data.putExtra("round", Integer.parseInt(textView_localRound.getText().toString()));
+            data.putExtra("draw",draw);
             setResult(RESULT_OK, data);
         }
+
         super.finish();
     }
 

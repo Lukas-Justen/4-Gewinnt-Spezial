@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.StartActivity">
+        <activity
+            android:name=".activities.StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -18,20 +20,27 @@
         </activity>
 
         <activity
-            android:name=".activities.OnlineGameActivity"
-            android:screenOrientation="landscape" />
-
-        <activity android:name=".activities.LocalActivity" />
-
-        <activity android:name=".activities.OnlineActivity" />
-
-        <activity android:name=".activities.HighscoreActivity" />
+            android:name=".activities.LocalActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".activities.LocalGameActivity"
             android:screenOrientation="landscape" />
 
-        <activity android:name=".activities.HighscoreDetailActivity" />
+        <activity
+            android:name=".activities.OnlineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.OnlineGameActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".activities.HighscoreActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.HighscoreDetailActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

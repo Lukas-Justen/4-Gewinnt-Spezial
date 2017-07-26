@@ -9,7 +9,7 @@
     <string name="button_local">Lokal</string>
     <string name="button_online">Online</string>
     <string name="button_highscores">Highscores</string>
-    <string name="button_start">Start</string>
+    <string name="button_start">Starten</string>
 
     <!--TextViews-->
     <string name="textView_score">0</string>

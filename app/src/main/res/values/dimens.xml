@@ -7,13 +7,18 @@
     <dimen name="editText_playerText">32sp</dimen>
     <dimen name="button_startActivityText">25sp</dimen>
     <dimen name="textView_statusBar">22sp</dimen>
+    <dimen name="textView_highscoreName">25sp</dimen>
 
     <!--Paddings-->
     <dimen name="button_startActivityPadding_leftright">32sp</dimen>
     <dimen name="button_startActivityPadding_topbottom">8sp</dimen>
+    <dimen name="button_segmentedControlPadding">10sp</dimen>
 
     <!--Margins-->
     <dimen name="button_startActivityMargin">8sp</dimen>
     <dimen name="textView_gameStatusBarMargin">4sp</dimen>
+    <dimen name="cardView_leftRightMargin">10sp</dimen>
+    <dimen name="cardView_topBottomMargin">5sp</dimen>
+    <dimen name="cardView_elevation">2dp</dimen>
 
 </resources>
