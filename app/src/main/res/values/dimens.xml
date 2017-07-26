@@ -8,6 +8,7 @@
     <dimen name="button_startActivityText">25sp</dimen>
     <dimen name="textView_statusBar">22sp</dimen>
     <dimen name="textView_highscoreName">25sp</dimen>
+    <dimen name="textView_highscoreNumbers">18sp</dimen>
 
     <!--Paddings-->
     <dimen name="button_startActivityPadding_leftright">32sp</dimen>
