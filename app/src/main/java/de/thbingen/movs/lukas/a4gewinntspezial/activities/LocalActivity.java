@@ -24,27 +24,19 @@ import io.realm.RealmQuery;
  */
 public class LocalActivity extends FullscreenActivity implements View.OnClickListener {
 
-
-    // Der Button zum Starten des Spiels
     private View button_startLocal;
-
-    // Die Textfelder und Variablen zur Überwachung der Eingabe der Spielernamen bzw. der Ergebnisse
-    private EditText editText_player1;
     private boolean player1 = false;
-    private TextView textView_localPlayer1;
-    private int scorePlayer1 = 0;
-    private EditText editText_player2;
     private boolean player2 = false;
-    private TextView textView_localPlayer2;
+    private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
+    private EditText editText_player1;
+    private EditText editText_player2;
+    private TextView textView_localPlayer1;
+    private TextView textView_localPlayer2;
     private Playerresults playerresults1;
     private Playerresults playerresults2;
-    private int roundCount = 0;
     private Realm realm;
-
-    // Request_Code um das Ergebnis des Spiels zu erhalten
     private final int START_GAME_CODE = 1234;
-
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -101,7 +93,6 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         startLocalGame.putExtra("score1", scorePlayer1);
         startLocalGame.putExtra("score2", scorePlayer2);
         startActivityForResult(startLocalGame, START_GAME_CODE);
-        roundCount++;
     }
 
     /**

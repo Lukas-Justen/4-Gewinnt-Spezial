@@ -10,6 +10,8 @@
     <string name="button_online">Online</string>
     <string name="button_highscores">Highscores</string>
     <string name="button_start">Starten</string>
+    <string name="button_host">Host</string>
+    <string name="button_client">Client</string>
 
     <!--TextViews-->
     <string name="textView_score">0</string>

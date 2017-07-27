@@ -91,7 +91,7 @@
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_0"
             card_view:layout_constraintRight_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/textView_victories"
-            card_view:srcCompat="@drawable/ic_victory" />
+            card_view:srcCompat="@drawable/victory" />
 
         <ImageView
             android:id="@+id/imageView_draws"
@@ -106,7 +106,7 @@
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_0"
             card_view:layout_constraintRight_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/textView_losses"
-            card_view:srcCompat="@drawable/ic_defeat" />
+            card_view:srcCompat="@drawable/loss" />
 
         <ImageView
             android:id="@+id/imageView_losses"
@@ -121,7 +121,7 @@
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_0"
             card_view:layout_constraintRight_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/textView_draws"
-            card_view:srcCompat="@drawable/ic_draw" />
+            card_view:srcCompat="@drawable/draw" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline_1"
@@ -141,7 +141,7 @@
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_victories"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_victories"
-            card_view:srcCompat="@drawable/ic_medal1" />
+            card_view:srcCompat="@drawable/medal1" />
 
         <TextView
             android:id="@+id/textView_highscorePlayerName"

@@ -72,11 +72,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
         private Drawable getMedal(int position) {
             switch (position) {
                 case 0:
-                    return context.getResources().getDrawable(R.drawable.ic_medal1);
+                    return context.getResources().getDrawable(R.drawable.medal1);
                 case 1:
-                    return context.getResources().getDrawable(R.drawable.ic_medal2);
+                    return context.getResources().getDrawable(R.drawable.medal2);
                 case 2:
-                    return context.getResources().getDrawable(R.drawable.ic_medal3);
+                    return context.getResources().getDrawable(R.drawable.medal3);
             }
             return null;
         }
