@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.HighscoreAdapter;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresults;
@@ -25,14 +26,12 @@ import io.realm.Sort;
  *          wobei es zusätzlich die Möglichkeit gibt sich die Spielstände graphisch darstellen zu
  *          lassen.
  */
-public class HighscoreActivity extends FullscreenActivity implements View.OnTouchListener {
+public class HighscoreActivity extends FullscreenActivity implements View.OnTouchListener, SegmentedButtonGroup.OnPositionChanged {
 
 
     private RecyclerView recyclerView_highscores;
-    private View segmentedControl_highscore;
-    private boolean fadeOutAllowed = false;
-    private boolean fadeInAllowed = true;
-    private Handler fadeHandler = new Handler();
+    private SegmentedButtonGroup segmentedControl_highscore;
+    private Realm realm;
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -46,12 +45,13 @@ public class HighscoreActivity extends FullscreenActivity implements View.OnTouc
         setContentView(R.layout.activity_highscore);
 
         Realm.init(this);
-        Realm realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
         recyclerView_highscores = (RecyclerView) findViewById(R.id.recyclerView_highscores);
         recyclerView_highscores.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).findAllSorted("victories", Sort.DESCENDING),this));
         recyclerView_highscores.setOnTouchListener(this);
-        segmentedControl_highscore = findViewById(R.id.segmentedControl_highscore);
+        segmentedControl_highscore = (SegmentedButtonGroup) findViewById(R.id.segmentedControl_highscore);
+        segmentedControl_highscore.setOnPositionChanged(this);
     }
 
     public boolean onTouch(View v, MotionEvent event) {
@@ -76,6 +76,17 @@ public class HighscoreActivity extends FullscreenActivity implements View.OnTouc
             }, 2000);
         }*/
         return false;
+    }
+
+    public void onPositionChanged(int position) {
+        switch (position) {
+            case 0:
+                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).findAllSorted("victories", Sort.DESCENDING),this));
+                break;
+            case 1:
+                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("name", "ikfdgidhvi").findAllSorted("victories", Sort.DESCENDING),this));
+                break;
+        }
     }
 
 }
