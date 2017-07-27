@@ -129,6 +129,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                     playerresults1.addLosses(data.getExtras().getInt("player1"));
                     playerresults2.addLosses(data.getExtras().getInt("player2"));
                 }
+                playerresults1.addTime(data.getExtras().getLong("playtime"));
+                playerresults2.addTime(data.getExtras().getLong("playtime"));
+                playerresults1.addColorOfPreference(1);
+                playerresults2.addColorOfPreference(-1);
                 playerresults1.nextGame();
                 playerresults2.nextGame();
                 playerresults1.addRounds(data.getExtras().getInt("round"));

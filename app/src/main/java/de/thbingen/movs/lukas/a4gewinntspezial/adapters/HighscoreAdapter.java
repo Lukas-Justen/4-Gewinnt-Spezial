@@ -39,10 +39,10 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
         private TextView textView_draws;
         private TextView textView_losses;
         private TextView textView_rounds;
-        private TextView textView_enemies;
         private TextView textView_time;
         private TextView textView_games;
         private ImageView imageView_medal;
+        private ImageView imageView_colorOfPreference;
 
         ViewHolder(View view) {
             super(view);
@@ -51,22 +51,22 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
             textView_draws = (TextView) view.findViewById(R.id.textView_draws);
             textView_losses = (TextView) view.findViewById(R.id.textView_losses);
             textView_rounds = (TextView) view.findViewById(R.id.textView_rounds);
-            textView_enemies = (TextView) view.findViewById(R.id.textView_enemies);
             textView_time = (TextView) view.findViewById(R.id.textView_time);
             textView_games = (TextView) view.findViewById(R.id.textView_games);
             imageView_medal = (ImageView) view.findViewById(R.id.imageView_medal);
+            imageView_colorOfPreference = (ImageView) view.findViewById(R.id.imageView_colorOfPreference);
         }
 
         void setInformation(Playerresults playerresults, int position) {
             imageView_medal.setImageDrawable(getMedal(position));
             textView_playerName.setText(playerresults.getName());
             textView_victories.setText(String.valueOf(playerresults.getVictories()));
-            textView_draws.setText(String.valueOf(playerresults.getGames()- playerresults.getVictories()-playerresults.getLosses()));
+            textView_draws.setText(String.valueOf(playerresults.getDraws()));
             textView_losses.setText(String.valueOf(playerresults.getLosses()));
             textView_rounds.setText(String.valueOf(playerresults.getRounds()));
-            textView_enemies.setText(String.valueOf(playerresults.getEnemy().size()));
-            textView_time.setText(String.valueOf(playerresults.getTime()));
+            textView_time.setText(context.getString(R.string.textView_minutes,playerresults.getTime() / 60));
             textView_games.setText(String.valueOf(playerresults.getGames()));
+            imageView_colorOfPreference.setImageDrawable(getColorOfPreference(playerresults.getColorOfPreference()));
         }
 
         private Drawable getMedal(int position) {
@@ -79,6 +79,16 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
                     return context.getResources().getDrawable(R.drawable.ic_medal3);
             }
             return null;
+        }
+
+        private Drawable getColorOfPreference(int color) {
+            if (color == 0) {
+                return null;
+            } else if (color > 0) {
+                return context.getResources().getDrawable(R.drawable.red_player);
+            } else {
+                return context.getResources().getDrawable(R.drawable.yellow_player);
+            }
         }
 
     }

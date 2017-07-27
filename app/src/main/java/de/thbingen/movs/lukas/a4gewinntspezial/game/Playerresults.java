@@ -1,17 +1,16 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.game;
 
-import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class Playerresults extends RealmObject {
 
     private String name = "";
-    private RealmList<Enemy> enemy = new RealmList<>();
     private int victories = 0;
     private int losses = 0;
     private int games = 0;
     private int rounds = 0;
-    private int time = 0;
+    private long time = 0;
+    private int colorOfPreference = 0;
 
     public String getName() {
         return name;
@@ -19,14 +18,6 @@ public class Playerresults extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public RealmList<Enemy> getEnemy() {
-        return enemy;
-    }
-
-    public void setEnemy(RealmList<Enemy> enemy) {
-        this.enemy = enemy;
     }
 
     public int getVictories() {
@@ -61,12 +52,20 @@ public class Playerresults extends RealmObject {
         this.rounds = rounds;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(long time) {
         this.time = time;
+    }
+
+    public int getColorOfPreference() {
+        return colorOfPreference;
+    }
+
+    public void setColorOfPreference(int colorOfPreference) {
+        this.colorOfPreference = colorOfPreference;
     }
 
     public void addVictories(int victory) {
@@ -78,11 +77,23 @@ public class Playerresults extends RealmObject {
     }
 
     public void addRounds(int rounds) {
-        setRounds(getRounds()+rounds);
+        setRounds(getRounds() + rounds);
     }
 
     public void addLosses(int victories) {
         setLosses(getLosses() + 1 - victories);
+    }
+
+    public void addTime(long playtime) {
+        setTime(getTime() + playtime);
+    }
+
+    public int getDraws() {
+        return getGames() - getVictories() - getLosses();
+    }
+
+    public void addColorOfPreference(int color) {
+        setColorOfPreference(getColorOfPreference()+color);
     }
 
 }

@@ -130,6 +130,19 @@
             android:orientation="vertical"
             card_view:layout_constraintGuide_percent="0.25" />
 
+        <ImageView
+            android:id="@+id/imageView_medal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="0dp"
+            android:visibility="visible"
+            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_victories"
+            card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
+            card_view:layout_constraintTop_toTopOf="@+id/imageView_victories"
+            card_view:srcCompat="@drawable/ic_medal1" />
+
         <TextView
             android:id="@+id/textView_highscorePlayerName"
             android:layout_width="0dp"
@@ -171,32 +184,6 @@
             card_view:layout_constraintTop_toTopOf="@+id/imageView_losses"
             card_view:srcCompat="@drawable/round" />
 
-        <ImageView
-            android:id="@+id/imageView_enemies"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="0dp"
-            android:tint="@android:color/darker_gray"
-            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_draws"
-            card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
-            card_view:layout_constraintTop_toTopOf="@+id/imageView_draws"
-            card_view:srcCompat="@drawable/player" />
-
-        <ImageView
-            android:id="@+id/imageView_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="0dp"
-            android:tint="@android:color/darker_gray"
-            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_rounds"
-            card_view:layout_constraintLeft_toRightOf="@+id/textView_rounds"
-            card_view:layout_constraintTop_toTopOf="@+id/imageView_rounds"
-            card_view:srcCompat="@drawable/time" />
-
         <TextView
             android:id="@+id/textView_rounds"
             android:layout_width="wrap_content"
@@ -212,20 +199,18 @@
             card_view:layout_constraintLeft_toRightOf="@+id/imageView_rounds"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_rounds" />
 
-        <TextView
-            android:id="@+id/textView_enemies"
+        <ImageView
+            android:id="@+id/imageView_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="0dp"
-            android:gravity="center_vertical|start"
-            android:maxEms="4"
-            android:minEms="4"
-            android:textColor="@android:color/darker_gray"
-            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_enemies"
-            card_view:layout_constraintLeft_toRightOf="@+id/imageView_enemies"
-            card_view:layout_constraintTop_toTopOf="@+id/imageView_enemies" />
+            android:tint="@android:color/darker_gray"
+            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_rounds"
+            card_view:layout_constraintLeft_toRightOf="@+id/textView_rounds"
+            card_view:layout_constraintTop_toTopOf="@+id/imageView_rounds"
+            card_view:srcCompat="@drawable/time" />
 
         <TextView
             android:id="@+id/textView_time"
@@ -244,19 +229,6 @@
             card_view:layout_constraintVertical_bias="0.5" />
 
         <ImageView
-            android:id="@+id/imageView_medal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="0dp"
-            android:visibility="visible"
-            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_victories"
-            card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
-            card_view:layout_constraintTop_toTopOf="@+id/imageView_victories"
-            card_view:srcCompat="@drawable/ic_medal1" />
-
-        <ImageView
             android:id="@+id/imageView_games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -264,9 +236,9 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="0dp"
             android:tint="@android:color/darker_gray"
-            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_enemies"
-            card_view:layout_constraintLeft_toRightOf="@+id/textView_enemies"
-            card_view:layout_constraintTop_toTopOf="@+id/imageView_enemies"
+            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_draws"
+            card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
+            card_view:layout_constraintTop_toTopOf="@+id/imageView_draws"
             card_view:srcCompat="@drawable/local" />
 
         <TextView
@@ -275,13 +247,27 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="0dp"
+            android:minEms="4"
+            android:maxEms="4"
             android:textColor="@android:color/darker_gray"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_games"
             card_view:layout_constraintLeft_toRightOf="@+id/imageView_games"
-            card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toTopOf="@+id/imageView_games" />
+            card_view:layout_constraintTop_toTopOf="@+id/imageView_games"
+            card_view:layout_constraintVertical_bias="0.571" />
+
+        <ImageView
+            android:id="@+id/imageView_colorOfPreference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="0dp"
+            card_view:layout_constraintBottom_toBottomOf="@+id/imageView_games"
+            card_view:layout_constraintLeft_toRightOf="@+id/textView_games"
+            card_view:layout_constraintTop_toTopOf="@+id/imageView_games"
+            card_view:layout_constraintVertical_bias="0.0"
+            card_view:srcCompat="@drawable/player" />
 
 
     </android.support.constraint.ConstraintLayout>

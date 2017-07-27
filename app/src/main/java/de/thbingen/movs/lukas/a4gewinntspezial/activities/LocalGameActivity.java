@@ -39,6 +39,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     private TextView textView_localRound;
     private TextView textView_localScore1;
     private TextView textView_localScore2;
+    private long startTime;
 
 
     // Die Spielvariable
@@ -90,6 +91,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
 
         textView_localPlayer.setText(game.getPlayerName());
         textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        startTime = System.currentTimeMillis();
     }
 
     /**
@@ -168,6 +170,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
             data.putExtra("player2", (winner == Player.P2) ? 1 : 0);
             data.putExtra("round", Integer.parseInt(textView_localRound.getText().toString()));
             data.putExtra("draw",draw);
+            data.putExtra("playtime", (System.currentTimeMillis() - startTime) / 1000 );
             setResult(RESULT_OK, data);
         }
 
