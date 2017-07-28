@@ -11,9 +11,9 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          <p>
  *          Created on 06.06.2017
  *          <p>
- *          Die Klasse HighscoreDetailActivity zeigt einen einzelnen Eintrag aus der Liste alles
+ *          Die Klasse HighscoreDetailActivity zeigt einen einzelnen Eintrag aus der Liste aller
  *          Highscores detailiert an. Hierzu werden Graphen und andere Textfelder verwendet. Neben
- *          denb Rohdaten kann es auch eine Platzierung anhand des Servers geben.
+ *          den Rohdaten kann es auch eine Platzierung anhand des Servers geben.
  */
 public class HighscoreDetailActivity extends FullscreenActivity {
 

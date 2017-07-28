@@ -63,10 +63,10 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
      * @param v Der View, der angeclickt wurde.
      */
     public void onClick(View v) {
-        Intent startLocalGame = new Intent(this, LocalGameActivity.class);
-        startLocalGame.putExtra("playerName", editText_playerThis.getText().toString());
-        startLocalGame.putExtra("host", segmentedControl_hostOrClient.getPosition() == 0);
-        startActivity(startLocalGame);
+        Intent startOnlineGame = new Intent(this, OnlineGameActivity.class);
+        startOnlineGame.putExtra("playerName", editText_playerThis.getText().toString());
+        startOnlineGame.putExtra("host", segmentedControl_hostOrClient.getPosition() == 0);
+        startActivity(startOnlineGame);
     }
 
 }

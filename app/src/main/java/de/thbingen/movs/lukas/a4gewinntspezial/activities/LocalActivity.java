@@ -149,6 +149,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         }
         Playerresults playerresults = new Playerresults();
         playerresults.setName(playerName);
+        playerresults.setType("local");
         return playerresults;
     }
 

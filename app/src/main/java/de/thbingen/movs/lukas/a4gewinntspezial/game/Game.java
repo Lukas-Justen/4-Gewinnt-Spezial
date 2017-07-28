@@ -40,6 +40,14 @@ public class Game {
         positions = new Player[COLUMNS][ROWS];
     }
 
+    public void reset() {
+        turn = Player.P1;
+        positions = new Player[COLUMNS][ROWS];
+        winPositions = new Point[4];
+        round = 0;
+        fieldsLeft = 42;
+    }
+
     /**
      * Überprüft, ob der Spieler den Stein in die angegebene Spalte überhaupt einwerfen kann.
      *

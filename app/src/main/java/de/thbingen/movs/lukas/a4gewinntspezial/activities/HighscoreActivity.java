@@ -81,10 +81,10 @@ public class HighscoreActivity extends FullscreenActivity implements View.OnTouc
     public void onPositionChanged(int position) {
         switch (position) {
             case 0:
-                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).findAllSorted("victories", Sort.DESCENDING),this));
+                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type","local").findAllSorted("victories", Sort.DESCENDING),this));
                 break;
             case 1:
-                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("name", "ikfdgidhvi").findAllSorted("victories", Sort.DESCENDING),this));
+                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type", "online").findAllSorted("victories", Sort.DESCENDING),this));
                 break;
         }
     }

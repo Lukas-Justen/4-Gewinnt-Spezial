@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
@@ -37,6 +38,11 @@ public class StartActivity extends FullscreenActivity implements View.OnClickLis
         button_online.setOnClickListener(this);
         View button_highscore = findViewById(R.id.button_highscores);
         button_highscore.setOnClickListener(this);
+
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("firstStart", true)) {
+            Intent startIntroActivity = new Intent(this, IntroActivity.class);
+            startActivity(startIntroActivity);
+        }
     }
 
     /**

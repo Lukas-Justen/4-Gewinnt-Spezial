@@ -56,6 +56,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_game);
+
         konfettiView_local = (KonfettiView) findViewById(R.id.konfettiView_local);
         textView_localPlayer = (TextView) findViewById(R.id.textView_localPlayer);
         textView_localRound = (TextView) findViewById(R.id.textView_localRound);

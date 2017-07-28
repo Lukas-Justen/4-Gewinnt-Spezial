@@ -1,48 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="7"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:weightSum="20"
     tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineGameActivity">
 
-    <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
     <LinearLayout
-        style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayoutOnline1"
-        android:tag="0"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@color/colorPrimaryDark"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:weightSum="19">
 
-    <LinearLayout
-        android:id="@+id/linearlayoutOnline2"
-        style="@style/LinearLayoutColumn"
-        android:tag="1" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/player" />
 
-    <LinearLayout
-        android:id="@+id/linearlayoutOnline3"
-        style="@style/LinearLayoutColumn"
-        android:tag="2" />
+        <TextView
+            android:id="@+id/textView_onlinePlayer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:gravity="center_vertical|start"
+            android:textSize="@dimen/textView_statusBar"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayoutOnline4"
-        android:tag="3" />
+        <TextView
+            android:id="@+id/textView_onlineScore1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
+            android:layout_weight="3"
+            android:gravity="center_vertical|end"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/textView_statusBar"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayoutOnline5"
-        android:tag="4"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/textView_colon"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textView_statusBar"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayoutOnline6"
-        android:tag="5" />
+        <TextView
+            android:id="@+id/textView_onlineScore2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical|start"
+            android:textColor="@color/colorYellow"
+            android:textSize="@dimen/textView_statusBar"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        style="@style/LinearLayoutColumn"
-        android:id="@+id/linearlayoutOnline7"
-        android:tag="6" />
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/round" />
+
+        <TextView
+            android:id="@+id/textView_onlineRound"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:text="1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textView_statusBar"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorDivider" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="18">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+            <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline1"
+                style="@style/LinearLayoutColumn"
+                android:tag="0" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline2"
+                style="@style/LinearLayoutColumn"
+                android:tag="1" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline3"
+                style="@style/LinearLayoutColumn"
+                android:tag="2" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline4"
+                style="@style/LinearLayoutColumn"
+                android:tag="3" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline5"
+                style="@style/LinearLayoutColumn"
+                android:tag="4" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline6"
+                style="@style/LinearLayoutColumn"
+                android:tag="5" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutOnline7"
+                style="@style/LinearLayoutColumn"
+                android:tag="6" />
+
+        </LinearLayout>
+
+        <nl.dionsegijn.konfetti.KonfettiView
+            android:id="@+id/konfettiView_online"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
 </LinearLayout>
+

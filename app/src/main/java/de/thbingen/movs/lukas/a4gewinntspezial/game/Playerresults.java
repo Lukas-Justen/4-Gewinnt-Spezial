@@ -5,6 +5,7 @@ import io.realm.RealmObject;
 public class Playerresults extends RealmObject {
 
     private String name = "";
+    private String type = "";
     private int victories = 0;
     private int losses = 0;
     private int games = 0;
@@ -18,6 +19,14 @@ public class Playerresults extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getVictories() {

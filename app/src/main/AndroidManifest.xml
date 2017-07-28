@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.thbingen.movs.lukas.a4gewinntspezial">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_logo"
@@ -9,39 +15,34 @@
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.LocalActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.LocalGameActivity"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".activities.OnlineActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.OnlineGameActivity"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".activities.HighscoreActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.HighscoreDetailActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".activities.IntroActivity"></activity>
     </application>
 
 </manifest>

@@ -57,8 +57,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintTop_toTopOf="@+id/guideline_1"
         android:layout_marginTop="8dp"
-        android:drawableTint="@android:color/white"
-        android:drawableStart="@drawable/local"/>
+        android:drawableTint="@android:color/white"/>
 
     <Button
         android:id="@+id/button_online"
@@ -74,7 +73,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:drawableStart="@drawable/online"
         android:drawableTint="@android:color/white"
         app:layout_constraintTop_toBottomOf="@+id/button_local" />
 
@@ -92,7 +90,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:drawableStart="@drawable/highscore"
         android:drawableTint="@android:color/white"
         app:layout_constraintTop_toBottomOf="@+id/button_online" />
 
