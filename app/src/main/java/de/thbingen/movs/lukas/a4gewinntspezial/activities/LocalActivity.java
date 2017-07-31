@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
+import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresults;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -76,8 +77,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 }
             }
         });
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
+        realm = RealmHandler.getLocalRealm(this);
     }
 
     /**
@@ -149,6 +149,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         }
         Playerresults playerresults = new Playerresults();
         playerresults.setName(playerName);
+        playerresults.setAlias(playerName);
         playerresults.setType("local");
         return playerresults;
     }

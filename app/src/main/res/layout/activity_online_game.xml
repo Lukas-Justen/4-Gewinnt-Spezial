@@ -43,6 +43,7 @@
             android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
             android:layout_weight="3"
             android:gravity="center_vertical|end"
+            android:text="@string/textView_score"
             android:textColor="@color/colorRed"
             android:textSize="@dimen/textView_statusBar"
             android:textStyle="bold" />
@@ -64,6 +65,7 @@
             android:layout_weight="3"
             android:gravity="center_vertical|start"
             android:textColor="@color/colorYellow"
+            android:text="@string/textView_score"
             android:textSize="@dimen/textView_statusBar"
             android:textStyle="bold" />
 

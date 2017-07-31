@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
@@ -12,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.HighscoreAdapter;
+import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresults;
 import io.realm.Realm;
 import io.realm.Sort;
@@ -26,7 +28,7 @@ import io.realm.Sort;
  *          wobei es zusätzlich die Möglichkeit gibt sich die Spielstände graphisch darstellen zu
  *          lassen.
  */
-public class HighscoreActivity extends FullscreenActivity implements View.OnTouchListener, SegmentedButtonGroup.OnPositionChanged {
+public class HighscoreActivity extends FullscreenActivity implements SegmentedButtonGroup.OnPositionChanged {
 
 
     private RecyclerView recyclerView_highscores;
@@ -43,19 +45,18 @@ public class HighscoreActivity extends FullscreenActivity implements View.OnTouc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
+        realm = RealmHandler.getLocalRealm(this);
         recyclerView_highscores = (RecyclerView) findViewById(R.id.recyclerView_highscores);
         recyclerView_highscores.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).findAllSorted("victories", Sort.DESCENDING),this));
-        recyclerView_highscores.setOnTouchListener(this);
+        recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type","local").findAllSorted("victories", Sort.DESCENDING),this));
         segmentedControl_highscore = (SegmentedButtonGroup) findViewById(R.id.segmentedControl_highscore);
         segmentedControl_highscore.setOnPositionChanged(this);
     }
 
-    public boolean onTouch(View v, MotionEvent event) {
-        /*if (event.getAction() == MotionEvent.ACTION_DOWN) {
+    /*public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             if (segmentedControl_highscore.getVisibility() == View.VISIBLE) {
                 Animation animFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out_slow);
                 segmentedControl_highscore.startAnimation(animFadeOut);
@@ -74,16 +75,18 @@ public class HighscoreActivity extends FullscreenActivity implements View.OnTouc
                     }
                 }
             }, 2000);
-        }*/
+        }
         return false;
-    }
+    }*/
 
     public void onPositionChanged(int position) {
         switch (position) {
             case 0:
+                realm = RealmHandler.getLocalRealm(this);
                 recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type","local").findAllSorted("victories", Sort.DESCENDING),this));
                 break;
             case 1:
+                realm = RealmHandler.getOnlineRealm(this);
                 recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type", "online").findAllSorted("victories", Sort.DESCENDING),this));
                 break;
         }

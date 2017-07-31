@@ -233,7 +233,7 @@ public class Game {
      * @return Die Speilrunde als int.
      */
     public int getCurrentRound() {
-        return (round / 2) + 1;
+        return (round / 2);
     }
 
     /**

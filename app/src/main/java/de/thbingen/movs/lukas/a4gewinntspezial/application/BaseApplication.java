@@ -1,10 +1,18 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.application;
 
+import android.os.StrictMode;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.SyncConfiguration;
+import io.realm.SyncCredentials;
+import io.realm.SyncUser;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -25,13 +33,15 @@ public class BaseApplication extends MultiDexApplication {
      */
     public void onCreate() {
         // Realm initialisieren
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("ConnectFour")
-                .schemaVersion(0)
-                .migration(new Migration())
-                .build();
-        Realm.setDefaultConfiguration(config);
+        SyncCredentials syncCredentials = SyncCredentials.usernamePassword("Test", "Test", false);
+        SyncUser syncUser = SyncUser.login(syncCredentials, "http://143.93.91.3:80/auth");
+        SyncConfiguration syncConfiguration = new SyncConfiguration.Builder(syncUser, "realm://143.93.91.3:80/~/default").build();
+        Realm.setDefaultConfiguration(syncConfiguration);
 
         // VectorDrawables erlauben
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);

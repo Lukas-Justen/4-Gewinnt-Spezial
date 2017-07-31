@@ -59,7 +59,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
 
         void setInformation(Playerresults playerresults, int position) {
             imageView_medal.setImageDrawable(getMedal(position));
-            textView_playerName.setText(playerresults.getName());
+            textView_playerName.setText(playerresults.getAlias());
             textView_victories.setText(String.valueOf(playerresults.getVictories()));
             textView_draws.setText(String.valueOf(playerresults.getDraws()));
             textView_losses.setText(String.valueOf(playerresults.getLosses()));
