@@ -1,6 +1,7 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
     private View button_startOnline;
     private EditText editText_playerThis;
     private SegmentedButtonGroup segmentedControl_hostOrClient;
+    private String playername = "";
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -54,6 +56,8 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
                 }
             }
         });
+        playername = PreferenceManager.getDefaultSharedPreferences(this).getString("onlinePlayer", "");
+        editText_playerThis.setText(playername);
     }
 
     /**
@@ -64,8 +68,10 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
      */
     public void onClick(View v) {
         Intent startOnlineGame = new Intent(this, OnlineGameActivity.class);
-        startOnlineGame.putExtra("playerName", editText_playerThis.getText().toString());
+        playername = editText_playerThis.getText().toString();
+        startOnlineGame.putExtra("playerName", playername);
         startOnlineGame.putExtra("host", segmentedControl_hostOrClient.getPosition() == 0);
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("onlinePlayer", playername).apply();
         startActivity(startOnlineGame);
     }
 
