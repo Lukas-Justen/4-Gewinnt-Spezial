@@ -18,6 +18,8 @@
     <string name="textView_colon">:</string>
     <string name="textView_localAction">Am Zug :</string>
     <string name="textView_minutes">%1$d min %2$d sek</string>
+    <string name="textView_round">0</string>
+    <string name="textView_wait">Warten ...</string>
 
     <!--EditTexts-->
     <string name="editText_thisPlayer">Dein Spielername</string>

@@ -32,6 +32,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
+            android:text="@string/textView_wait"
+            android:textColor="@android:color/white"
             android:gravity="center_vertical|start"
             android:textSize="@dimen/textView_statusBar"
             android:textStyle="bold" />

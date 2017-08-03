@@ -6,7 +6,7 @@
     <dimen name="textView_scoreText">64sp</dimen>
     <dimen name="editText_playerText">32sp</dimen>
     <dimen name="button_startActivityText">25sp</dimen>
-    <dimen name="textView_statusBar">22sp</dimen>
+    <dimen name="textView_statusBar">25sp</dimen>
     <dimen name="textView_highscoreName">25sp</dimen>
 
     <!--Paddings-->
