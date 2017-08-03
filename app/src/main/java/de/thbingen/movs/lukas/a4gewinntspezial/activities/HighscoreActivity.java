@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +48,11 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
         setContentView(R.layout.activity_highscore);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
-        realm = RealmHandler.getLocalRealm(this);
+        Realm.init(this);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
         recyclerView_highscores = (RecyclerView) findViewById(R.id.recyclerView_highscores);
         recyclerView_highscores.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type","local").findAllSorted("victories", Sort.DESCENDING),this));
@@ -55,38 +60,14 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
         segmentedControl_highscore.setOnPositionChanged(this);
     }
 
-    /*public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            if (segmentedControl_highscore.getVisibility() == View.VISIBLE) {
-                Animation animFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out_slow);
-                segmentedControl_highscore.startAnimation(animFadeOut);
-                segmentedControl_highscore.setVisibility(View.GONE);
-            }
-            fadeOutAllowed = false;
-        } else if (event.getAction() == MotionEvent.ACTION_UP) {
-            final Animation animFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
-            fadeOutAllowed = true;
-            fadeHandler.removeCallbacksAndMessages(null);
-            fadeHandler.postDelayed(new Runnable() {
-                public void run() {
-                    if (fadeOutAllowed) {
-                        segmentedControl_highscore.startAnimation(animFadeIn);
-                        segmentedControl_highscore.setVisibility(View.VISIBLE);
-                    }
-                }
-            }, 2000);
-        }
-        return false;
-    }*/
-
     public void onPositionChanged(int position) {
         switch (position) {
             case 0:
-                realm = RealmHandler.getLocalRealm(this);
+                realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
                 recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type","local").findAllSorted("victories", Sort.DESCENDING),this));
                 break;
             case 1:
-                realm = RealmHandler.getOnlineRealm(this);
+                realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
                 recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresults.class).equalTo("type", "online").findAllSorted("victories", Sort.DESCENDING),this));
                 break;
         }

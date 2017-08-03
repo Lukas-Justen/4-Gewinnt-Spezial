@@ -77,7 +77,9 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 }
             }
         });
-        realm = RealmHandler.getLocalRealm(this);
+
+        Realm.init(this);
+        realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
     }
 
     /**

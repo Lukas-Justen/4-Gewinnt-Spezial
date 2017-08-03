@@ -130,9 +130,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:drawableStart="@drawable/start"
-        android:drawableEnd="@drawable/start"
-        android:drawableTint="@android:color/white"
         app:layout_constraintTop_toBottomOf="@+id/edittext_player1" />
 
 </android.support.constraint.ConstraintLayout>

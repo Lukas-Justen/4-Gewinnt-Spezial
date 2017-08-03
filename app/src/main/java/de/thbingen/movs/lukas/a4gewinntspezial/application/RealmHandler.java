@@ -10,24 +10,32 @@ import io.realm.SyncUser;
 
 public class RealmHandler {
 
-    public static Realm getLocalRealm(Context context) {
-        Realm.init(context);
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("ConnectFour")
+    private static RealmConfiguration localConfig = null;
+    private static RealmConfiguration onlineConfig = null;
+
+    public static RealmConfiguration getLocalRealmConfig() {
+        if (localConfig != null) {
+            return localConfig;
+        }
+        localConfig = new RealmConfiguration.Builder()
+                .name("local.realm")
                 .schemaVersion(0)
                 .migration(new Migration())
                 .build();
-        Realm.setDefaultConfiguration(config);
-        return Realm.getDefaultInstance();
+        return localConfig;
     }
 
-    public static Realm getOnlineRealm(Context context) {
-        Realm.init(context);
+    public static RealmConfiguration getOnlineRealmConfig() {
+        if (onlineConfig != null) {
+            return onlineConfig;
+        }
         SyncCredentials syncCredentials = SyncCredentials.usernamePassword("Test", "Test", false);
         SyncUser syncUser = SyncUser.login(syncCredentials, "http://143.93.91.3:80/auth");
-        SyncConfiguration syncConfiguration = new SyncConfiguration.Builder(syncUser, "realm://143.93.91.3:80/~/default").build();
-        Realm.setDefaultConfiguration(syncConfiguration);
-        return Realm.getDefaultInstance();
+        onlineConfig= new SyncConfiguration.Builder(syncUser, "realm://143.93.91.3:80/~/default")
+                .schemaVersion(0)
+                .name("online.realm")
+                .build();
+        return onlineConfig;
     }
 
 }

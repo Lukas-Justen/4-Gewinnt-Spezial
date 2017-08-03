@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,7 +139,10 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
 
         setupField();
 
-        realm = RealmHandler.getOnlineRealm(this);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Realm.init(this);
+        realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
     }
 
     /**
