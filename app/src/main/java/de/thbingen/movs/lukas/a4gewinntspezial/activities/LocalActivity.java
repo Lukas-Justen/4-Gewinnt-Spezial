@@ -29,15 +29,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     private View button_startLocal;
     private boolean player1 = false;
     private boolean player2 = false;
-    private int scorePlayer1 = 0;
-    private int scorePlayer2 = 0;
     private EditText editText_player1;
     private EditText editText_player2;
     private TextView textView_localPlayer1;
     private TextView textView_localPlayer2;
-    private Playerresults playerresults1;
-    private Playerresults playerresults2;
-    private Realm realm;
     private final int START_GAME_CODE = 1234;
     private String playerName1 = "";
     private String playerName2 = "";
@@ -85,9 +80,6 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         editText_player1.setText(playerName1);
         playerName2 = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer2","");
         editText_player2.setText(playerName2);
-
-        Realm.init(this);
-        realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
     }
 
     /**
@@ -104,8 +96,6 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer2", playerName2).apply();
         startLocalGame.putExtra("player1", playerName1);
         startLocalGame.putExtra("player2", playerName2);
-        startLocalGame.putExtra("score1", scorePlayer1);
-        startLocalGame.putExtra("score2", scorePlayer2);
         startActivityForResult(startLocalGame, START_GAME_CODE);
     }
 
@@ -119,53 +109,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == START_GAME_CODE) {
             if (resultCode == RESULT_OK) {
-                playerresults1 = findPlayer(editText_player1.getText().toString());
-                playerresults2 = findPlayer(editText_player2.getText().toString());
-
-                scorePlayer1 += data.getExtras().getInt("player1");
-                scorePlayer2 += data.getExtras().getInt("player2");
-                textView_localPlayer1.setText(String.valueOf(scorePlayer1));
-                textView_localPlayer2.setText(String.valueOf(scorePlayer2));
-
-                realm.beginTransaction();
-                playerresults1.addVictories(data.getExtras().getInt("player1"));
-                playerresults2.addVictories(data.getExtras().getInt("player2"));
-                if (!data.getExtras().getBoolean("draw")) {
-                    playerresults1.addLosses(data.getExtras().getInt("player1"));
-                    playerresults2.addLosses(data.getExtras().getInt("player2"));
-                }
-                playerresults1.addTime(data.getExtras().getLong("playtime"));
-                playerresults2.addTime(data.getExtras().getLong("playtime"));
-                playerresults1.addColorOfPreference(1);
-                playerresults2.addColorOfPreference(-1);
-                playerresults1.nextGame();
-                playerresults2.nextGame();
-                playerresults1.addRounds(data.getExtras().getInt("round"));
-                playerresults2.addRounds(data.getExtras().getInt("round"));
-                realm.insertOrUpdate(playerresults1);
-                realm.insertOrUpdate(playerresults2);
-                realm.commitTransaction();
+                textView_localPlayer1.setText(String.valueOf(data.getExtras().getInt("player1")));
+                textView_localPlayer2.setText(String.valueOf(data.getExtras().getInt("player2")));
             }
         }
-    }
-
-    /**
-     * Sucht die entsprechenden Spielergebnisse zu dem gegebenen Namen aus der Datenbank.
-     *
-     * @param playerName Der Spielername dessen Ergebnisse man sucht.
-     *
-     * @return Die Ergebnisse des Spielers.
-     */
-    private Playerresults findPlayer(String playerName) {
-        RealmQuery<Playerresults> entriesForPlayer = realm.where(Playerresults.class).equalTo("name", playerName);
-        if (entriesForPlayer.count() > 0) {
-            return entriesForPlayer.findFirst();
-        }
-        Playerresults playerresults = new Playerresults();
-        playerresults.setName(playerName);
-        playerresults.setAlias(playerName);
-        playerresults.setType("local");
-        return playerresults;
     }
 
 }

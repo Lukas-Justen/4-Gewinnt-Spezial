@@ -3,8 +3,6 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,8 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
+import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresults;
+import io.realm.Realm;
+import io.realm.RealmQuery;
 import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import nl.dionsegijn.konfetti.models.Size;
@@ -31,7 +33,7 @@ import nl.dionsegijn.konfetti.models.Size;
  */
 public class LocalGameActivity extends FullscreenActivity implements View.OnClickListener {
 
-    // Das Spielffeld
+    // Das Spielfeld
     private LinearLayout[] linearLayouts_Columns = new LinearLayout[7];
     private ImageView[][] imageViews_fields = new ImageView[7][6];
     private KonfettiView konfettiView_local;
@@ -40,7 +42,11 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     private TextView textView_localScore1;
     private TextView textView_localScore2;
     private long startTime;
-
+    private Playerresults playerresults1;
+    private Playerresults playerresults2;
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
+    private Realm realm;
 
     // Die Spielvariable
     private Game game;
@@ -62,9 +68,6 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
         textView_localRound = (TextView) findViewById(R.id.textView_localRound);
         textView_localScore1 = (TextView) findViewById(R.id.textView_localScore1);
         textView_localScore2 = (TextView) findViewById(R.id.textView_localScore2);
-        textView_localScore1.setText(String.valueOf(getIntent().getExtras().getInt("score1")));
-        textView_localScore2.setText(String.valueOf(getIntent().getExtras().getInt("score2")));
-
 
         // Legt ein neues Spiel an und Initialisiert die LinearLayouts für die Spalten
         Bundle receivedData = getIntent().getExtras();
@@ -77,22 +80,14 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
         linearLayouts_Columns[5] = (LinearLayout) findViewById(R.id.linearlayoutLocal6);
         linearLayouts_Columns[6] = (LinearLayout) findViewById(R.id.linearlayoutLocal7);
 
-        // Initialisiert jedes einelne Feld
-        for (int j = 0; j < 7; j++) {
-            for (int i = 0; i < 6; i++) {
-                ImageView image = new ImageView(this);
-                image.setImageDrawable(getResources().getDrawable(R.drawable.field));
-                imageViews_fields[j][i] = image;
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
-                linearLayouts_Columns[j].addView(image, params);
-            }
-            linearLayouts_Columns[j].setTag(j);
-            linearLayouts_Columns[j].setOnClickListener(this);
-        }
+        setupField();
 
         textView_localPlayer.setText(game.getPlayerName());
         textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
         startTime = System.currentTimeMillis();
+
+        Realm.init(this);
+        realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
     }
 
     /**
@@ -106,36 +101,95 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
      * @param view Der View, bzw. die Spalte, die angeclickt wurde.
      */
     public void onClick(View view) {
-        if (winner == null) {
+        if (winner == null && game.getFieldsLeft() > 0) {
             LinearLayout linearLayout = (LinearLayout) view;
 
             int column = (int) linearLayout.getTag();
-            int row = game.insert(column);
-
-            if (row >= 0) {
-                imageViews_fields[column][row].setImageDrawable(getResources().getDrawable(game.getPlayerTurn().getImage()));
-
-                if (game.checkWin()) {
-                    for (Point p : game.getWinPositions()) {
-                        imageViews_fields[p.x][p.y].setImageDrawable(getResources().getDrawable(R.drawable.stone_green));
-                        makeKonfetti(p, game.getPlayerTurn().getColor());
-                    }
-                    winner = game.getPlayerTurn();
-                    if (winner == Player.P1) {
-                        textView_localScore1.setText(String.valueOf(getIntent().getExtras().getInt("score1") +1));
-                    } else {
-                        textView_localScore2.setText(String.valueOf(getIntent().getExtras().getInt("score2") +1));
-                    }
-                } else {
-                    game.nextPlayer();
-                    textView_localPlayer.setText(game.getPlayerName());
-                    textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
-                    textView_localRound.setText(String.valueOf(game.getCurrentRound()));
-                }
-
-            }
+            insertStone(column);
         } else {
-            finish();
+            resetGame();
+        }
+    }
+
+    /**
+     * Setzt das Spielfeld und die TextViews zur Anzeige der Runde für eine neue Spielrunde auf.
+     */
+    private void resetGame() {
+        if (winner == null) {
+            saveResults(0, 0);
+        }
+        game.reset();
+        textView_localPlayer.setText(game.getPlayerName());
+        textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        textView_localRound.setText(String.valueOf(game.getCurrentRound()));
+        winner = null;
+        setupField();
+        startTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Befüllt die Layouts des Spielfelds mit leeren Feldern für ein neues Spiel.
+     */
+    private void setupField() {
+        for (int j = 0; j < 7; j++) {
+            linearLayouts_Columns[j].removeAllViews();
+            for (int i = 0; i < 6; i++) {
+                ImageView image = new ImageView(this);
+                image.setImageDrawable(getResources().getDrawable(R.drawable.field));
+                imageViews_fields[j][i] = image;
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
+                linearLayouts_Columns[j].addView(image, params);
+            }
+            linearLayouts_Columns[j].setTag(j);
+            linearLayouts_Columns[j].setOnClickListener(this);
+        }
+    }
+
+    /**
+     * Bereitet die Anzeigen und die Rundentafel für den nächsten Spieler vor.
+     */
+    private void nextPlayer() {
+        game.nextPlayer();
+        textView_localPlayer.setText(game.getPlayerName());
+        textView_localPlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        textView_localRound.setText(String.valueOf(game.getCurrentRound()));
+    }
+
+    /**
+     * Wirft einen Stein in die angegebene Spalte. Daraufhin wird überprüft, ob es einen Gewinner
+     * gibt.
+     *
+     * @param column Die Spalte, in die der Stein eingeworfen werden soll.
+     */
+    private void insertStone(int column) {
+        int row = game.insert(column);
+
+        if (row >= 0) {
+            imageViews_fields[column][row].setImageDrawable(getResources().getDrawable(game.getPlayerTurn().getImage()));
+
+            if (game.checkWin()) {
+                hasWinner();
+            } else {
+                nextPlayer();
+            }
+        }
+    }
+
+    /**
+     * Macht Konfetti und aktualisiert die Anzeigen nach dem Sieg.
+     */
+    private void hasWinner() {
+        for (Point p : game.getWinPositions()) {
+            imageViews_fields[p.x][p.y].setImageDrawable(getResources().getDrawable(R.drawable.stone_green));
+            makeKonfetti(p, game.getPlayerTurn().getColor());
+        }
+        winner = game.getPlayerTurn();
+        if (winner == Player.P1) {
+            textView_localScore1.setText(String.valueOf(++scorePlayer1));
+            saveResults(1, 0);
+        } else {
+            textView_localScore2.setText(String.valueOf(++scorePlayer2));
+            saveResults(0, 1);
         }
     }
 
@@ -144,14 +198,14 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
      */
     private void makeKonfetti(Point point, int color) {
         konfettiView_local.build()
-                .addColors(getResources().getColor(color), getResources().getColor(R.color.colorAccent))
+                .addColors(getResources().getColor(color), getResources().getColor(R.color.colorWin))
                 .setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f)
                 .setFadeOutEnabled(true)
                 .setTimeToLive(1000L)
                 .addShapes(Shape.CIRCLE, Shape.RECT)
                 .addSizes(new Size(12, 5f))
-                .setPosition(linearLayouts_Columns[point.x].getX() + linearLayouts_Columns[point.x].getWidth()/2, imageViews_fields[point.x][point.y].getY() + imageViews_fields[point.x][point.y].getHeight()/2)
+                .setPosition(linearLayouts_Columns[point.x].getX() + linearLayouts_Columns[point.x].getWidth() / 2, imageViews_fields[point.x][point.y].getY() + imageViews_fields[point.x][point.y].getHeight() / 2)
                 .burst(100);
 
     }
@@ -161,21 +215,58 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
      * speichert das Ergebnis der Partie in der Realm-Datenbank.
      */
     public void finish() {
-        boolean draw = game.getFieldsLeft() == 0;
-
-        if (winner == null && !draw) {
-            setResult(RESULT_CANCELED);
-        } else {
-            Intent data = new Intent();
-            data.putExtra("player1", (winner == Player.P1) ? 1 : 0);
-            data.putExtra("player2", (winner == Player.P2) ? 1 : 0);
-            data.putExtra("round", Integer.parseInt(textView_localRound.getText().toString()));
-            data.putExtra("draw",draw);
-            data.putExtra("playtime", (System.currentTimeMillis() - startTime) / 1000 );
-            setResult(RESULT_OK, data);
-        }
+        Intent data = new Intent();
+        data.putExtra("player1", scorePlayer1);
+        data.putExtra("player2", scorePlayer2);
+        setResult(RESULT_OK, data);
 
         super.finish();
+    }
+
+    /**
+     * Speichert die Ergebnisse der letzten Partie in der Datenbanbk.
+     */
+    private void saveResults(int player1, int player2) {
+        playerresults1 = findPlayer(getIntent().getExtras().getString("player1"));
+        playerresults2 = findPlayer(getIntent().getExtras().getString("player2"));
+
+        realm.beginTransaction();
+        playerresults1.addVictories(player1);
+        playerresults2.addVictories(player2);
+        if (player1 != player2) {
+            playerresults1.addLosses(player1);
+            playerresults2.addLosses(player2);
+        }
+        long time = (System.currentTimeMillis() - startTime) / 1000;
+        playerresults1.addTime(time);
+        playerresults2.addTime(time);
+        playerresults1.addColorOfPreference(1);
+        playerresults2.addColorOfPreference(-1);
+        playerresults1.nextGame();
+        playerresults2.nextGame();
+        playerresults1.addRounds(game.getCurrentRound());
+        playerresults2.addRounds(game.getCurrentRound());
+        realm.insertOrUpdate(playerresults1);
+        realm.insertOrUpdate(playerresults2);
+        realm.commitTransaction();
+    }
+
+    /**
+     * Sucht die entsprechenden Spielergebnisse zu dem gegebenen Namen aus der Datenbank.
+     *
+     * @param playerName Der Spielername dessen Ergebnisse man sucht.
+     * @return Die Ergebnisse des Spielers.
+     */
+    private Playerresults findPlayer(String playerName) {
+        RealmQuery<Playerresults> entriesForPlayer = realm.where(Playerresults.class).equalTo("name", playerName);
+        if (entriesForPlayer.count() > 0) {
+            return entriesForPlayer.findFirst();
+        }
+        Playerresults playerresults = new Playerresults();
+        playerresults.setName(playerName);
+        playerresults.setAlias(playerName);
+        playerresults.setType("local");
+        return playerresults;
     }
 
 }

@@ -1,103 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineGameActivity"
-    android:weightSum="20"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:weightSum="20"
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineGameActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:weightSum="19"
-        android:paddingStart="8dp"
+        android:background="@color/colorPrimaryDark"
         android:paddingEnd="8dp"
-        android:background="@color/colorPrimaryDark">
+        android:paddingStart="8dp"
+        android:weightSum="19">
 
         <ImageView
-            app:srcCompat="@drawable/player"
-            android:tint="@android:color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center_vertical|end"/>
+            android:gravity="center_vertical|end"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/player" />
 
         <TextView
             android:id="@+id/textView_localPlayer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textStyle="bold"
+            android:gravity="center_vertical|start"
             android:textSize="@dimen/textView_statusBar"
-            android:gravity="center_vertical|start" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView_localScore1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:textStyle="bold"
             android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
-            android:textSize="@dimen/textView_statusBar"
+            android:layout_weight="3"
             android:gravity="center_vertical|end"
-            android:textColor="@color/colorRed"/>
+            android:text="@string/textView_score"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/textView_statusBar"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textStyle="bold"
+            android:gravity="center"
             android:text="@string/textView_colon"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textView_statusBar"
-            android:gravity="center" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView_localScore2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:textStyle="bold"
+            android:gravity="center_vertical|start"
+            android:text="@string/textView_score"
             android:textColor="@color/colorYellow"
             android:textSize="@dimen/textView_statusBar"
-            android:gravity="center_vertical|start" />
+            android:textStyle="bold" />
 
         <android.support.v4.widget.Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"/>
+            android:layout_weight="4" />
 
         <ImageView
-            app:srcCompat="@drawable/round"
-            android:tint="@android:color/white"
-            android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
             android:layout_weight="1"
-            android:gravity="center_vertical|end"/>
+            android:gravity="center_vertical|end"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/round" />
 
         <TextView
             android:id="@+id/textView_localRound"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textStyle="bold"
+            android:gravity="center_vertical|start"
             android:text="@string/textView_round"
             android:textColor="@android:color/white"
             android:textSize="@dimen/textView_statusBar"
-            android:gravity="center_vertical|start" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/colorDivider"/>
+        android:background="@color/colorDivider" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -112,9 +114,9 @@
 
             <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
             <LinearLayout
-                style="@style/LinearLayoutColumn"
                 android:id="@+id/linearlayoutLocal1"
-                android:tag="0"/>
+                style="@style/LinearLayoutColumn"
+                android:tag="0" />
 
             <LinearLayout
                 android:id="@+id/linearlayoutLocal2"
@@ -127,23 +129,23 @@
                 android:tag="2" />
 
             <LinearLayout
-                style="@style/LinearLayoutColumn"
                 android:id="@+id/linearlayoutLocal4"
+                style="@style/LinearLayoutColumn"
                 android:tag="3" />
 
             <LinearLayout
-                style="@style/LinearLayoutColumn"
                 android:id="@+id/linearlayoutLocal5"
-                android:tag="4"/>
+                style="@style/LinearLayoutColumn"
+                android:tag="4" />
 
             <LinearLayout
-                style="@style/LinearLayoutColumn"
                 android:id="@+id/linearlayoutLocal6"
+                style="@style/LinearLayoutColumn"
                 android:tag="5" />
 
             <LinearLayout
-                style="@style/LinearLayoutColumn"
                 android:id="@+id/linearlayoutLocal7"
+                style="@style/LinearLayoutColumn"
                 android:tag="6" />
 
         </LinearLayout>

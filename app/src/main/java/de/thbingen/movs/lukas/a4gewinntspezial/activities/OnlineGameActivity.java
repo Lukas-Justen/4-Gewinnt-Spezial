@@ -64,7 +64,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
                     .setMessage("Bestätigen Sie, wenn der Code: " + connectionInfo.getAuthenticationToken() + " auch auf dem anderen Gerät angezeigt wird.")
                     .setPositiveButton("Akzeptieren", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            acceptConnection(endpointId,connectionInfo);
+                            acceptConnection(endpointId, connectionInfo);
                         }
                     })
                     .setNegativeButton("Ablehnen", new DialogInterface.OnClickListener() {
@@ -198,7 +198,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      * @param view Der View, der angeclickt wurde.
      */
     public void onClick(View view) {
-        if (winner == null) {
+        if (winner == null && game.getFieldsLeft() > 0) {
             if (allowedToClick) {
                 LinearLayout linearLayout = (LinearLayout) view;
 
@@ -211,6 +211,15 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
         }
     }
 
+    /**
+     * Bereitet die Anzeigen und die Rundentafel für den nächsten Spieler vor.
+     */
+    private void nextPlayer() {
+        game.nextPlayer();
+        textView_onlinePlayer.setText(game.getPlayerName());
+        textView_onlinePlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        textView_onlineRound.setText(String.valueOf(game.getCurrentRound()));
+    }
 
     /**
      * Startet das Anbieten eines neuen Spiels und wartet auf die Anfrage eines anderen Geräts.
@@ -318,7 +327,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      */
     private void makeKonfetti(Point point, int color) {
         konfettiView_online.build()
-                .addColors(getResources().getColor(color), getResources().getColor(R.color.colorAccent))
+                .addColors(getResources().getColor(color), getResources().getColor(R.color.colorWin))
                 .setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f)
                 .setFadeOutEnabled(true)
@@ -348,20 +357,14 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
         }
     }
 
-    /**
-     * Bereitet die Anzeigen und die Rundentafel für den nächsten Spieler vor.
-     */
-    private void nextPlayer() {
-        game.nextPlayer();
-        textView_onlinePlayer.setText(game.getPlayerName());
-        textView_onlinePlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
-        textView_onlineRound.setText(String.valueOf(game.getCurrentRound()));
-    }
 
     /**
      * Setzt das Spielfeld und die TextViews zur Anzeige der Runde für eine neue Spielrunde auf.
      */
     private void resetGame() {
+        if (winner == null) {
+            saveMyResults(0, 0);
+        }
         game.reset();
         allowedToClick = getIntent().getExtras().getBoolean("host");
         textView_onlinePlayer.setText(game.getPlayerName());
@@ -407,7 +410,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      * Akzeptiert die angefragte Verbindung und bereitet alles für die spätere Kommunikation mit dem
      * Partnergerät vor.
      *
-     * @param endpointId Die Id des anderen Geräts
+     * @param endpointId     Die Id des anderen Geräts
      * @param connectionInfo Die zusätzlichen Informationen
      */
     private void acceptConnection(String endpointId, ConnectionInfo connectionInfo) {
@@ -427,21 +430,23 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
     /**
      * Speichert die Ergebnisse der letzten Partie in der Datenbanbk.
      *
-     * @param host Ergebnis des hosts.
+     * @param host   Ergebnis des hosts.
      * @param client Ergebnis des clients
      */
     private void saveMyResults(int host, int client) {
         playerresults = findPlayer(Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID));
         realm.beginTransaction();
         playerresults.setAlias(getIntent().getExtras().getString("playerName"));
-        if (getIntent().getExtras().getBoolean("host")) {
-            playerresults.addVictories(host);
-            playerresults.addLosses(host);
-        } else {
-            playerresults.addVictories(client);
-            playerresults.addLosses(client);
+        if (host != client) {
+            if (getIntent().getExtras().getBoolean("host")) {
+                playerresults.addVictories(host);
+                playerresults.addLosses(host);
+            } else {
+                playerresults.addVictories(client);
+                playerresults.addLosses(client);
+            }
         }
-        playerresults.addTime((System.currentTimeMillis() - startTime) / 1000 );
+        playerresults.addTime((System.currentTimeMillis() - startTime) / 1000);
         playerresults.addColorOfPreference(getIntent().getExtras().getBoolean("host") ? 1 : -1);
         playerresults.nextGame();
         playerresults.addRounds(game.getCurrentRound());
@@ -453,7 +458,6 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      * Sucht die entsprechenden Spielergebnisse zu dem gegebenen Namen aus der Datenbank.
      *
      * @param playerName Der Spielername dessen Ergebnisse man sucht.
-     *
      * @return Die Ergebnisse des Spielers.
      */
     private Playerresults findPlayer(String playerName) {
@@ -466,7 +470,6 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
         playerresults.setType("online");
         return playerresults;
     }
-
 
     // Nicht benötigt
     public void onConnectionSuspended(int i) {
