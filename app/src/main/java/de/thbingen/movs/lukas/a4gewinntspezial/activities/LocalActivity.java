@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,6 +39,9 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     private Playerresults playerresults2;
     private Realm realm;
     private final int START_GAME_CODE = 1234;
+    private String playerName1 = "";
+    private String playerName2 = "";
+
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -77,6 +81,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 }
             }
         });
+        playerName1 = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer1","");
+        editText_player1.setText(playerName1);
+        playerName2 = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer2","");
+        editText_player2.setText(playerName2);
 
         Realm.init(this);
         realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
@@ -90,8 +98,12 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      */
     public void onClick(View v) {
         Intent startLocalGame = new Intent(this, LocalGameActivity.class);
-        startLocalGame.putExtra("player1", editText_player1.getText().toString());
-        startLocalGame.putExtra("player2", editText_player2.getText().toString());
+        playerName1 = editText_player1.getText().toString();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer1", playerName1).apply();
+        playerName2 = editText_player2.getText().toString();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer2", playerName2).apply();
+        startLocalGame.putExtra("player1", playerName1);
+        startLocalGame.putExtra("player2", playerName2);
         startLocalGame.putExtra("score1", scorePlayer1);
         startLocalGame.putExtra("score2", scorePlayer2);
         startActivityForResult(startLocalGame, START_GAME_CODE);
