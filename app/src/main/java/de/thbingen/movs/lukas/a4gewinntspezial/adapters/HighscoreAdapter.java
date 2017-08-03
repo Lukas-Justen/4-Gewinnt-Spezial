@@ -64,7 +64,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
             textView_draws.setText(String.valueOf(playerresults.getDraws()));
             textView_losses.setText(String.valueOf(playerresults.getLosses()));
             textView_rounds.setText(String.valueOf(playerresults.getRounds()));
-            textView_time.setText(context.getString(R.string.textView_minutes,playerresults.getTime() / 60));
+            textView_time.setText(context.getString(R.string.textView_minutes,playerresults.getTime() / 60, playerresults.getTime() % 60));
             textView_games.setText(String.valueOf(playerresults.getGames()));
             imageView_colorOfPreference.setImageDrawable(getColorOfPreference(playerresults.getColorOfPreference()));
         }
