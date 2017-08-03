@@ -2,6 +2,8 @@ package de.thbingen.movs.lukas.a4gewinntspezial.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.provider.Settings;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +19,12 @@ import io.realm.RealmRecyclerViewAdapter;
 public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, HighscoreAdapter.ViewHolder>{
 
     private Context context;
+    private String myId = "";
 
     public HighscoreAdapter(OrderedRealmCollection<Playerresults> data, Context context) {
         super(data, true);
         this.context = context;
+        this.myId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,9 +47,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
         private TextView textView_games;
         private ImageView imageView_medal;
         private ImageView imageView_colorOfPreference;
+        private CardView cardView_background;
 
         ViewHolder(View view) {
             super(view);
+
             textView_playerName = (TextView) view.findViewById(R.id.textView_highscorePlayerName);
             textView_victories = (TextView) view.findViewById(R.id.textView_victories);
             textView_draws = (TextView) view.findViewById(R.id.textView_draws);
@@ -55,6 +61,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
             textView_games = (TextView) view.findViewById(R.id.textView_games);
             imageView_medal = (ImageView) view.findViewById(R.id.imageView_medal);
             imageView_colorOfPreference = (ImageView) view.findViewById(R.id.imageView_colorOfPreference);
+            cardView_background = (CardView) view.findViewById(R.id.cardView_background);
         }
 
         void setInformation(Playerresults playerresults, int position) {
@@ -67,6 +74,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
             textView_time.setText(context.getString(R.string.textView_minutes,playerresults.getTime() / 60, playerresults.getTime() % 60));
             textView_games.setText(String.valueOf(playerresults.getGames()));
             imageView_colorOfPreference.setImageDrawable(getColorOfPreference(playerresults.getColorOfPreference()));
+            if (playerresults.getName().equals(myId)) {
+                cardView_background.setCardBackgroundColor(context.getResources().getColor(R.color.colorCardHighlight));
+            } else {
+                cardView_background.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
+            }
         }
 
         private Drawable getMedal(int position) {
