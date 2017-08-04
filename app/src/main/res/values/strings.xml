@@ -9,17 +9,25 @@
     <string name="button_local">Lokal</string>
     <string name="button_online">Online</string>
     <string name="button_highscores">Highscores</string>
+    <string name="textView_score">0</string>
+    <string name="textView_colon">:</string>
+    <string name="textView_localAction">Am Zug :</string>
+    <string name="textView_minutes">%1$d min %2$d sek</string>
     <string name="button_start">Starten</string>
     <string name="button_host">Host</string>
     <string name="button_client">Client</string>
 
     <!--TextViews-->
-    <string name="textView_score">0</string>
-    <string name="textView_colon">:</string>
-    <string name="textView_localAction">Am Zug :</string>
-    <string name="textView_minutes">%1$d min %2$d sek</string>
     <string name="textView_round">0</string>
-    <string name="textView_wait">Warten ...</string>
+    <string name="textView_wait">Warten …</string>
+    <string name="title_welcome">Herzlich Willkommen</string>
+    <string name="message_welcome">… mit dieser 4-Gewinnt-App kannst du dich wieder in deine Kindheit versetzen und aufregende Partien gegen andere spielen </string>
+    <string name="title_local">Lokale Spielrunde</string>
+    <string name="message_local">… bei lokalen Spielen kannst du auf diesem Gerät gegen eine andere Person spielen ohne eine Internetverbindung zu benötigen</string>
+    <string name="title_online">Online Spielrunde</string>
+    <string name="message_online">… bei online Spielen kannst du dich mit einer anderen Person in deiner Nähe verbinden und jeder spielt auf seinem Geräzt gegen den anderen</string>
+    <string name="title_highscore">Highscores</string>
+    <string name="message_highscore">… sehe dir sowohl die lokalen Spielstände auf diesem Gerät als auch die Spielstände aller Nutzer an</string>
 
     <!--EditTexts-->
     <string name="editText_thisPlayer">Dein Spielername</string>

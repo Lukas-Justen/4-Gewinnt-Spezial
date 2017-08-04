@@ -75,7 +75,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresults, Hi
             textView_games.setText(String.valueOf(playerresults.getGames()));
             imageView_colorOfPreference.setImageDrawable(getColorOfPreference(playerresults.getColorOfPreference()));
             if (playerresults.getName().equals(myId)) {
-                cardView_background.setCardBackgroundColor(context.getResources().getColor(R.color.colorCardHighlight));
+                if (playerresults.getColorOfPreference()>= 0) {
+                    cardView_background.setCardBackgroundColor(context.getResources().getColor(R.color.colorCardHighlightRed));
+                } else {
+                    cardView_background.setCardBackgroundColor(context.getResources().getColor(R.color.colorCardHighlightYellow));
+                }
             } else {
                 cardView_background.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
             }

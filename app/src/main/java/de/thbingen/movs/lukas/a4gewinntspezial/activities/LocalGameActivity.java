@@ -101,7 +101,7 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
      * @param view Der View, bzw. die Spalte, die angeclickt wurde.
      */
     public void onClick(View view) {
-        if (winner == null && game.getFieldsLeft() > 0) {
+        if (winner == null && game != null && game.getFieldsLeft() > 0) {
             LinearLayout linearLayout = (LinearLayout) view;
 
             int column = (int) linearLayout.getTag();

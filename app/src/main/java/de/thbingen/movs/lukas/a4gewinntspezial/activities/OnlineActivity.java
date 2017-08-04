@@ -1,12 +1,15 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
@@ -29,6 +32,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
     private EditText editText_playerThis;
     private SegmentedButtonGroup segmentedControl_hostOrClient;
     private String playername = "";
+    private BluetoothAdapter bluetoothAdapter;
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -60,6 +64,13 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
         editText_playerThis.setText(playername);
     }
 
+    public void finish() {
+        super.finish();
+        if (bluetoothAdapter != null)  {
+            bluetoothAdapter.disable();
+        }
+    }
+
     /**
      * Wird automatisch aufgerufen, wenn der Button zum Starten des neuen online Spiels geclickt
      * wurde.
@@ -67,12 +78,47 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
      * @param v Der View, der angeclickt wurde.
      */
     public void onClick(View v) {
+        checknetworkForNearby();
+    }
+
+    public void checknetworkForNearby() {
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        bluetoothAdapter.enable();
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+        } else {
+            startGame();
+        }
+    }
+
+    private void startGame() {
         Intent startOnlineGame = new Intent(this, OnlineGameActivity.class);
         playername = editText_playerThis.getText().toString();
         startOnlineGame.putExtra("playerName", playername);
         startOnlineGame.putExtra("host", segmentedControl_hostOrClient.getPosition() == 0);
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("onlinePlayer", playername).apply();
         startActivity(startOnlineGame);
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }

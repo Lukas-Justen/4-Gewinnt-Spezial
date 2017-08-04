@@ -73,7 +73,6 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
                             Nearby.Connections.rejectConnection(googleApiClient, endpointId);
                         }
                     })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
 
@@ -83,6 +82,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
                 textView_onlinePlayer.setText(game.getPlayerName());
                 textView_onlinePlayer.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
                 startTime = System.currentTimeMillis();
+                connected = true;
             }
         }
 
@@ -102,6 +102,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
     private String endpoint;
     private Player winner = null;
     private long startTime;
+    private boolean connected = false;
     private boolean allowedToClick = false;
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
@@ -198,16 +199,18 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      * @param view Der View, der angeclickt wurde.
      */
     public void onClick(View view) {
-        if (winner == null && game.getFieldsLeft() > 0) {
-            if (allowedToClick) {
-                LinearLayout linearLayout = (LinearLayout) view;
+        if (connected) {
+            if (winner == null && game.getFieldsLeft() > 0) {
+                if (allowedToClick) {
+                    LinearLayout linearLayout = (LinearLayout) view;
 
-                int column = (int) linearLayout.getTag();
-                insertStone(column);
+                    int column = (int) linearLayout.getTag();
+                    insertStone(column);
+                }
+            } else {
+                Nearby.Connections.sendPayload(googleApiClient, endpoint, Payload.fromBytes("Ende".getBytes()));
+                resetGame();
             }
-        } else {
-            Nearby.Connections.sendPayload(googleApiClient, endpoint, Payload.fromBytes("Ende".getBytes()));
-            resetGame();
         }
     }
 
