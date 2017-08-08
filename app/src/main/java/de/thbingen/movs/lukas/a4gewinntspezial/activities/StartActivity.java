@@ -2,7 +2,6 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
@@ -38,31 +37,28 @@ public class StartActivity extends FullscreenActivity implements View.OnClickLis
         button_online.setOnClickListener(this);
         View button_highscore = findViewById(R.id.button_highscores);
         button_highscore.setOnClickListener(this);
-
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("firstStart", true)) {
-            Intent startIntroActivity = new Intent(this, IntroActivity.class);
-            startActivity(startIntroActivity);
-        }
     }
 
     /**
      * Wird automatisch aufgerufen, wenn ein Button innerhalb des Layouts angeclickt wird. Der
-     * Button local Startet die Activity zum Starten eines neuen lokalen Spiels.
+     * Button local Startet die Activity zum Starten eines neuen lokalen Spiels. Der Button online
+     * zum Starten eines neuen Online-games. Der letzten Button mit der Aufschritt Highscores
+     * zeigt die Highscores in Tabellenform an.
      *
      * @param view Die View, die angeclickt wurde.
      */
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_local:
-                Intent intentLocal = new Intent(this,LocalActivity.class);
+                Intent intentLocal = new Intent(this, LocalActivity.class);
                 startActivity(intentLocal);
                 break;
             case R.id.button_online:
-                Intent intentOnline = new Intent(this,OnlineActivity.class);
+                Intent intentOnline = new Intent(this, OnlineActivity.class);
                 startActivity(intentOnline);
                 break;
             case R.id.button_highscores:
-                Intent intentHighscores = new Intent(this,HighscoreActivity.class);
+                Intent intentHighscores = new Intent(this, HighscoreActivity.class);
                 startActivity(intentHighscores);
                 break;
         }

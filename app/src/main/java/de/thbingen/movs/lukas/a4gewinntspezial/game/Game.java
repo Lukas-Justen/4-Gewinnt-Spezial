@@ -1,7 +1,6 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.game;
 
 import android.graphics.Point;
-import android.util.Log;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -28,10 +27,24 @@ public class Game {
     private int round = 0;
     private int fieldsLeft = 42;
 
+    /**
+     * Legt ein neues Spiel an.
+     *
+     * @param player1 Name des ersten Spielers.
+     * @param player2 Name des zweiten Spielers.
+     */
     public Game(String player1, String player2) {
-        this(7, 6,player1, player2);
+        this(7, 6, player1, player2);
     }
 
+    /**
+     * Legt ein neues Spiel an.
+     *
+     * @param columns Anzahl der Spalten.
+     * @param rows    Anzahl der Zeilen.
+     * @param player1 Name des ersten Spielers.
+     * @param player2 Name des zweiten Spielers.
+     */
     private Game(int columns, int rows, String player1, String player2) {
         this.COLUMNS = columns;
         this.ROWS = rows;
@@ -40,6 +53,9 @@ public class Game {
         positions = new Player[COLUMNS][ROWS];
     }
 
+    /**
+     * Setzt alle Spielrelavanten Variablen wieder für ein neues Spiel zurück.
+     */
     public void reset() {
         turn = Player.P1;
         positions = new Player[COLUMNS][ROWS];
@@ -76,116 +92,92 @@ public class Game {
      */
     public boolean checkWin() {
         // Horizontal
-        for(int i = 0; i < positions[0].length; i++)
-        {
+        for (int i = 0; i < positions[0].length; i++) {
             int c = 0;
-            for(int x = 0; x < COLUMNS; x++)
-            {
+            for (int x = 0; x < COLUMNS; x++) {
                 Player[] p = positions[x];
-                if( p[i] == turn )
-                {
-                    winPositions[c] = new Point(x,i);
+                if (p[i] == turn) {
+                    winPositions[c] = new Point(x, i);
                     c++;
-                }
-                else
+                } else
                     c = 0;
 
-                if( c >= 4 )
+                if (c >= 4)
                     return true;
             }
         }
 
         // Vertikal
-        for(int x = 0; x < COLUMNS; x++)
-        {
+        for (int x = 0; x < COLUMNS; x++) {
             Player[] pc = positions[x];
             int c = 0;
-            for(int y = 0; y < ROWS; y++)
-            {
+            for (int y = 0; y < ROWS; y++) {
                 Player p = pc[y];
-                if( p == turn )
-                {
+                if (p == turn) {
                     winPositions[c] = new Point(x, y);
                     c++;
-                }
-                else
+                } else
                     c = 0;
 
-                if( c >= 4 )
+                if (c >= 4)
                     return true;
             }
         }
         // Diagonal - top left to bottom right
-        for(int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             int c = 0;
-            for(int x = 0; x <= 5-i; x++)
-            {
-                int y = i+x;
-                if( positions[x][y] == turn )
-                {
+            for (int x = 0; x <= 5 - i; x++) {
+                int y = i + x;
+                if (positions[x][y] == turn) {
                     winPositions[c] = new Point(x, y);
                     c++;
-                }
-                else
+                } else
                     c = 0;
 
-                if( c >= 4 )
+                if (c >= 4)
                     return true;
             }
         }
-        for(int i = 1; i <= 3; i++)
-        {
+        for (int i = 1; i <= 3; i++) {
             int c = 0;
-            for(int y = 0; y <= 6-i; y++)
-            {
-                int x = i+y;
-                if( positions[x][y] == turn )
-                {
+            for (int y = 0; y <= 6 - i; y++) {
+                int x = i + y;
+                if (positions[x][y] == turn) {
                     winPositions[c] = new Point(x, y);
                     c++;
-                }
-                else
+                } else
                     c = 0;
 
-                if( c >= 4 )
+                if (c >= 4)
                     return true;
             }
         }
         // Diagonal - bottom left to top right
-        for(int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) {
             int c = 0;
-            for(int x = 0; x <= 5-i; x++)
-            {
-                int y = i+x;
-                if( positions[x][5-y] == turn )
-                {
-                    winPositions[c] = new Point(x, 5-y);
+            for (int x = 0; x <= 5 - i; x++) {
+                int y = i + x;
+                if (positions[x][5 - y] == turn) {
+                    winPositions[c] = new Point(x, 5 - y);
                     c++;
-                }
-                else
+                } else
                     c = 0;
 
-                if( c >= 4 )
+                if (c >= 4)
                     return true;
             }
         }
-        for(int i = 1; i <= 3; i++)
-        {
+        for (int i = 1; i <= 3; i++) {
             int c = 0;
-            for(int y = 0; y <= 6-i; y++)
-            {
-                int x = i+y;
-                if( positions[x][5-y] == turn )
-                {
-                    winPositions[c] = new Point(x, 5-y);
+            for (int y = 0; y <= 6 - i; y++) {
+                int x = i + y;
+                if (positions[x][5 - y] == turn) {
+                    winPositions[c] = new Point(x, 5 - y);
                     c++;
-                }
-                else
+                } else
                     c = 0;
 
-                if( c >= 4 )
+                if (c >= 4)
                     return true;
             }
         }
@@ -213,8 +205,7 @@ public class Game {
      *
      * @return Die 4 Positionen als Array
      */
-    public Point[] getWinPositions()
-    {
+    public Point[] getWinPositions() {
         return winPositions;
     }
 

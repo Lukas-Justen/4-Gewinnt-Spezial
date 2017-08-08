@@ -22,16 +22,15 @@ import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
  *          Created on 05.04.2017
  *          <p>
  *          Die Klasse OnlineActivity ist zum Starten eines neuen OnlineSpiels verantwortlich. Der
- *          Spieler dieses Geräts muss seinen Namen angeben und aus einer Liste einen potentiellen
- *          Gegner wählen. Die Actvity etabliert daraughin eine Datenverbindung zwischen den beiden
- *          Geräten, die zur Kommunikation benötigt wird.
+ *          Spieler dieses Geräts muss seinen Namen angeben. Die Actvity etabliert daraufhin eine
+ *          Datenverbindung zwischen den beiden Geräten, die zur Kommunikation benötigt wird.
  */
 public class OnlineActivity extends FullscreenActivity implements View.OnClickListener {
 
     private View button_startOnline;
     private EditText editText_playerThis;
     private SegmentedButtonGroup segmentedControl_hostOrClient;
-    private String playername = "";
+    private String playerName = "";
     private BluetoothAdapter bluetoothAdapter;
 
     /**
@@ -60,13 +59,17 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
                 }
             }
         });
-        playername = PreferenceManager.getDefaultSharedPreferences(this).getString("onlinePlayer", "");
-        editText_playerThis.setText(playername);
+        playerName = PreferenceManager.getDefaultSharedPreferences(this).getString("onlinePlayer", "");
+        editText_playerThis.setText(playerName);
     }
 
+    /**
+     * Deaktiviert beim Schließen dieser Activity wieder den BluetoothAdapter, der ursprünglich für
+     * das Online-Spiel benötigt wurde.
+     */
     public void finish() {
         super.finish();
-        if (bluetoothAdapter != null)  {
+        if (bluetoothAdapter != null) {
             bluetoothAdapter.disable();
         }
     }
@@ -78,40 +81,52 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
      * @param v Der View, der angeclickt wurde.
      */
     public void onClick(View v) {
-        checknetworkForNearby();
-    }
-
-    public void checknetworkForNearby() {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        bluetoothAdapter.enable();
-        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        if (!checkNetworkForNearby()) {
             buildAlertMessageNoGps();
         } else {
             startGame();
         }
     }
 
+    /**
+     * Überprüft, ob sowohl das Bluetooth als auch die GPS-Position durch den Benutzer aktiviert
+     * wurden. Wenn das der Fall ist wird das Spiel gestartet.
+     *
+     * @return True, wenn das Netzwerk bereit ist, sonst false
+     */
+    public boolean checkNetworkForNearby() {
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        bluetoothAdapter.enable();
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    /**
+     * Startet ein neues Online-Spiel anhand des angegebenen Spielernamen und der Wahl ob man Host
+     * oder Client sein möchte.
+     */
     private void startGame() {
         Intent startOnlineGame = new Intent(this, OnlineGameActivity.class);
-        playername = editText_playerThis.getText().toString();
-        startOnlineGame.putExtra("playerName", playername);
+        playerName = editText_playerThis.getText().toString();
+        startOnlineGame.putExtra("playerName", playerName);
         startOnlineGame.putExtra("host", segmentedControl_hostOrClient.getPosition() == 0);
-        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("onlinePlayer", playername).apply();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("onlinePlayer", playerName).apply();
         startActivity(startOnlineGame);
     }
 
+    /**
+     * Zeigt einen Alert-Dialog an, zum Aktivieren des GPS.
+     */
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        builder.setMessage("Dein GPS scheint deaktiviert zu sein, willst du es für ein Online-Spiel aktivieren?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Aktivieren", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                         finish();

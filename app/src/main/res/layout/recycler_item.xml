@@ -2,7 +2,6 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/cardView_topBottomMargin"
@@ -16,7 +15,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/textView_victories"
@@ -81,45 +79,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="0dp"
             card_view:layout_constraintBottom_toBottomOf="@+id/textView_victories"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_0"
             card_view:layout_constraintRight_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/textView_victories"
-            card_view:srcCompat="@drawable/victory" />
+            card_view:srcCompat="@drawable/victory"
+            android:contentDescription="@string/imageView_victory"/>
 
         <ImageView
             android:id="@+id/imageView_draws"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="0dp"
             card_view:layout_constraintBottom_toBottomOf="@+id/textView_losses"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_0"
             card_view:layout_constraintRight_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/textView_losses"
-            card_view:srcCompat="@drawable/loss" />
+            card_view:srcCompat="@drawable/loss"
+            android:contentDescription="@string/imageView_losses"/>
 
         <ImageView
             android:id="@+id/imageView_losses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="0dp"
             card_view:layout_constraintBottom_toBottomOf="@+id/textView_draws"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_0"
             card_view:layout_constraintRight_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/textView_draws"
-            card_view:srcCompat="@drawable/draw" />
+            card_view:srcCompat="@drawable/draw"
+            android:contentDescription="@string/imageView_draws"/>
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline_1"
@@ -133,13 +134,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="0dp"
             android:visibility="visible"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_victories"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_victories"
-            card_view:srcCompat="@drawable/medal1" />
+            card_view:srcCompat="@drawable/medal1"
+            android:contentDescription="@string/imageView_medal"/>
 
         <TextView
             android:id="@+id/textView_highscorePlayerName"
@@ -147,7 +149,6 @@
             android:layout_height="30dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textView_highscoreName"
             android:textStyle="bold"
@@ -174,20 +175,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="0dp"
             android:tint="@android:color/darker_gray"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_losses"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_losses"
-            card_view:srcCompat="@drawable/round" />
+            card_view:srcCompat="@drawable/round"
+            android:contentDescription="@string/imageView_round"/>
 
         <TextView
             android:id="@+id/textView_rounds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
             android:gravity="center_vertical|start"
             android:maxEms="3"
@@ -202,13 +204,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
             android:tint="@android:color/darker_gray"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_rounds"
             card_view:layout_constraintLeft_toRightOf="@+id/textView_rounds"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_rounds"
-            card_view:srcCompat="@drawable/time" />
+            card_view:srcCompat="@drawable/time"
+            android:contentDescription="@string/imageView_time"/>
 
         <TextView
             android:id="@+id/textView_time"
@@ -231,20 +234,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="0dp"
             android:tint="@android:color/darker_gray"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_draws"
             card_view:layout_constraintLeft_toLeftOf="@+id/guideline_1"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_draws"
-            card_view:srcCompat="@drawable/local" />
+            card_view:srcCompat="@drawable/local"
+            android:contentDescription="@string/imageView_games"/>
 
         <TextView
             android:id="@+id/textView_games"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
             android:minEms="3"
             android:maxEms="3"
@@ -259,16 +263,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView_games"
             card_view:layout_constraintLeft_toRightOf="@+id/textView_games"
             card_view:layout_constraintTop_toTopOf="@+id/imageView_games"
             card_view:layout_constraintVertical_bias="0.0"
-            card_view:srcCompat="@drawable/player" />
-
+            card_view:srcCompat="@drawable/player"
+            android:contentDescription="@string/imageView_color"/>
 
     </android.support.constraint.ConstraintLayout>
-
 
 </android.support.v7.widget.CardView>

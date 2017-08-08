@@ -13,22 +13,38 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          Enum für Spieler 1 und Spieler 2. Zusätzlich wird die Farbe und der Spielstein mit
  *          abgespeichert.
  */
-public enum Player implements Serializable{
+public enum Player implements Serializable {
 
     P1(R.color.colorRed, R.drawable.stone_red), P2(R.color.colorYellow, R.drawable.stone_yellow);
 
     private int color;
     private int image;
 
+    /**
+     * Legt einen neuen Spieler an.
+     *
+     * @param color Farbe des Spielers.
+     * @param image Sein Spielstein.
+     */
     Player(int color, int image) {
         this.color = color;
         this.image = image;
     }
 
+    /**
+     * Liefert die Farbe des Spielers.
+     *
+     * @return Die Farbe als int-Ressource
+     */
     public int getColor() {
         return color;
     }
 
+    /**
+     * Liefert den Spielstein des Spielers.
+     *
+     * @return Der Spielstein als int-Ressource
+     */
     public int getImage() {
         return image;
     }

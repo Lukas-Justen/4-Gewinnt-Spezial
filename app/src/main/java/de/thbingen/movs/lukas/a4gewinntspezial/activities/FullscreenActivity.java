@@ -18,13 +18,12 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  */
 public abstract class FullscreenActivity extends AppCompatActivity {
 
-    // Der DecorView für das Umstalten in den FullscreenMode
     private View decorView;
 
     /**
      * Wenn sich der Fokus auf die Activity ändert müssen die UI-Elemente wieder versteckt werden.
      *
-     * @param hasFocus Der neue Fokus
+     * @param hasFocus Der neue Fokus.
      */
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -32,17 +31,16 @@ public abstract class FullscreenActivity extends AppCompatActivity {
     }
 
     /**
-     * Die onCreate wird von der Superclass aufgerufen und versteckt direkt zu Beginn alle UI-
-     * Elemente des Systems. Die abgeleitete Klasse muss lediglich noch setContentView aufrufen, um
-     * das zugrunde liegende Layout festzulegen.
+     * Die onCreate() wird von der Superclass aufgerufen und versteckt direkt zu Beginn alle UI-
+     * Elemente des Systems. Die abgeleitete Klasse muss lediglich noch setContentView() aufrufen,
+     * um das zugrunde liegende Layout festzulegen.
      *
-     * @param savedInstanceState Kann benutzt werden, um Inhalte der App wieder herzustellen
+     * @param savedInstanceState Kann benutzt werden, um Inhalte der App wieder herzustellen.
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-        // Versteckt die Statusbar der App
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         decorView = getWindow().getDecorView();
         decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             public void onSystemUiVisibilityChange(int visibility) {

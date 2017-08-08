@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.adapters.PayloadCallbackAdapter;
 import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
-import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresults;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import nl.dionsegijn.konfetti.KonfettiView;
@@ -101,13 +102,13 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
     private Game game;
     private String endpoint;
     private Player winner = null;
+    private Realm realm;
+    private Playerresult playerresults;
     private long startTime;
     private boolean connected = false;
     private boolean allowedToClick = false;
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
-    private Realm realm;
-    private Playerresults playerresults;
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -236,7 +237,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
                 new AdvertisingOptions(Strategy.P2P_STAR))
                 .setResultCallback(
                         new ResultCallback<Connections.StartAdvertisingResult>() {
-                            public void onResult(Connections.StartAdvertisingResult result) {
+                            public void onResult(@NonNull Connections.StartAdvertisingResult result) {
                                 handleResultCallback(result.getStatus());
                             }
                         });
@@ -257,7 +258,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
                 new DiscoveryOptions(Strategy.P2P_STAR))
                 .setResultCallback(
                         new ResultCallback<Status>() {
-                            public void onResult(Status status) {
+                            public void onResult(@NonNull Status status) {
                                 handleResultCallback(status);
                             }
                         });
@@ -360,7 +361,6 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
         }
     }
 
-
     /**
      * Setzt das Spielfeld und die TextViews zur Anzeige der Runde für eine neue Spielrunde auf.
      */
@@ -401,11 +401,13 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      * @param payload Die Payload, die vom Partner bei diesem Gerät angekommen ist.
      */
     private void handlePayload(Payload payload) {
-        String data = new String(payload.asBytes());
-        if (data.equals("Ende")) {
-            resetGame();
-        } else {
-            insertStone(Integer.parseInt(new String(payload.asBytes())));
+        if (payload.asBytes() != null) {
+            String data = new String(payload.asBytes());
+            if (data.equals("Ende")) {
+                resetGame();
+            } else {
+                insertStone(Integer.parseInt(new String(payload.asBytes())));
+            }
         }
     }
 
@@ -463,14 +465,13 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
      * @param playerName Der Spielername dessen Ergebnisse man sucht.
      * @return Die Ergebnisse des Spielers.
      */
-    private Playerresults findPlayer(String playerName) {
-        RealmQuery<Playerresults> entriesForPlayer = realm.where(Playerresults.class).equalTo("name", playerName);
+    private Playerresult findPlayer(String playerName) {
+        RealmQuery<Playerresult> entriesForPlayer = realm.where(Playerresult.class).equalTo("name", playerName);
         if (entriesForPlayer.count() > 0) {
             return entriesForPlayer.findFirst();
         }
-        Playerresults playerresults = new Playerresults();
+        Playerresult playerresults = new Playerresult();
         playerresults.setName(playerName);
-        playerresults.setType("online");
         return playerresults;
     }
 
@@ -478,7 +479,7 @@ public class OnlineGameActivity extends FullscreenActivity implements GoogleApiC
     public void onConnectionSuspended(int i) {
     }
 
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
 
 }

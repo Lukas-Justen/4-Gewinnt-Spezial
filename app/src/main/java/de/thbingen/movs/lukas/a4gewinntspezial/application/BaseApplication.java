@@ -1,18 +1,9 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.application;
 
-import android.os.StrictMode;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.SyncConfiguration;
-import io.realm.SyncCredentials;
-import io.realm.SyncUser;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -20,21 +11,17 @@ import io.realm.SyncUser;
  *          <p>
  *          Created on 12.04.2017
  *          <p>
- *          Die Klasse BaseApplication wird zum Start der App aufgerufen. Sie initialisiert alle
- *          notwendigen Datenelemente zur Kommunikation mit Realm und stellt diese im weiteren
- *          Appverlauf zur Verfügung.
+ *          Die Klasse BaseApplication wird zum Start der App aufgerufen. Sie stellt die App für
+ *          Kompatibilität mit VektorDrawables ein.
  */
 public class BaseApplication extends MultiDexApplication {
 
     /**
      * Wird beim Start der App aufgerufen, bevor auch nur eine Activity gestartet wurde. Hier wird
-     * die Realmdatenbank mit ihrer Configuration initialisiert und notwendige Migrations
-     * vorgenommen.
+     * die Kompatibilität der App mit Vektorgrafiken ermöglicht.
      */
     public void onCreate() {
-        // VectorDrawables erlauben
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-
         super.onCreate();
     }
 

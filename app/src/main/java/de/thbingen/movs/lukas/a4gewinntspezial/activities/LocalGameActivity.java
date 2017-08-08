@@ -13,7 +13,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
-import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresults;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import nl.dionsegijn.konfetti.KonfettiView;
@@ -42,8 +42,8 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     private TextView textView_localScore1;
     private TextView textView_localScore2;
     private long startTime;
-    private Playerresults playerresults1;
-    private Playerresults playerresults2;
+    private Playerresult playerresults1;
+    private Playerresult playerresults2;
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
     private Realm realm;
@@ -257,15 +257,14 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
      * @param playerName Der Spielername dessen Ergebnisse man sucht.
      * @return Die Ergebnisse des Spielers.
      */
-    private Playerresults findPlayer(String playerName) {
-        RealmQuery<Playerresults> entriesForPlayer = realm.where(Playerresults.class).equalTo("name", playerName);
+    private Playerresult findPlayer(String playerName) {
+        RealmQuery<Playerresult> entriesForPlayer = realm.where(Playerresult.class).equalTo("name", playerName);
         if (entriesForPlayer.count() > 0) {
             return entriesForPlayer.findFirst();
         }
-        Playerresults playerresults = new Playerresults();
+        Playerresult playerresults = new Playerresult();
         playerresults.setName(playerName);
         playerresults.setAlias(playerName);
-        playerresults.setType("local");
         return playerresults;
     }
 

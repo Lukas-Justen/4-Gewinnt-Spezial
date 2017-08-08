@@ -2,11 +2,21 @@ package de.thbingen.movs.lukas.a4gewinntspezial.game;
 
 import io.realm.RealmObject;
 
-public class Playerresults extends RealmObject {
+/**
+ * @author Lukas Justen lukas.justen@th-bingen.de
+ * @version 1.0
+ *          <p>
+ *          Created on 01.08.2017
+ *          <p>
+ *          Die KLasse Playerresult speichert alle Informationen zu den Siegen und Niederlagen eines
+ *          Spielers ab. Neben den Siegen und Niederlagen wird die Anzahl der gespielten Spiele, die
+ *          Summe aller Runden, die Gesamtspielzeit und die bevorzugte Lieblingsspielsteinfarbe ge-
+ *          speichert. Für jedes Datenelemnt muss ein Setter un ein Getter zur Verfügung gestellt werden
+ */
+public class Playerresult extends RealmObject {
 
     private String name = "";
     private String alias = "";
-    private String type = "";
     private int victories = 0;
     private int losses = 0;
     private int games = 0;
@@ -30,19 +40,11 @@ public class Playerresults extends RealmObject {
         this.alias = alias;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getVictories() {
         return victories;
     }
 
-    public void setVictories(int victories) {
+    private void setVictories(int victories) {
         this.victories = victories;
     }
 
@@ -50,7 +52,7 @@ public class Playerresults extends RealmObject {
         return losses;
     }
 
-    public void setLosses(int losses) {
+    private void setLosses(int losses) {
         this.losses = losses;
     }
 
@@ -58,7 +60,7 @@ public class Playerresults extends RealmObject {
         return games;
     }
 
-    public void setGames(int games) {
+    private void setGames(int games) {
         this.games = games;
     }
 
@@ -66,7 +68,7 @@ public class Playerresults extends RealmObject {
         return rounds;
     }
 
-    public void setRounds(int rounds) {
+    private void setRounds(int rounds) {
         this.rounds = rounds;
     }
 
@@ -85,6 +87,7 @@ public class Playerresults extends RealmObject {
     public void setColorOfPreference(int colorOfPreference) {
         this.colorOfPreference = colorOfPreference;
     }
+
 
     public void addVictories(int victory) {
         setVictories(getVictories() + victory);

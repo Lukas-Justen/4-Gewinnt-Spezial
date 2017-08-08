@@ -3,23 +3,23 @@
 <resources>
 
     <!--Grundfarben-->
-    <color name="colorPrimary">#ff0099cc</color>
-    <color name="colorPrimaryTransparent">#ffaecfe2</color>
-    <color name="colorPrimaryDark">#037DA5</color>
-    <color name="colorDivider">#03698b</color>
     <color name="colorAccent">#ffaecfe2</color>
+    <color name="colorPrimary">#ff0099cc</color>
+    <color name="colorPrimaryDark">#037DA5</color>
+
+    <!--Weitere Farben-->
+    <color name="colorDivider">#03698b</color>
+    <color name="colorPrimaryTransparent">#ffaecfe2</color>
     <color name="windowBackgroundColor">#d4e3f1</color>
-    <color name="colorWin">#ff91d50d</color>
-    <color name="colorCardHighlightRed">#ffd6d6</color>
-    <color name="colorCardHighlightYellow">#ffedce</color>
+    <color name="colorButtonText">#ffe6eff4</color>
 
     <!--Spielsteinfarben-->
     <color name="colorRed">#ffcc0000</color>
-    <color name="colorYellow">#ffffbb33</color>
     <color name="colorRedTransparent">#66cc0000</color>
+    <color name="colorCardHighlightRed">#ffd6d6</color>
+    <color name="colorYellow">#ffffbb33</color>
     <color name="colorYellowTransparent">#88ffbb33</color>
-
-    <!--Textfarben-->
-    <color name="colorButtonText">#ffe6eff4</color>
+    <color name="colorCardHighlightYellow">#ffedce</color>
+    <color name="colorWin">#ff91d50d</color>
 
 </resources>
