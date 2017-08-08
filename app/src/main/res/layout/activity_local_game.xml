@@ -1,161 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    android:weightSum="20"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineGameActivity">
+    android:layout_width="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@color/colorPrimaryDark"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:weightSum="19">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|end"
-            android:tint="@android:color/white"
-            app:srcCompat="@drawable/player" />
-
-        <TextView
-            android:id="@+id/textView_localPlayer"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:gravity="center_vertical|start"
-            android:textSize="@dimen/textView_statusBar"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView_localScore1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
-            android:layout_weight="3"
-            android:gravity="center_vertical|end"
-            android:text="@string/textView_score"
-            android:textColor="@color/colorRed"
-            android:textSize="@dimen/textView_statusBar"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/textView_colon"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/textView_statusBar"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView_localScore2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center_vertical|start"
-            android:text="@string/textView_score"
-            android:textColor="@color/colorYellow"
-            android:textSize="@dimen/textView_statusBar"
-            android:textStyle="bold" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
-            android:layout_weight="1"
-            android:gravity="center_vertical|end"
-            android:tint="@android:color/white"
-            app:srcCompat="@drawable/round" />
-
-        <TextView
-            android:id="@+id/textView_localRound"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:text="@string/textView_round"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/textView_statusBar"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorDivider" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="18">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:weightSum="20"
+        tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineGameActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="7">
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@color/colorPrimaryDark"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:weightSum="19">
 
-            <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal1"
-                style="@style/LinearLayoutColumn"
-                android:tag="0" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|end"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/player" />
 
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal2"
-                style="@style/LinearLayoutColumn"
-                android:tag="1" />
+            <TextView
+                android:id="@+id/textView_localPlayer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center_vertical|start"
+                android:textSize="@dimen/textView_statusBar"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal3"
-                style="@style/LinearLayoutColumn"
-                android:tag="2" />
+            <TextView
+                android:id="@+id/textView_localScore1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
+                android:layout_weight="3"
+                android:gravity="center_vertical|end"
+                android:text="@string/textView_score"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/textView_statusBar"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal4"
-                style="@style/LinearLayoutColumn"
-                android:tag="3" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/textView_colon"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textView_statusBar"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal5"
-                style="@style/LinearLayoutColumn"
-                android:tag="4" />
+            <TextView
+                android:id="@+id/textView_localScore2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical|start"
+                android:text="@string/textView_score"
+                android:textColor="@color/colorYellow"
+                android:textSize="@dimen/textView_statusBar"
+                android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal6"
-                style="@style/LinearLayoutColumn"
-                android:tag="5" />
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4" />
 
-            <LinearLayout
-                android:id="@+id/linearlayoutLocal7"
-                style="@style/LinearLayoutColumn"
-                android:tag="6" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
+                android:layout_weight="1"
+                android:gravity="center_vertical|end"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/round" />
+
+            <TextView
+                android:id="@+id/textView_localRound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|start"
+                android:text="@string/textView_round"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textView_statusBar"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <nl.dionsegijn.konfetti.KonfettiView
-            android:id="@+id/konfettiView_local"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="2dp"
+            android:background="@color/colorDivider" />
 
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="18">
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+                <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal1"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="0" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal2"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="1" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal3"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="2" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal4"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="3" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal5"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="4" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal6"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="5" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLocal7"
+                    style="@style/LinearLayoutColumn"
+                    android:tag="6" />
+
+            </LinearLayout>
+
+            <nl.dionsegijn.konfetti.KonfettiView
+                android:id="@+id/konfettiView_local"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_localDialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#cc000000"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/button_newGame"
+            style="@style/ButtonStartActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="64dp"
+            android:layout_marginStart="64dp"
+            android:text="@string/button_newGame"/>
+
+    </LinearLayout>
+
+</FrameLayout>
+
 

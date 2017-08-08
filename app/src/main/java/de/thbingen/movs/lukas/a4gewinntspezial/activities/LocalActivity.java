@@ -51,7 +51,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         editText_player1 = (EditText) findViewById(R.id.edittext_player1);
         editText_player1.addTextChangedListener(new TextWatcherAdapter() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                player1HasName = s.length() > 0;
+                player1HasName = s.length() > 0 && !s.toString().equals(player2Name);
                 if (player1HasName && player2HasName) {
                     button_startLocal.setVisibility(View.VISIBLE);
                 } else {
@@ -63,7 +63,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         editText_player2 = (EditText) findViewById(R.id.edittext_player2);
         editText_player2.addTextChangedListener(new TextWatcherAdapter() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                player2HasName = s.length() > 0;
+                player2HasName = s.length() > 0 && !s.toString().equals(player1Name);
                 if (player1HasName && player2HasName) {
                     button_startLocal.setVisibility(View.VISIBLE);
                 } else {
@@ -88,7 +88,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         player1Name = editText_player1.getText().toString();
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer1", player1Name).apply();
         player2Name = editText_player2.getText().toString();
-        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer2", player1Name).apply();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer2", player2Name).apply();
         startLocalGame.putExtra("player1", player1Name);
         startLocalGame.putExtra("player2", player2Name);
         startActivityForResult(startLocalGame, START_GAME_CODE);

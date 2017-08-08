@@ -12,6 +12,8 @@
     <string name="button_start">Starten</string>
     <string name="button_host">Host</string>
     <string name="button_client">Client</string>
+    <string name="button_newGame">Neues Spiel starten</string>
+    <string name="button_finish">Spiel beenden</string>
 
     <string name="textView_score">0</string>
     <string name="textView_colon">:</string>

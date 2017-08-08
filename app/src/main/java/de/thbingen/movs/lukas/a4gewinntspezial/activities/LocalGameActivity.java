@@ -3,17 +3,21 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
-import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import nl.dionsegijn.konfetti.KonfettiView;
@@ -34,6 +38,8 @@ import nl.dionsegijn.konfetti.models.Size;
 public class LocalGameActivity extends FullscreenActivity implements View.OnClickListener {
 
     // Das Spielfeld
+    private Button button_newGame;
+    private LinearLayout linearLayout_localDialog;
     private LinearLayout[] linearLayouts_Columns = new LinearLayout[7];
     private ImageView[][] imageViews_fields = new ImageView[7][6];
     private KonfettiView konfettiView_local;
@@ -47,6 +53,12 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
     private int scorePlayer1 = 0;
     private int scorePlayer2 = 0;
     private Realm realm;
+    private Animation fadeIn;
+    private View.OnClickListener newGameListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            resetGame();
+        }
+    };
 
     // Die Spielvariable
     private Game game;
@@ -63,6 +75,9 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_game);
 
+        fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in_slow);
+        linearLayout_localDialog = (LinearLayout) findViewById(R.id.linearLayout_localDialog);
+        button_newGame = (Button) findViewById(R.id.button_newGame);
         konfettiView_local = (KonfettiView) findViewById(R.id.konfettiView_local);
         textView_localPlayer = (TextView) findViewById(R.id.textView_localPlayer);
         textView_localRound = (TextView) findViewById(R.id.textView_localRound);
@@ -106,8 +121,6 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
 
             int column = (int) linearLayout.getTag();
             insertStone(column);
-        } else {
-            resetGame();
         }
     }
 
@@ -125,6 +138,8 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
         winner = null;
         setupField();
         startTime = System.currentTimeMillis();
+        linearLayout_localDialog.setVisibility(View.GONE);
+        button_newGame.setOnClickListener(null);
     }
 
     /**
@@ -170,7 +185,11 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
             if (game.checkWin()) {
                 hasWinner();
             } else {
-                nextPlayer();
+                if (game.getFieldsLeft() > 0) {
+                    nextPlayer();
+                } else {
+                    showNewGameButton();
+                }
             }
         }
     }
@@ -191,6 +210,20 @@ public class LocalGameActivity extends FullscreenActivity implements View.OnClic
             textView_localScore2.setText(String.valueOf(++scorePlayer2));
             saveResults(0, 1);
         }
+        showNewGameButton();
+    }
+
+    /**
+     * Shows the button for starting a new game.
+     */
+    private void showNewGameButton() {
+        linearLayout_localDialog.startAnimation(fadeIn);
+        linearLayout_localDialog.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                button_newGame.setOnClickListener(newGameListener);
+            }
+        },2000);
     }
 
     /**
