@@ -1,4 +1,4 @@
-package de.thbingen.movs.lukas.a4gewinntspezial.application;
+package de.thbingen.movs.lukas.a4gewinntspezial.game;
 
 import io.realm.RealmConfiguration;
 import io.realm.SyncConfiguration;

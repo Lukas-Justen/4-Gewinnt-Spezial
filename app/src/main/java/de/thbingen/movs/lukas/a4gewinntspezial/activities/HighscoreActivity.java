@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.HighscoreAdapter;
-import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import io.realm.Realm;
 import io.realm.Sort;

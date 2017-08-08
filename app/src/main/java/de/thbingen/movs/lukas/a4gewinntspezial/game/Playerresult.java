@@ -84,7 +84,7 @@ public class Playerresult extends RealmObject {
         return colorOfPreference;
     }
 
-    public void setColorOfPreference(int colorOfPreference) {
+    private void setColorOfPreference(int colorOfPreference) {
         this.colorOfPreference = colorOfPreference;
     }
 

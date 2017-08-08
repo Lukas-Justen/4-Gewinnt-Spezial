@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
@@ -39,6 +40,7 @@ public abstract class FullscreenActivity extends AppCompatActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         decorView = getWindow().getDecorView();

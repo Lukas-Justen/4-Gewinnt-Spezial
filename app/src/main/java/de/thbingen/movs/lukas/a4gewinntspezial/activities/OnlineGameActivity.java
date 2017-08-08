@@ -33,7 +33,7 @@ import com.google.android.gms.nearby.connection.Strategy;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.EndpointDiscoveryAdapter;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.PayloadCallbackAdapter;
-import de.thbingen.movs.lukas.a4gewinntspezial.application.RealmHandler;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;

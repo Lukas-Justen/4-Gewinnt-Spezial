@@ -32,7 +32,7 @@
     <string name="imageView_round">The rounds this player has played</string>
     <string name="imageView_time">The sum of the time all the games took to play</string>
     <string name="imageView_games">The number of games this player has played</string>
-    <string name="imageView_color">The prefered color of this player</string>
+    <string name="imageView_color">The preferred color of this player</string>
 
     <!--Texte für die Intro-Slides-->
     <string name="title_welcome">Herzlich Willkommen</string>
