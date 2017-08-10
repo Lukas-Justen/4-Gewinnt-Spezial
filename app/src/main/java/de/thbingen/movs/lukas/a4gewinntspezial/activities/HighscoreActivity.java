@@ -1,17 +1,22 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.HighscoreAdapter;
-import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 import io.realm.Realm;
 import io.realm.Sort;
+import mehdi.sakout.dynamicbox.DynamicBox;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -23,10 +28,11 @@ import io.realm.Sort;
  *          wobei die Spielstände und Highscores der jeweiligen Personen grafisch ansprechend darge-
  *          stellt werden.
  */
-public class HighscoreActivity extends FullscreenActivity implements SegmentedButtonGroup.OnPositionChanged {
+public class HighscoreActivity extends FullscreenActivity implements SegmentedButtonGroup.OnClickedButtonPosition {
 
     private RecyclerView recyclerView_highscores;
     private Realm realm;
+    private DynamicBox box;
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -47,7 +53,39 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
         recyclerView_highscores = (RecyclerView) findViewById(R.id.recyclerView_highscores);
         recyclerView_highscores.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
-        ((SegmentedButtonGroup) findViewById(R.id.segmentedControl_highscore)).setOnPositionChanged(this);
+        ((SegmentedButtonGroup) findViewById(R.id.segmentedControl_highscore)).setOnClickedButtonPosition(this);
+        box = new DynamicBox(this, recyclerView_highscores);
+    }
+
+    /**
+     * Zeigt die lokalen Spielergebnisse im Recyclerview an.
+     */
+    private void localHighscoreSelected() {
+        realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
+        recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
+        box.hideAll();
+    }
+
+    /**
+     * Zeigt die online Spielergebnisse im Recylerview bei vorhandener Internetverbindung an.
+     */
+    private void onlineHighscoreSelected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
+            recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
+        } else {
+            recyclerView_highscores.setAdapter(null);
+            box.showInternetOffLayout();
+            box.setInternetOffTitle("Fehler");
+            box.setInternetOffMessage("Sie haben keine Internetverbindung, bitte aktivieren sie die Verbindung");
+            box.setClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onlineHighscoreSelected();
+                }
+            });
+        }
     }
 
     /**
@@ -57,15 +95,13 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
      * @param position Die Position der aktuell ausgewählten Schaltfläche innerhalb der Segmented-
      *                 Control. Dabei bedeutet 0 = lokal und 1 = online.
      */
-    public void onPositionChanged(int position) {
+    public void onClickedButtonPosition(int position) {
         switch (position) {
             case 0:
-                realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
-                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
+                localHighscoreSelected();
                 break;
             case 1:
-                realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
-                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
+                onlineHighscoreSelected();
                 break;
         }
     }
