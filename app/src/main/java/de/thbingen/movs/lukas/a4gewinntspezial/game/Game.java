@@ -21,11 +21,13 @@ public class Game {
     private final String PLAYER_1;
     private final String PLAYER_2;
 
-    private Player turn = Player.P1;
     private Player[][] positions;
     private Point[] winPositions = new Point[4];
+    private Player turn = Player.P1;
+    private Player winner = null;
     private int round = 0;
     private int fieldsLeft = 42;
+    private long startTime;
 
     /**
      * Legt ein neues Spiel an.
@@ -50,7 +52,8 @@ public class Game {
         this.ROWS = rows;
         this.PLAYER_1 = player1;
         this.PLAYER_2 = player2;
-        positions = new Player[COLUMNS][ROWS];
+        this.positions = new Player[COLUMNS][ROWS];
+        this.startTime = System.currentTimeMillis();
     }
 
     /**
@@ -61,7 +64,9 @@ public class Game {
         positions = new Player[COLUMNS][ROWS];
         winPositions = new Point[4];
         round = 0;
+        winner = null;
         fieldsLeft = 42;
+        startTime = System.currentTimeMillis();
     }
 
     /**
@@ -91,6 +96,7 @@ public class Game {
      * @return true, wenn einer gewonnen hat, sonst false
      */
     public boolean checkWin() {
+        winner = getPlayerTurn();
         // Horizontal
         for (int i = 0; i < positions[0].length; i++) {
             int c = 0;
@@ -181,6 +187,7 @@ public class Game {
                     return true;
             }
         }
+        winner = null;
         return false;
     }
 
@@ -234,6 +241,24 @@ public class Game {
      */
     public int getFieldsLeft() {
         return fieldsLeft;
+    }
+
+    /**
+     * Liefert den Sieger, falls es einen gibt.
+     *
+     * @return Der Player, der gewonnen hat, ansonsten null.
+     */
+    public Player getWinner() {
+        return winner;
+    }
+
+    /**
+     * Liefert die Zeit in Sekunden die bereits für das aktuelle Spiel benötigt wurde.
+     *
+     * @return Die Spielzeit in Sekunden.
+     */
+    public long getPlayTime() {
+        return (System.currentTimeMillis() - startTime) /1000;
     }
 
 }

@@ -21,6 +21,11 @@
     <string name="textView_minutes">%1$d min %2$d sek</string>
     <string name="textView_round">0</string>
     <string name="textView_wait">Warten …</string>
+    <string name="textView_resultWinnerDraw">Unentschieden</string>
+    <string name="textView_resultWinnerVictory">Sieg</string>
+    <string name="textView_resultWinnerDefeat">Niederlage</string>
+    <string name="textView_resultTime">%1$02d:%2$02d Minuten</string>
+    <string name="textView_resultRound">%1$d Runden</string>
 
     <string name="editText_thisPlayer">Dein Spielername</string>
     <string name="editText_player1">Spieler 1</string>

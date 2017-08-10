@@ -8,6 +8,7 @@
     <color name="colorPrimaryDark">#037DA5</color>
 
     <!--Weitere Farben-->
+    <color name="darkTranslucent">#dd000000</color>
     <color name="colorDivider">#03698b</color>
     <color name="colorPrimaryTransparent">#ffaecfe2</color>
     <color name="windowBackgroundColor">#d4e3f1</color>

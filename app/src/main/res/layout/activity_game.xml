@@ -32,7 +32,7 @@
                 app:srcCompat="@drawable/player" />
 
             <TextView
-                android:id="@+id/textView_localPlayer"
+                android:id="@+id/textView_player"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
@@ -41,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView_localScore1"
+                android:id="@+id/textView_score1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/textView_gameStatusBarMargin"
@@ -63,7 +63,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView_localScore2"
+                android:id="@+id/textView_score2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
@@ -88,7 +88,7 @@
                 app:srcCompat="@drawable/round" />
 
             <TextView
-                android:id="@+id/textView_localRound"
+                android:id="@+id/textView_round"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -118,44 +118,44 @@
 
                 <!--Die 7 Spalten des Spielfeldes vorab angelegt-->
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal1"
+                    android:id="@+id/linearlayout1"
                     style="@style/LinearLayoutColumn"
                     android:tag="0" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal2"
+                    android:id="@+id/linearlayout2"
                     style="@style/LinearLayoutColumn"
                     android:tag="1" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal3"
+                    android:id="@+id/linearlayout3"
                     style="@style/LinearLayoutColumn"
                     android:tag="2" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal4"
+                    android:id="@+id/linearlayout4"
                     style="@style/LinearLayoutColumn"
                     android:tag="3" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal5"
+                    android:id="@+id/linearlayout5"
                     style="@style/LinearLayoutColumn"
                     android:tag="4" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal6"
+                    android:id="@+id/linearlayout6"
                     style="@style/LinearLayoutColumn"
                     android:tag="5" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayoutLocal7"
+                    android:id="@+id/linearlayout7"
                     style="@style/LinearLayoutColumn"
                     android:tag="6" />
 
             </LinearLayout>
 
             <nl.dionsegijn.konfetti.KonfettiView
-                android:id="@+id/konfettiView_local"
+                android:id="@+id/konfettiView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>
@@ -163,23 +163,92 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout_localDialog"
+        android:id="@+id/linearLayout_dialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#cc000000"
+        android:background="@color/darkTranslucent"
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_resultScore1"
+                android:textSize="@dimen/textView_scoreText"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/textView_scoreMargin"
+                android:textColor="@color/colorRed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textView_colon"
+                android:textSize="@dimen/textView_scoreText"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/textView_scoreMargin"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_resultScore2"
+                android:textSize="@dimen/textView_scoreText"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/textView_scoreMargin"
+                android:textColor="@color/colorYellow" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_resultWinner"
+            android:textSize="@dimen/button_startActivityText"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/textView_resultsMargin"
+            android:layout_marginBottom="@dimen/textView_resultsSmallMargin"
+            android:textColor="@color/colorRed"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_resultTime"
+            android:drawableStart="@drawable/time"
+            android:drawablePadding="@dimen/button_drawablePadding"
+            android:layout_marginTop="@dimen/textView_resultsSmallMargin"
+            android:layout_marginBottom="@dimen/textView_resultsSmallMargin"
+            android:textSize="@dimen/button_startActivityText"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_resultRound"
+            android:drawableStart="@drawable/round"
+            android:drawablePadding="@dimen/button_drawablePadding"
+            android:layout_marginTop="@dimen/textView_resultsSmallMargin"
+            android:layout_marginBottom="@dimen/button_newGameMargin"
+            android:textSize="@dimen/button_startActivityText"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_width="250dp"
+            android:layout_height="2dp"
+            android:background="@android:color/white"/>
 
         <Button
             android:id="@+id/button_newGame"
             style="@style/ButtonStartActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="64dp"
-            android:layout_marginLeft="64dp"
-            android:layout_marginRight="64dp"
-            android:layout_marginStart="64dp"
+            android:layout_margin="@dimen/button_newGameMargin"
             android:text="@string/button_newGame"/>
 
     </LinearLayout>
