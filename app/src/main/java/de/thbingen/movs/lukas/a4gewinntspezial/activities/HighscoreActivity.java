@@ -63,7 +63,6 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
     private void localHighscoreSelected() {
         realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
         recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
-        box.hideAll();
     }
 
     /**
@@ -96,6 +95,7 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
      *                 Control. Dabei bedeutet 0 = lokal und 1 = online.
      */
     public void onClickedButtonPosition(int position) {
+        box.hideAll();
         switch (position) {
             case 0:
                 localHighscoreSelected();

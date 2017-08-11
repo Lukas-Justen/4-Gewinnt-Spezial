@@ -2,7 +2,6 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
