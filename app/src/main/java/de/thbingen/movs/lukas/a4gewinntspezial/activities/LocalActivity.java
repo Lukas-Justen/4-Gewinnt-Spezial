@@ -12,6 +12,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
+import icepick.Icepick;
+import icepick.State;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -41,6 +43,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     private String player2Name = "";
     private boolean player1HasName = false;
     private boolean player2HasName = false;
+    @State
+    int scorePlayer1 = 0;
+    @State
+    int scorePlayer2 = 0;
     private final int START_GAME_CODE = 1234;
 
     /**
@@ -54,6 +60,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local);
         ButterKnife.bind(this);
+        Icepick.restoreInstanceState(this, savedInstanceState);
 
         // Initialisiert die Eingabefelder für die Spielernamen
         player1Name = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer1", "");
@@ -80,8 +87,9 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 }
             }
         });
-        ;
         editText_player2.setText(player2Name);
+
+        updateScore();
     }
 
     /**
@@ -112,10 +120,29 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == START_GAME_CODE) {
             if (resultCode == RESULT_OK) {
-                textView_localPlayer1.setText(String.valueOf(data.getExtras().getInt("player1")));
-                textView_localPlayer2.setText(String.valueOf(data.getExtras().getInt("player2")));
+                scorePlayer1 = data.getExtras().getInt("player1");
+                scorePlayer2 = data.getExtras().getInt("player2");
+                updateScore();
             }
         }
+    }
+
+    /**
+     * Aktualisiert den Inhalt der Anzeige für den aktuellen Spielstand zwischen Spieler 1 und 2.
+     */
+    private void updateScore() {
+        textView_localPlayer1.setText(String.valueOf(scorePlayer1));
+        textView_localPlayer2.setText(String.valueOf(scorePlayer2));
+    }
+
+    /**
+     * Speichert den aktuellen Spielstand in den savedInstanceState.
+     *
+     * @param outState Der Zustand, der gespeichert wird.
+     */
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
 }

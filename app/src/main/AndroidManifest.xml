@@ -23,8 +23,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".activities.LocalActivity"
-            android:screenOrientation="portrait" />
+            android:name=".activities.LocalActivity" />
         <activity
             android:name=".activities.LocalGameActivity"
             android:screenOrientation="landscape" />
