@@ -6,34 +6,35 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/window_background"
-    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineActivity">
+    tools:context="de.thbingen.movs.lukas.a4gewinntspezial.activities.OnlineActivity"
+    tools:layout_editor_absoluteY="25dp"
+    tools:layout_editor_absoluteX="0dp">
 
 
     <!--Die Oberen 40% des Bildschirms stellen lediglich das App-Logo dar-->
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:contentDescription="@string/imageView_applogo"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_1"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:srcCompat="@drawable/app_logo"
+        app:layout_constraintRight_toLeftOf="@+id/guideline_1"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/app_logo" />
+        android:layout_marginTop="8dp"
+        android:id="@+id/imageView" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 
     <!--In der unteren Hälfte findet der jeweilige Spieler die Schaltflächen zum Starten des Spiels bzw.-->
@@ -44,19 +45,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:hint="@string/editText_thisPlayer"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimaryTransparent"
+        android:visibility="visible"
         app:exchangeColor="@color/colorPrimary"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:standardColor="@color/colorPrimaryTransparent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_1"
-        android:layout_marginTop="0dp" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_1"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintBottom_toTopOf="@+id/button_startOnline"
+        app:layout_constraintTop_toBottomOf="@+id/segmentedControl_hostOrClient" />
+
+    <Button
+        android:id="@+id/button_startOnline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/ButtonStartActivity"
+        android:drawableEnd="@drawable/start"
+        android:drawableStart="@drawable/start"
+        android:text="@string/button_start"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/editText_thisPlayer"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_1"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp" />
 
     <co.ceryle.segmentedbutton.SegmentedButtonGroup
         android:id="@+id/segmentedControl_hostOrClient"
@@ -64,14 +84,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:background="@android:color/transparent"
         android:focusableInTouchMode="true"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="visible"
         app:sbg_borderColor="@color/colorPrimaryDark"
         app:sbg_borderSize="2dp"
         app:sbg_dividerSize="0dp"
@@ -79,8 +95,11 @@
         app:sbg_radius="30dp"
         app:sbg_rippleColor="@color/colorPrimaryTransparent"
         app:sbg_selectorColor="@color/colorPrimary"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/editText_thisPlayer">
+        app:layout_constraintBottom_toTopOf="@+id/editText_thisPlayer"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_1"
+        app:layout_constraintRight_toRightOf="parent">
 
         <co.ceryle.segmentedbutton.SegmentedButton
             android:layout_width="0dp"
@@ -109,21 +128,5 @@
             app:sb_selectedTextColor="@android:color/white" />
 
     </co.ceryle.segmentedbutton.SegmentedButtonGroup>
-
-    <Button
-        android:id="@+id/button_startOnline"
-        style="@style/ButtonStartActivity"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/button_start"
-        android:visibility="invisible"
-        android:drawableStart="@drawable/start"
-        android:drawableEnd="@drawable/start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/segmentedControl_hostOrClient" />
 
 </android.support.constraint.ConstraintLayout>

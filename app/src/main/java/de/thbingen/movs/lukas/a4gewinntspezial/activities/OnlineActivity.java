@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
@@ -47,6 +48,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online);
+        ButterKnife.bind(this);
 
         // Initialisiert die benötigten Views
         segmentedControl_hostOrClient = (SegmentedButtonGroup) findViewById(R.id.segmentedControl_hostOrClient);
