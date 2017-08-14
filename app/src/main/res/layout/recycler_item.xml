@@ -76,8 +76,8 @@
 
         <ImageView
             android:id="@+id/imageView_victories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="8dp"
@@ -92,8 +92,8 @@
 
         <ImageView
             android:id="@+id/imageView_draws"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="8dp"
@@ -108,8 +108,8 @@
 
         <ImageView
             android:id="@+id/imageView_losses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="8dp"
@@ -146,7 +146,7 @@
         <TextView
             android:id="@+id/textView_highscorePlayerName"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/colorPrimaryDark"
@@ -172,8 +172,8 @@
 
         <ImageView
             android:id="@+id/imageView_rounds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="0dp"
@@ -201,8 +201,8 @@
 
         <ImageView
             android:id="@+id/imageView_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"
@@ -231,8 +231,8 @@
 
         <ImageView
             android:id="@+id/imageView_games"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="0dp"
@@ -260,8 +260,8 @@
 
         <ImageView
             android:id="@+id/imageView_colorOfPreference"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="0dp"

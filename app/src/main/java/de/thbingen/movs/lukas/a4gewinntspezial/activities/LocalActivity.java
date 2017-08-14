@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
 
@@ -22,11 +25,18 @@ import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
  */
 public class LocalActivity extends FullscreenActivity implements View.OnClickListener {
 
-    private View button_startLocal;
-    private EditText editText_player1;
-    private EditText editText_player2;
-    private TextView textView_localPlayer1;
-    private TextView textView_localPlayer2;
+    // Die Views für die Eingabe
+    @BindView(R.id.button_startLocal)
+    View button_startLocal;
+    @BindView(R.id.edittext_player1)
+    EditText editText_player1;
+    @BindView(R.id.edittext_player2)
+    EditText editText_player2;
+    @BindView(R.id.textview_localPlayer1)
+    TextView textView_localPlayer1;
+    @BindView(R.id.textview_localPlayer2)
+    TextView textView_localPlayer2;
+
     private String player1Name = "";
     private String player2Name = "";
     private boolean player1HasName = false;
@@ -43,12 +53,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local);
+        ButterKnife.bind(this);
 
-        // Initialisiert die benötigten Views
-        button_startLocal = findViewById(R.id.button_startLocal);
-        button_startLocal.setOnClickListener(this);
-        textView_localPlayer1 = (TextView) findViewById(R.id.textview_localPlayer1);
-        editText_player1 = (EditText) findViewById(R.id.edittext_player1);
+        // Initialisiert die Eingabefelder für die Spielernamen
+        player1Name = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer1", "");
         editText_player1.addTextChangedListener(new TextWatcherAdapter() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 player1HasName = s.length() > 0 && !s.toString().equals(player2Name);
@@ -59,8 +67,9 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 }
             }
         });
-        textView_localPlayer2 = (TextView) findViewById(R.id.textview_localPlayer2);
-        editText_player2 = (EditText) findViewById(R.id.edittext_player2);
+        editText_player1.setText(player1Name);
+
+        player2Name = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer2", "");
         editText_player2.addTextChangedListener(new TextWatcherAdapter() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 player2HasName = s.length() > 0 && !s.toString().equals(player1Name);
@@ -71,9 +80,7 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
                 }
             }
         });
-        player1Name = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer1", "");
-        editText_player1.setText(player1Name);
-        player2Name = PreferenceManager.getDefaultSharedPreferences(this).getString("localPlayer2", "");
+        ;
         editText_player2.setText(player2Name);
     }
 
@@ -83,13 +90,14 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      *
      * @param v Der View, der angeclickt wurde.
      */
+    @OnClick(R.id.button_startLocal)
     public void onClick(View v) {
         Intent startLocalGame = new Intent(this, LocalGameActivity.class);
         player1Name = editText_player1.getText().toString();
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer1", player1Name).apply();
+        startLocalGame.putExtra("player1", player1Name);
         player2Name = editText_player2.getText().toString();
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("localPlayer2", player2Name).apply();
-        startLocalGame.putExtra("player1", player1Name);
         startLocalGame.putExtra("player2", player2Name);
         startActivityForResult(startLocalGame, START_GAME_CODE);
     }

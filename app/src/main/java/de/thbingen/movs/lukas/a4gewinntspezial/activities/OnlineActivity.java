@@ -11,6 +11,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
@@ -27,8 +29,10 @@ import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
  */
 public class OnlineActivity extends FullscreenActivity implements View.OnClickListener {
 
-    private View button_startOnline;
-    private EditText editText_playerThis;
+    @BindView(R.id.button_startOnline)
+    View button_startOnline;
+    @BindView(R.id.editText_thisPlayer)
+    EditText editText_playerThis;
     private SegmentedButtonGroup segmentedControl_hostOrClient;
     private String playerName = "";
     private BluetoothAdapter bluetoothAdapter;
@@ -46,9 +50,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
 
         // Initialisiert die benötigten Views
         segmentedControl_hostOrClient = (SegmentedButtonGroup) findViewById(R.id.segmentedControl_hostOrClient);
-        button_startOnline = findViewById(R.id.button_startOnline);
-        button_startOnline.setOnClickListener(this);
-        editText_playerThis = (EditText) findViewById(R.id.editText_thisPlayer);
+        playerName = PreferenceManager.getDefaultSharedPreferences(this).getString("onlinePlayer", "");
         editText_playerThis.addTextChangedListener(new TextWatcherAdapter() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean player1 = s.length() > 0;
@@ -59,7 +61,6 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
                 }
             }
         });
-        playerName = PreferenceManager.getDefaultSharedPreferences(this).getString("onlinePlayer", "");
         editText_playerThis.setText(playerName);
     }
 
@@ -80,6 +81,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
      *
      * @param v Der View, der angeclickt wurde.
      */
+    @OnClick(R.id.button_startOnline)
     public void onClick(View v) {
         if (!checkNetworkForNearby()) {
             buildAlertMessageNoGps();

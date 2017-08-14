@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.HighscoreAdapter;
@@ -30,7 +32,8 @@ import mehdi.sakout.dynamicbox.DynamicBox;
  */
 public class HighscoreActivity extends FullscreenActivity implements SegmentedButtonGroup.OnClickedButtonPosition {
 
-    private RecyclerView recyclerView_highscores;
+    @BindView(R.id.recyclerView_highscores)
+    RecyclerView recyclerView_highscores;
     private Realm realm;
     private DynamicBox box;
 
@@ -44,13 +47,13 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
+        ButterKnife.bind(this);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Realm.init(this);
         realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
 
-        recyclerView_highscores = (RecyclerView) findViewById(R.id.recyclerView_highscores);
         recyclerView_highscores.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
         ((SegmentedButtonGroup) findViewById(R.id.segmentedControl_highscore)).setOnClickedButtonPosition(this);

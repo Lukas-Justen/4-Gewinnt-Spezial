@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
@@ -36,20 +39,33 @@ import nl.dionsegijn.konfetti.models.Size;
 public abstract class GameActivity extends FullscreenActivity implements View.OnClickListener {
 
     // Das Spielfeld
-    protected LinearLayout[] linearLayouts_Columns = new LinearLayout[7];
-    protected ImageView[][] imageViews_fields = new ImageView[7][6];
+    @BindViews({R.id.linearlayout1, R.id.linearlayout2, R.id.linearlayout3, R.id.linearlayout4, R.id.linearlayout5, R.id.linearlayout6, R.id.linearlayout7})
+    protected LinearLayout[] linearLayouts_Columns;
+    @BindView(R.id.linearLayout_dialog)
     protected LinearLayout linearLayout_dialog;
+    @BindView(R.id.konfettiView)
     protected KonfettiView konfettiView;
+    @BindView(R.id.textView_player)
     protected TextView textView_player;
+    @BindView(R.id.textView_round)
     protected TextView textView_round;
+    @BindView(R.id.textView_score1)
     protected TextView textView_score1;
+    @BindView(R.id.textView_score2)
     protected TextView textView_score2;
+    @BindView(R.id.button_newGame)
     protected Button button_newGame;
+    @BindView(R.id.textView_resultTime)
     protected TextView textView_resultTime;
+    @BindView(R.id.textView_resultRound)
     protected TextView textView_resultRound;
+    @BindView(R.id.textView_resultWinner)
     protected TextView textView_resultWinner;
+    @BindView(R.id.textView_resultScore1)
     protected TextView textView_resultScore1;
+    @BindView(R.id.textView_resultScore2)
     protected TextView textView_resultScore2;
+    protected ImageView[][] imageViews_fields = new ImageView[7][6];
 
     // Die Spielvariable
     protected int scorePlayer1 = 0;
@@ -67,7 +83,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        findViewsById();
+        ButterKnife.bind(this);
         setupField();
     }
 
@@ -88,31 +104,6 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
             int column = (int) linearLayout.getTag();
             insertStone(column);
         }
-    }
-
-    /**
-     * Sucht die Views zur Darstellung der Informationen und des Spielfeldes anhand der Ids.
-     */
-    private void findViewsById() {
-        linearLayouts_Columns[0] = (LinearLayout) findViewById(R.id.linearlayout1);
-        linearLayouts_Columns[1] = (LinearLayout) findViewById(R.id.linearlayout2);
-        linearLayouts_Columns[2] = (LinearLayout) findViewById(R.id.linearlayout3);
-        linearLayouts_Columns[3] = (LinearLayout) findViewById(R.id.linearlayout4);
-        linearLayouts_Columns[4] = (LinearLayout) findViewById(R.id.linearlayout5);
-        linearLayouts_Columns[5] = (LinearLayout) findViewById(R.id.linearlayout6);
-        linearLayouts_Columns[6] = (LinearLayout) findViewById(R.id.linearlayout7);
-        linearLayout_dialog = (LinearLayout) findViewById(R.id.linearLayout_dialog);
-        konfettiView = (KonfettiView) findViewById(R.id.konfettiView);
-        textView_player = (TextView) findViewById(R.id.textView_player);
-        textView_round = (TextView) findViewById(R.id.textView_round);
-        textView_score1 = (TextView) findViewById(R.id.textView_score1);
-        textView_score2 = (TextView) findViewById(R.id.textView_score2);
-        button_newGame = (Button) findViewById(R.id.button_newGame);
-        textView_resultTime = (TextView) findViewById(R.id.textView_resultTime);
-        textView_resultRound = (TextView) findViewById(R.id.textView_resultRound);
-        textView_resultWinner  = (TextView) findViewById(R.id.textView_resultWinner);
-        textView_resultScore1 = (TextView) findViewById(R.id.textView_resultScore1);
-        textView_resultScore2 = (TextView) findViewById(R.id.textView_resultScore2);
     }
 
     /**
@@ -216,8 +207,8 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     protected void showResults() {
         textView_resultScore1.setText(String.valueOf(scorePlayer1));
         textView_resultScore2.setText(String.valueOf(scorePlayer2));
-        textView_resultRound.setText(getString(R.string.textView_resultRound,game.getCurrentRound()));
-        textView_resultTime.setText(getString(R.string.textView_resultTime,game.getPlayTime()/60,game.getPlayTime()%60));
+        textView_resultRound.setText(getString(R.string.textView_resultRound, game.getCurrentRound()));
+        textView_resultTime.setText(getString(R.string.textView_resultTime, game.getPlayTime() / 60, game.getPlayTime() % 60));
         if (game.getWinner() == null) {
             textView_resultWinner.setText(getString(R.string.textView_resultWinnerDraw));
             textView_resultWinner.setTextColor(getResources().getColor(R.color.colorPrimaryTransparent));

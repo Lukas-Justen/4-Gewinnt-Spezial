@@ -1,5 +1,6 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
@@ -11,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindColor;
+import butterknife.BindDrawable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import io.realm.OrderedRealmCollection;
@@ -31,15 +36,35 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
     private Context context;
     private String myId = "";
 
+    @BindDrawable(R.drawable.medal1)
+    Drawable drawable_medal1;
+    @BindDrawable(R.drawable.medal2)
+    Drawable drawable_medal2;
+    @BindDrawable(R.drawable.medal3)
+    Drawable drawable_medal3;
+    @BindColor(R.color.colorCardHighlightRed)
+    int color_highlightRed;
+    @BindColor(R.color.colorCardHighlightYellow)
+    int color_highlightYellow;
+    @BindColor(android.R.color.white)
+    int color_white;
+    @BindDrawable(R.drawable.player)
+    Drawable drawable_player;
+    @BindDrawable(R.drawable.red_player)
+    Drawable drawable_playerRed;
+    @BindDrawable(R.drawable.yellow_player)
+    Drawable drawable_playerYellow;
+
     /**
      * Initialisiert den Adapter mit allen notwendigen Daten vorab.
      *
      * @param data    Die Liste der Ergebnisse, die dargestellt werden soll.
      * @param context Der Kontext, in dem der Adapter arbeiten soll.
      */
-    public HighscoreAdapter(OrderedRealmCollection<Playerresult> data, Context context) {
+    public HighscoreAdapter(OrderedRealmCollection<Playerresult> data, Activity activity) {
         super(data, true);
-        this.context = context;
+        ButterKnife.bind(this, activity);
+        this.context = activity.getApplicationContext();
         this.myId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
@@ -72,36 +97,35 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
      */
     class HighscoreHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView_playerName;
-        private TextView textView_victories;
-        private TextView textView_draws;
-        private TextView textView_losses;
-        private TextView textView_rounds;
-        private TextView textView_time;
-        private TextView textView_games;
-        private ImageView imageView_medal;
-        private ImageView imageView_colorOfPreference;
-        private CardView cardView_background;
+        @BindView(R.id.textView_highscorePlayerName)
+        TextView textView_playerName;
+        @BindView(R.id.textView_victories)
+        TextView textView_victories;
+        @BindView(R.id.textView_draws)
+        TextView textView_draws;
+        @BindView(R.id.textView_losses)
+        TextView textView_losses;
+        @BindView(R.id.textView_rounds)
+        TextView textView_rounds;
+        @BindView(R.id.textView_time)
+        TextView textView_time;
+        @BindView(R.id.textView_games)
+        TextView textView_games;
+        @BindView(R.id.imageView_medal)
+        ImageView imageView_medal;
+        @BindView(R.id.imageView_colorOfPreference)
+        ImageView imageView_colorOfPreference;
+        @BindView(R.id.cardView_background)
+        CardView cardView_background;
 
         /**
-         * Erzeugt einen neuen ViewHolder und hinterlegt alle Views, die später zur Darstellung der
-         * Informationen benötigt werden in entsprechenden Variablen.
+         * Erzeugt einen neuen ViewHolder.
          *
          * @param view Der Parent-View, der die anderen Views enthält.
          */
         HighscoreHolder(View view) {
             super(view);
-
-            textView_playerName = (TextView) view.findViewById(R.id.textView_highscorePlayerName);
-            textView_victories = (TextView) view.findViewById(R.id.textView_victories);
-            textView_draws = (TextView) view.findViewById(R.id.textView_draws);
-            textView_losses = (TextView) view.findViewById(R.id.textView_losses);
-            textView_rounds = (TextView) view.findViewById(R.id.textView_rounds);
-            textView_time = (TextView) view.findViewById(R.id.textView_time);
-            textView_games = (TextView) view.findViewById(R.id.textView_games);
-            imageView_medal = (ImageView) view.findViewById(R.id.imageView_medal);
-            imageView_colorOfPreference = (ImageView) view.findViewById(R.id.imageView_colorOfPreference);
-            cardView_background = (CardView) view.findViewById(R.id.cardView_background);
+            ButterKnife.bind(this, view);
         }
 
         /**
@@ -122,12 +146,12 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
             imageView_colorOfPreference.setImageDrawable(getColorOfPreference(playerresults.getColorOfPreference()));
             if (playerresults.getName().equals(myId)) {
                 if (playerresults.getColorOfPreference() >= 0) {
-                    cardView_background.setCardBackgroundColor(context.getResources().getColor(R.color.colorCardHighlightRed));
+                    cardView_background.setCardBackgroundColor(color_highlightRed);
                 } else {
-                    cardView_background.setCardBackgroundColor(context.getResources().getColor(R.color.colorCardHighlightYellow));
+                    cardView_background.setCardBackgroundColor(color_highlightYellow);
                 }
             } else {
-                cardView_background.setCardBackgroundColor(context.getResources().getColor(android.R.color.white));
+                cardView_background.setCardBackgroundColor(color_white);
             }
         }
 
@@ -141,11 +165,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
         private Drawable getMedal(int position) {
             switch (position) {
                 case 0:
-                    return context.getResources().getDrawable(R.drawable.medal1);
+                    return drawable_medal1;
                 case 1:
-                    return context.getResources().getDrawable(R.drawable.medal2);
+                    return drawable_medal2;
                 case 2:
-                    return context.getResources().getDrawable(R.drawable.medal3);
+                    return drawable_medal3;
             }
             return null;
         }
@@ -159,11 +183,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
          */
         private Drawable getColorOfPreference(int color) {
             if (color == 0) {
-                return context.getResources().getDrawable(R.drawable.player);
+                return drawable_player;
             } else if (color > 0) {
-                return context.getResources().getDrawable(R.drawable.red_player);
+                return drawable_playerRed;
             } else {
-                return context.getResources().getDrawable(R.drawable.yellow_player);
+                return drawable_playerYellow;
             }
         }
 
