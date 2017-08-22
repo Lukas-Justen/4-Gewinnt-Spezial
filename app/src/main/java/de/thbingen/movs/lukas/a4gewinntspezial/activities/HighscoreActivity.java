@@ -82,11 +82,7 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
             box.showInternetOffLayout();
             box.setInternetOffTitle("Fehler");
             box.setInternetOffMessage("Sie haben keine Internetverbindung, bitte aktivieren sie die Verbindung");
-            box.setClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    onlineHighscoreSelected();
-                }
-            });
+            box.setClickListener((v)-> onlineHighscoreSelected());
         }
     }
 

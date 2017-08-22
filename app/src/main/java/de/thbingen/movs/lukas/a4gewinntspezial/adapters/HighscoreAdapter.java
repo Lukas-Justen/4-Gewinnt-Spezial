@@ -59,7 +59,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
      * Initialisiert den Adapter mit allen notwendigen Daten vorab.
      *
      * @param data    Die Liste der Ergebnisse, die dargestellt werden soll.
-     * @param context Der Kontext, in dem der Adapter arbeiten soll.
+     * @param activity Der Kontext, in dem der Adapter arbeiten soll.
      */
     public HighscoreAdapter(OrderedRealmCollection<Playerresult> data, Activity activity) {
         super(data, true);
