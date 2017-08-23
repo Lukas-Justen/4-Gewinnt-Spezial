@@ -119,9 +119,10 @@ public class LocalActivity extends FullscreenActivity implements View.OnClickLis
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == START_GAME_CODE) {
-            if (resultCode == RESULT_OK) {
-                scorePlayer1 = data.getExtras().getInt("player1");
-                scorePlayer2 = data.getExtras().getInt("player2");
+            Bundle bundle = data.getExtras();
+            if (resultCode == RESULT_OK && bundle != null) {
+                scorePlayer1 = bundle.getInt("player1");
+                scorePlayer2 = bundle.getInt("player2");
                 updateScore();
             }
         }

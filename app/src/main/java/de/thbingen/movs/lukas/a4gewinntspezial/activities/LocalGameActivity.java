@@ -38,8 +38,10 @@ public class LocalGameActivity extends GameActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         Bundle receivedData = getIntent().getExtras();
-        name1 = receivedData.getString("player1");
-        name2 = receivedData.getString("player2");
+        if (receivedData != null) {
+            name1 = receivedData.getString("player1");
+            name2 = receivedData.getString("player2");
+        }
         game = new Game(name1, name2);
         textView_player.setText(game.getPlayerName());
         textView_player.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));

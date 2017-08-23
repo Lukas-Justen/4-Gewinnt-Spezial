@@ -65,7 +65,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     protected TextView textView_resultScore1;
     @BindView(R.id.textView_resultScore2)
     protected TextView textView_resultScore2;
-    protected ImageView[][] imageViews_fields = new ImageView[7][6];
+    protected final ImageView[][] imageViews_fields = new ImageView[7][6];
 
     // Die Spielvariable
     protected int scorePlayer1 = 0;
@@ -189,15 +189,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_slow);
         linearLayout_dialog.startAnimation(fadeIn);
         linearLayout_dialog.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                button_newGame.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        resetGame();
-                    }
-                });
-            }
-        }, 2000);
+        new Handler().postDelayed(() -> button_newGame.setOnClickListener(v -> resetGame()), 2000);
     }
 
     /**

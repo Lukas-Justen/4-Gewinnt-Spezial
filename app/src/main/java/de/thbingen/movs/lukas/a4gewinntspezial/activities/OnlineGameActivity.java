@@ -1,7 +1,6 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.Settings;
@@ -11,14 +10,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
 import com.google.android.gms.nearby.connection.ConnectionInfo;
 import com.google.android.gms.nearby.connection.ConnectionLifecycleCallback;
 import com.google.android.gms.nearby.connection.ConnectionResolution;
-import com.google.android.gms.nearby.connection.Connections;
 import com.google.android.gms.nearby.connection.ConnectionsStatusCodes;
 import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo;
 import com.google.android.gms.nearby.connection.DiscoveryOptions;
@@ -110,7 +107,7 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
      * @param bundle Nicht notwendig.
      */
     public void onConnected(Bundle bundle) {
-        if (getIntent().getExtras().getBoolean("host")) {
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host")) {
             startAdvertising();
         } else {
             startDiscovering();
@@ -135,7 +132,7 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
      */
     protected void resetGame() {
         if (game.getFieldsLeft() <= 0 || game.getWinner() != null) {
-            allowedToClick = getIntent().getExtras().getBoolean("host");
+            allowedToClick = getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host");
             super.resetGame();
             Nearby.Connections.sendPayload(googleApiClient, endpoint, Payload.fromBytes("Ende".getBytes()));
         }
@@ -151,12 +148,7 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
                 "de.thbingen.movs.lukas.a4gewinntspezial",
                 getConnectionLifecycleCallback(),
                 new AdvertisingOptions(Strategy.P2P_STAR))
-                .setResultCallback(
-                        new ResultCallback<Connections.StartAdvertisingResult>() {
-                            public void onResult(@NonNull Connections.StartAdvertisingResult result) {
-                                handleResultCallback(result.getStatus());
-                            }
-                        });
+                .setResultCallback(result -> handleResultCallback(result.getStatus()));
     }
 
     /**
@@ -172,12 +164,7 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
                     }
                 },
                 new DiscoveryOptions(Strategy.P2P_STAR))
-                .setResultCallback(
-                        new ResultCallback<Status>() {
-                            public void onResult(@NonNull Status status) {
-                                handleResultCallback(status);
-                            }
-                        });
+                .setResultCallback(this::handleResultCallback);
     }
 
     /**
@@ -187,13 +174,16 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
      * @return Der Name als String.
      */
     private String getUserNickname() {
-        return getIntent().getExtras().getString("playerName");
+        if (getIntent().getExtras() != null) {
+            return getIntent().getExtras().getString("playerName");
+        }
+        return "";
     }
 
     /**
-     * Liefert den LifecyclerCallback für die Kommunikation mit dem anderen Gerät
+     * Liefert den LifecyclerCallback für die Kommunikation mit dem anderen Gerät.
      *
-     * @return
+     * @return Liefert den Lifecycle für die NearbyConnection.
      */
     private ConnectionLifecycleCallback getConnectionLifecycleCallback() {
         return new ConnectionLifecycleCallback() {
@@ -201,23 +191,14 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
                 new AlertDialog.Builder(OnlineGameActivity.this)
                         .setTitle("Wollen Sie die Verbindung zu " + connectionInfo.getEndpointName() + " akzeptieren?")
                         .setMessage("Bestätigen Sie, wenn der Code: " + connectionInfo.getAuthenticationToken() + " auch auf dem anderen Gerät angezeigt wird.")
-                        .setPositiveButton("Akzeptieren", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                acceptConnection(endpointId, connectionInfo);
-                            }
-                        })
-                        .setNegativeButton("Ablehnen", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(OnlineGameActivity.this, "Die Verbindung wird abgelehnt!", Toast.LENGTH_SHORT).show();
-                                Nearby.Connections.rejectConnection(googleApiClient, endpointId);
-                            }
-                        })
+                        .setPositiveButton("Akzeptieren", (dialog, which) -> acceptConnection(endpointId, connectionInfo))
+                        .setNegativeButton("Ablehnen", (dialog, which) -> refuseConnection(endpointId))
                         .show();
             }
 
             public void onConnectionResult(String endpointId, ConnectionResolution result) {
                 if (result.getStatus().getStatusCode() == ConnectionsStatusCodes.STATUS_OK) {
-                    allowedToClick = getIntent().getExtras().getBoolean("host");
+                    allowedToClick = getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host");
                     textView_player.setText(game.getPlayerName());
                     textView_player.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
                 }
@@ -284,14 +265,17 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
     protected void saveResults(int player1, int player2) {
         Playerresult playerresult = findPlayer(Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID), "");
         realm.beginTransaction();
-        playerresult.setAlias(getIntent().getExtras().getString("playerName"));
-        if (player1 != player2) {
-            if (getIntent().getExtras().getBoolean("host")) {
-                playerresult.addVictories(player1);
-                playerresult.addLosses(player1);
-            } else {
-                playerresult.addVictories(player2);
-                playerresult.addLosses(player2);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            playerresult.setAlias(bundle.getString("playerName"));
+            if (player1 != player2) {
+                if (bundle.getBoolean("host")) {
+                    playerresult.addVictories(player1);
+                    playerresult.addLosses(player1);
+                } else {
+                    playerresult.addVictories(player2);
+                    playerresult.addLosses(player2);
+                }
             }
         }
         playerresult.addTime(game.getPlayTime());
@@ -308,12 +292,16 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
      * @param payload Die Payload, die vom Partner bei diesem Gerät angekommen ist.
      */
     private void handlePayload(Payload payload) {
-        if (payload.asBytes() != null) {
-            String data = new String(payload.asBytes());
-            if (data.equals("Ende")) {
-                resetGame();
-            } else {
-                insertStone(Integer.parseInt(new String(payload.asBytes())));
+
+        if (payload != null && payload.asBytes() != null) {
+            byte[] bytes = payload.asBytes();
+            if (bytes != null) {
+                String data = new String(bytes);
+                if (data.equals("Ende")) {
+                    resetGame();
+                } else {
+                    insertStone(Integer.parseInt(new String(bytes)));
+                }
             }
         }
     }
@@ -327,7 +315,7 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
      */
     private void acceptConnection(String endpointId, ConnectionInfo connectionInfo) {
         endpoint = endpointId;
-        if (getIntent().getExtras().getBoolean("host")) {
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host")) {
             game = new Game(getIntent().getExtras().getString("playerName"), connectionInfo.getEndpointName());
         } else {
             game = new Game(connectionInfo.getEndpointName(), getIntent().getExtras().getString("playerName"));
@@ -340,10 +328,20 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
     }
 
     /**
+     * Lehnt die Verbindung zu dem angegebenen Enpunkt ab.
+     *
+     * @param endpointId Die ID des Endpunkts der abgelehnt werden soll.
+     */
+    private void refuseConnection(String endpointId) {
+        Toast.makeText(OnlineGameActivity.this, "Die Verbindung wird abgelehnt!", Toast.LENGTH_SHORT).show();
+        Nearby.Connections.rejectConnection(googleApiClient, endpointId);
+    }
+
+    /**
      * Liefert die Konfiguration für den Sieger-textView beim Ergebnisbildschirm
      */
     protected void getWinnerText() {
-        if (getIntent().getExtras().getBoolean("host")) {
+        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host")) {
             if (game.getWinner() == Player.P1) {
                 textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory));
             } else {

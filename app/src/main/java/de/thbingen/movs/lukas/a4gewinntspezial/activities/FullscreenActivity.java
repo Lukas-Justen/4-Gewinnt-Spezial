@@ -44,11 +44,7 @@ public abstract class FullscreenActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         decorView = getWindow().getDecorView();
-        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            public void onSystemUiVisibilityChange(int visibility) {
-                hideSystemUI();
-            }
-        });
+        decorView.setOnSystemUiVisibilityChangeListener(visibility -> hideSystemUI());
         hideSystemUI();
     }
 

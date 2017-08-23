@@ -3,7 +3,6 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -51,7 +50,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
         ButterKnife.bind(this);
 
         // Initialisiert die benötigten Views
-        segmentedControl_hostOrClient = (SegmentedButtonGroup) findViewById(R.id.segmentedControl_hostOrClient);
+        segmentedControl_hostOrClient = findViewById(R.id.segmentedControl_hostOrClient);
         playerName = PreferenceManager.getDefaultSharedPreferences(this).getString("onlinePlayer", "");
         editText_playerThis.addTextChangedListener(new TextWatcherAdapter() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -102,7 +101,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.enable();
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        return manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return manager != null && manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
     /**
@@ -125,16 +124,10 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Dein GPS scheint deaktiviert zu sein, willst du es für ein Online-Spiel aktivieren?")
                 .setCancelable(false)
-                .setPositiveButton("Aktivieren", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                    }
-                })
-                .setNegativeButton("Abbrechen", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int id) {
-                        dialog.cancel();
-                        finish();
-                    }
+                .setPositiveButton("Aktivieren", (dialog, id) -> startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)))
+                .setNegativeButton("Abbrechen", (dialog, id) -> {
+                    dialog.cancel();
+                    finish();
                 });
         final AlertDialog alert = builder.create();
         alert.show();

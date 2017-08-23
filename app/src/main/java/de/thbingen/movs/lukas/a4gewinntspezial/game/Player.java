@@ -17,8 +17,8 @@ public enum Player implements Serializable {
 
     P1(R.color.colorRed, R.drawable.stone_red), P2(R.color.colorYellow, R.drawable.stone_yellow);
 
-    private int color;
-    private int image;
+    private final int color;
+    private final int image;
 
     /**
      * Legt einen neuen Spieler an.

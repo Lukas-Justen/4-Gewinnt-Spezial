@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.support.v7.widget.CardView;
@@ -17,6 +18,7 @@ import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
+import de.thbingen.movs.lukas.a4gewinntspezial.activities.HighscoreDetailActivity;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
@@ -33,7 +35,7 @@ import io.realm.RealmRecyclerViewAdapter;
  */
 public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, HighscoreAdapter.HighscoreHolder> {
 
-    private Context context;
+    private final Context context;
     private String myId = "";
 
     @BindDrawable(R.drawable.medal1)
@@ -153,6 +155,11 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
             } else {
                 cardView_background.setCardBackgroundColor(color_white);
             }
+            cardView_background.setOnClickListener((view -> {
+                Intent i = new Intent(context, HighscoreDetailActivity.class);
+                i.putExtra("name", playerresults.getName());
+                context.startActivity(i);
+            }));
         }
 
         /**

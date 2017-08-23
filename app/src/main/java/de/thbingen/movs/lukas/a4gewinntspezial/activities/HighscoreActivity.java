@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,16 +72,18 @@ public class HighscoreActivity extends FullscreenActivity implements SegmentedBu
      */
     private void onlineHighscoreSelected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
-            recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
-        } else {
-            recyclerView_highscores.setAdapter(null);
-            box.showInternetOffLayout();
-            box.setInternetOffTitle("Fehler");
-            box.setInternetOffMessage("Sie haben keine Internetverbindung, bitte aktivieren sie die Verbindung");
-            box.setClickListener((v)-> onlineHighscoreSelected());
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
+                recyclerView_highscores.setAdapter(new HighscoreAdapter(realm.where(Playerresult.class).findAllSorted("victories", Sort.DESCENDING), this));
+            } else {
+                recyclerView_highscores.setAdapter(null);
+                box.showInternetOffLayout();
+                box.setInternetOffTitle("Fehler");
+                box.setInternetOffMessage("Sie haben keine Internetverbindung, bitte aktivieren sie die Verbindung");
+                box.setClickListener((v) -> onlineHighscoreSelected());
+            }
         }
     }
 

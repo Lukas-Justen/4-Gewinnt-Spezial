@@ -36,20 +36,8 @@ public class Game {
      * @param player2 Name des zweiten Spielers.
      */
     public Game(String player1, String player2) {
-        this(7, 6, player1, player2);
-    }
-
-    /**
-     * Legt ein neues Spiel an.
-     *
-     * @param columns Anzahl der Spalten.
-     * @param rows    Anzahl der Zeilen.
-     * @param player1 Name des ersten Spielers.
-     * @param player2 Name des zweiten Spielers.
-     */
-    private Game(int columns, int rows, String player1, String player2) {
-        this.COLUMNS = columns;
-        this.ROWS = rows;
+        this.COLUMNS = 7;
+        this.ROWS = 6;
         this.PLAYER_1 = player1;
         this.PLAYER_2 = player2;
         this.positions = new Player[COLUMNS][ROWS];
