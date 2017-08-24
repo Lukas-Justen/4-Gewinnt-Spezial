@@ -2,7 +2,6 @@ package de.thbingen.movs.lukas.a4gewinntspezial.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.support.v7.widget.CardView;
@@ -13,12 +12,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindColor;
 import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
-import de.thbingen.movs.lukas.a4gewinntspezial.activities.HighscoreDetailActivity;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
@@ -119,6 +126,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
         ImageView imageView_colorOfPreference;
         @BindView(R.id.cardView_background)
         CardView cardView_background;
+        BarChart barChart;
 
         /**
          * Erzeugt einen neuen ViewHolder.
@@ -128,6 +136,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
         HighscoreHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            barChart = view.findViewById(R.id.pieChart);
         }
 
         /**
@@ -146,6 +155,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
             textView_time.setText(context.getString(R.string.textView_minutes, playerresults.getTime() / 60, playerresults.getTime() % 60));
             textView_games.setText(String.valueOf(playerresults.getGames()));
             imageView_colorOfPreference.setImageDrawable(getColorOfPreference(playerresults.getColorOfPreference()));
+            setupBarChart(playerresults.getVictories(), playerresults.getDraws(), playerresults.getLosses());
             if (playerresults.getName().equals(myId)) {
                 if (playerresults.getColorOfPreference() >= 0) {
                     cardView_background.setCardBackgroundColor(color_highlightRed);
@@ -155,11 +165,6 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
             } else {
                 cardView_background.setCardBackgroundColor(color_white);
             }
-            cardView_background.setOnClickListener((view -> {
-                Intent i = new Intent(context, HighscoreDetailActivity.class);
-                i.putExtra("name", playerresults.getName());
-                context.startActivity(i);
-            }));
         }
 
         /**
@@ -198,6 +203,28 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
             }
         }
 
+        private void setupBarChart(int victories, int draws, int losses) {
+            List<BarEntry> entries = new ArrayList<>();
+
+            entries.add(new BarEntry(1, victories));
+            entries.add(new BarEntry(2, draws));
+            entries.add(new BarEntry(3, losses));
+
+            BarDataSet set = new BarDataSet(entries, "");
+            set.setColors(new int[]{R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorPrimaryTransparent}, context);
+            BarData data = new BarData(set);
+            data.setDrawValues(false);
+            Description d = new Description();
+            d.setText("");
+            barChart.setDescription(d);
+            barChart.getAxisLeft().setEnabled(false);
+            barChart.getAxisRight().setEnabled(false);
+            barChart.getXAxis().setEnabled(false);
+            barChart.getLegend().setEnabled(false);
+            barChart.setViewPortOffsets(0f, 0f, 0f, 0f);
+            barChart.setData(data);
+            barChart.invalidate();
+        }
     }
 
 }

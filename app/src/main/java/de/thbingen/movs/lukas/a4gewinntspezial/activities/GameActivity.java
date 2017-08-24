@@ -199,7 +199,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     protected void showResults() {
         textView_resultScore1.setText(String.valueOf(scorePlayer1));
         textView_resultScore2.setText(String.valueOf(scorePlayer2));
-        textView_resultRound.setText(getString(R.string.textView_resultRound, game.getCurrentRound()));
+        textView_resultRound.setText(getString(R.plurals.textView_resultRound, game.getCurrentRound()));
         textView_resultTime.setText(getString(R.string.textView_resultTime, game.getPlayTime() / 60, game.getPlayTime() % 60));
         if (game.getWinner() == null) {
             textView_resultWinner.setText(getString(R.string.textView_resultWinnerDraw));
