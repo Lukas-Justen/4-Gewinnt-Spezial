@@ -2,6 +2,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
@@ -44,7 +45,7 @@ public class LocalGameActivity extends GameActivity implements View.OnClickListe
         }
         game = new Game(name1, name2);
         textView_player.setText(game.getPlayerName());
-        textView_player.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        textView_player.setTextColor(ContextCompat.getColor(this,game.getPlayerTurn().getColor()));
 
         Realm.init(this);
         realm = Realm.getInstance(RealmHandler.getLocalRealmConfig());
@@ -54,11 +55,13 @@ public class LocalGameActivity extends GameActivity implements View.OnClickListe
      * Liefert die Konfiguration für den Sieger-textView beim Ergebnisbildschirm
      */
     protected void getWinnerText() {
-        textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory) + " für " + name1);
+
         if (game.getWinner() == Player.P1) {
-            textView_resultWinner.setTextColor(getResources().getColor(R.color.colorRed));
+            textView_resultWinner.setTextColor(color_red);
+            textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory, name1));
         } else {
-            textView_resultWinner.setTextColor(getResources().getColor(R.color.colorYellow));
+            textView_resultWinner.setTextColor(color_yellow);
+            textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory, name2));
         }
     }
 

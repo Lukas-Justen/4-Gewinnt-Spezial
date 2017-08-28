@@ -3,8 +3,9 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.Settings;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo;
 import com.google.android.gms.nearby.connection.DiscoveryOptions;
 import com.google.android.gms.nearby.connection.Payload;
 import com.google.android.gms.nearby.connection.Strategy;
+
+import java.util.UUID;
 
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.EndpointDiscoveryAdapter;
@@ -200,7 +203,7 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
                 if (result.getStatus().getStatusCode() == ConnectionsStatusCodes.STATUS_OK) {
                     allowedToClick = getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host");
                     textView_player.setText(game.getPlayerName());
-                    textView_player.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+                    textView_player.setTextColor(ContextCompat.getColor(getApplicationContext(), game.getPlayerTurn().getColor()));
                 }
             }
 
@@ -263,11 +266,16 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
      * @param player2 Ergebnis des clients
      */
     protected void saveResults(int player1, int player2) {
-        Playerresult playerresult = findPlayer(Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID), "");
+        String yourId = PreferenceManager.getDefaultSharedPreferences(this).getString("yourId", UUID.randomUUID().toString());
+        Playerresult playerresult = findPlayer(yourId, "");
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("yourId", yourId).apply();
         realm.beginTransaction();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            playerresult.setAlias(bundle.getString("playerName"));
+            String alias = bundle.getString("playerName");
+            if (alias != null) {
+                playerresult.setAlias(alias);
+            }
             if (player1 != player2) {
                 if (bundle.getBoolean("host")) {
                     playerresult.addVictories(player1);
@@ -347,14 +355,14 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
             } else {
                 textView_resultWinner.setText(getString(R.string.textView_resultWinnerDefeat));
             }
-            textView_resultWinner.setTextColor(getResources().getColor(R.color.colorRed));
+            textView_resultWinner.setTextColor(color_red);
         } else {
             if (game.getWinner() == Player.P2) {
                 textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory));
             } else {
                 textView_resultWinner.setText(getString(R.string.textView_resultWinnerDefeat));
             }
-            textView_resultWinner.setTextColor(getResources().getColor(R.color.colorYellow));
+            textView_resultWinner.setTextColor(color_yellow);
         }
     }
 

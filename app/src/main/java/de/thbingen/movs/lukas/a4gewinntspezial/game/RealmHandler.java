@@ -58,4 +58,14 @@ public class RealmHandler {
         return onlineConfig;
     }
 
+    /**
+     * Gibt Auskunft darüber, ob bereits eine Verbindung zur Online-Realm-Datenbank bestanden hat.
+     * Falls ja ist die Confuguration ungleich null also false;
+     *
+     * @return Boolean, ob Verbindung zur Datenbank vorhanden ist.
+     */
+    public static boolean isOnlineRealmConfigNull() {
+        return onlineConfig == null;
+    }
+
 }

@@ -20,7 +20,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:contentDescription="@string/imageView_applogo"
-        app:srcCompat="@drawable/app_logo"
+        app:srcCompat="@drawable/app_logo_svg"
         app:layout_constraintRight_toLeftOf="@+id/guideline_1"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"

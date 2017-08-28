@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
@@ -87,9 +88,9 @@ public class IntroActivity extends AppIntro2 {
         return AppIntroFragment.newInstance(getString(title)
                 , getString(message)
                 , image
-                , getResources().getColor(background)
-                , getResources().getColor(textColor)
-                , getResources().getColor(textColor));
+                , ContextCompat.getColor(this, background)
+                , ContextCompat.getColor(this, textColor)
+                , ContextCompat.getColor(this, textColor));
     }
 
 }

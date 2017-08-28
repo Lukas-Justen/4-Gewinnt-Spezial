@@ -1,8 +1,10 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.BindColor;
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -46,7 +50,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     @BindView(R.id.konfettiView)
     protected KonfettiView konfettiView;
     @BindView(R.id.textView_player)
-    protected TextView textView_player;
+    TextView textView_player;
     @BindView(R.id.textView_round)
     protected TextView textView_round;
     @BindView(R.id.textView_score1)
@@ -60,18 +64,30 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     @BindView(R.id.textView_resultRound)
     protected TextView textView_resultRound;
     @BindView(R.id.textView_resultWinner)
-    protected TextView textView_resultWinner;
+    TextView textView_resultWinner;
     @BindView(R.id.textView_resultScore1)
     protected TextView textView_resultScore1;
     @BindView(R.id.textView_resultScore2)
     protected TextView textView_resultScore2;
-    protected final ImageView[][] imageViews_fields = new ImageView[7][6];
+    @BindDrawable(R.drawable.field)
+    Drawable drawable_field;
+    @BindDrawable(R.drawable.stone_green)
+    Drawable drawable_stoneGreen;
+    @BindColor(R.color.colorPrimaryTransparent)
+    int color_primaryTransparent;
+    @BindColor(R.color.colorWin)
+    int color_win;
+    @BindColor(R.color.colorRed)
+    int color_red;
+    @BindColor(R.color.colorYellow)
+    int color_yellow;
+    private final ImageView[][] imageViews_fields = new ImageView[7][6];
 
     // Die Spielvariable
-    protected int scorePlayer1 = 0;
-    protected int scorePlayer2 = 0;
-    protected Game game;
-    protected Realm realm;
+    int scorePlayer1 = 0;
+    int scorePlayer2 = 0;
+    Game game;
+    Realm realm;
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -109,12 +125,12 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     /**
      * Befüllt die Layouts des Spielfelds mit leeren Feldern für ein neues Spiel.
      */
-    protected void setupField() {
+    private void setupField() {
         for (int j = 0; j < 7; j++) {
             linearLayouts_Columns[j].removeAllViews();
             for (int i = 0; i < 6; i++) {
                 ImageView image = new ImageView(this);
-                image.setImageDrawable(getResources().getDrawable(R.drawable.field));
+                image.setImageDrawable(drawable_field);
                 imageViews_fields[j][i] = image;
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
                 linearLayouts_Columns[j].addView(image, params);
@@ -130,7 +146,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     private void nextPlayer() {
         game.nextPlayer();
         textView_player.setText(game.getPlayerName());
-        textView_player.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        textView_player.setTextColor(ContextCompat.getColor(this, game.getPlayerTurn().getColor()));
         textView_round.setText(String.valueOf(game.getCurrentRound()));
     }
 
@@ -140,11 +156,11 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
      *
      * @param column Die Spalte, in die der Stein eingeworfen werden soll.
      */
-    protected int insertStone(int column) {
+    int insertStone(int column) {
         int row = game.insert(column);
 
         if (row >= 0) {
-            imageViews_fields[column][row].setImageDrawable(getResources().getDrawable(game.getPlayerTurn().getImage()));
+            imageViews_fields[column][row].setImageDrawable(ContextCompat.getDrawable(this,game.getPlayerTurn().getImage()));
 
             if (game.checkWin()) {
                 hasWinner();
@@ -163,9 +179,9 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
      * Lässt Konfetti an der Position der Siegerkombination explodieren und aktualisiert die
      * Anzeigen nach dem Sieg.
      */
-    protected void hasWinner() {
+    private void hasWinner() {
         for (Point p : game.getWinPositions()) {
-            imageViews_fields[p.x][p.y].setImageDrawable(getResources().getDrawable(R.drawable.stone_green));
+            imageViews_fields[p.x][p.y].setImageDrawable(drawable_stoneGreen);
             makeKonfetti(p, game.getPlayerTurn().getColor());
         }
         if (game.getWinner() == Player.P1) {
@@ -181,7 +197,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     /**
      * Zeigt den Button zum Starten einer neuen Partie an.
      */
-    protected void showNewGameButton() {
+    private void showNewGameButton() {
         if (game.getWinner() == null) {
             saveResults(0, 0);
         }
@@ -196,14 +212,14 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
      * Zeigt beim Ende des Spiels die aktuellen Spielergebnisse, Rundenzeiten und sonstige
      * Informationen an.
      */
-    protected void showResults() {
+    private void showResults() {
         textView_resultScore1.setText(String.valueOf(scorePlayer1));
         textView_resultScore2.setText(String.valueOf(scorePlayer2));
-        textView_resultRound.setText(getString(R.plurals.textView_resultRound, game.getCurrentRound()));
+        textView_resultRound.setText(getResources().getQuantityString(R.plurals.textView_resultRound, game.getCurrentRound(), game.getCurrentRound()));
         textView_resultTime.setText(getString(R.string.textView_resultTime, game.getPlayTime() / 60, game.getPlayTime() % 60));
         if (game.getWinner() == null) {
             textView_resultWinner.setText(getString(R.string.textView_resultWinnerDraw));
-            textView_resultWinner.setTextColor(getResources().getColor(R.color.colorPrimaryTransparent));
+            textView_resultWinner.setTextColor(color_primaryTransparent);
         } else {
             getWinnerText();
         }
@@ -217,9 +233,9 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     /**
      * Lässt gelbes und rotes Konfetti an der Position der Siegerkombination explodieren.
      */
-    protected void makeKonfetti(Point point, int color) {
+    private void makeKonfetti(Point point, int color) {
         konfettiView.build()
-                .addColors(getResources().getColor(color), getResources().getColor(R.color.colorWin))
+                .addColors(ContextCompat.getColor(this,color), color_win)
                 .setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f)
                 .setFadeOutEnabled(true)
@@ -240,7 +256,7 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
      * @param alias Der Alias der für einen neuen Eintrag verwendet werden soll.
      * @return Die Ergebnisse des Spielers.
      */
-    protected Playerresult findPlayer(String name, String alias) {
+    Playerresult findPlayer(String name, String alias) {
         RealmQuery<Playerresult> entriesForPlayer = realm.where(Playerresult.class).equalTo("name", name);
         if (entriesForPlayer.count() > 0) {
             return entriesForPlayer.findFirst();
@@ -254,10 +270,10 @@ public abstract class GameActivity extends FullscreenActivity implements View.On
     /**
      * Setzt das Spielfeld und die TextViews zur Anzeige der Runde für eine neue Spielrunde auf.
      */
-    protected void resetGame() {
+    void resetGame() {
         game.reset();
         textView_player.setText(game.getPlayerName());
-        textView_player.setTextColor(getResources().getColor(game.getPlayerTurn().getColor()));
+        textView_player.setTextColor(ContextCompat.getColor(this, game.getPlayerTurn().getColor()));
         textView_round.setText(String.valueOf(game.getCurrentRound()));
         setupField();
         linearLayout_dialog.setVisibility(View.GONE);

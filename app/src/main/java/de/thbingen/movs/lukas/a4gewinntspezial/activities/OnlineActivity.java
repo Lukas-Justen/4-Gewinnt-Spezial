@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +17,7 @@ import butterknife.OnClick;
 import co.ceryle.segmentedbutton.SegmentedButtonGroup;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 import de.thbingen.movs.lukas.a4gewinntspezial.adapters.TextWatcherAdapter;
+import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
 
 /**
  * @author Lukas Justen lukas.justen@th-bingen.de
@@ -87,7 +89,11 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
         if (!checkNetworkForNearby()) {
             buildAlertMessageNoGps();
         } else {
-            startGame();
+            if (RealmHandler.isOnlineRealmConfigNull()) {
+                Toast.makeText(this, "Sie haben keine Verbindung zur Online-datenbank und können daher keine Partie spielen!",Toast.LENGTH_LONG).show();
+            } else {
+                startGame();
+            }
         }
     }
 
@@ -97,7 +103,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
      *
      * @return True, wenn das Netzwerk bereit ist, sonst false
      */
-    public boolean checkNetworkForNearby() {
+    private boolean checkNetworkForNearby() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.enable();
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

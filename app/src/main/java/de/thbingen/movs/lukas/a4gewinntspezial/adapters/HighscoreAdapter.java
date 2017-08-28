@@ -3,7 +3,7 @@ package de.thbingen.movs.lukas.a4gewinntspezial.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.provider.Settings;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindColor;
 import butterknife.BindDrawable;
@@ -67,14 +68,15 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
     /**
      * Initialisiert den Adapter mit allen notwendigen Daten vorab.
      *
-     * @param data    Die Liste der Ergebnisse, die dargestellt werden soll.
+     * @param data     Die Liste der Ergebnisse, die dargestellt werden soll.
      * @param activity Der Kontext, in dem der Adapter arbeiten soll.
      */
     public HighscoreAdapter(OrderedRealmCollection<Playerresult> data, Activity activity) {
         super(data, true);
         ButterKnife.bind(this, activity);
         this.context = activity.getApplicationContext();
-        this.myId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        this.myId = PreferenceManager.getDefaultSharedPreferences(context).getString("yourId", UUID.randomUUID().toString());
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("yourId", myId).apply();
     }
 
     /**
@@ -126,7 +128,7 @@ public class HighscoreAdapter extends RealmRecyclerViewAdapter<Playerresult, Hig
         ImageView imageView_colorOfPreference;
         @BindView(R.id.cardView_background)
         CardView cardView_background;
-        BarChart barChart;
+        final BarChart barChart;
 
         /**
          * Erzeugt einen neuen ViewHolder.

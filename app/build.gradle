@@ -7,7 +7,7 @@ android {
     buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "de.thbingen.movs.lukas.a4gewinntspezial"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,7 @@ android {
         sourceCompatibility 1.8
     }
 }
+
 allprojects {
     repositories {
         maven { url "https://jitpack.io" }

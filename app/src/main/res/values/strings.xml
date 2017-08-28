@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Name der App-->
     <string name="app_name">Connect Four</string>
@@ -16,13 +16,12 @@
 
     <string name="textView_score">0</string>
     <string name="textView_colon">:</string>
-    <string name="textView_minutes">%1$d min. %2$d sec.</string>
+    <string name="textView_minutes" tools:ignore="PluralsCandidate">%1$d min. %2$d sec.</string>
     <string name="textView_round">0</string>
-    <string name="textView_wait">Waiting …</string>
     <string name="textView_resultWinnerDraw">Draw</string>
-    <string name="textView_resultWinnerVictory">Victory</string>
+    <string name="textView_resultWinnerVictory">Victory for %s</string>
     <string name="textView_resultWinnerDefeat">Loss</string>
-    <string name="textView_resultTime">%1$02d:%2$02d Minutes</string>
+    <string name="textView_resultTime" tools:ignore="PluralsCandidate">%1$02d:%2$02d Minutes</string>
     <plurals name="textView_resultRound">
         <item quantity="one">%1$d Round</item>
         <item quantity="other">%1$d Rounds</item>
