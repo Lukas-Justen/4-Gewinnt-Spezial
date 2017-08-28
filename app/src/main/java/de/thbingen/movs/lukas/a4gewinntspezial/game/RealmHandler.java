@@ -1,5 +1,6 @@
 package de.thbingen.movs.lukas.a4gewinntspezial.game;
 
+import io.realm.ObjectServerError;
 import io.realm.RealmConfiguration;
 import io.realm.SyncConfiguration;
 import io.realm.SyncCredentials;
@@ -45,7 +46,7 @@ public class RealmHandler {
      *
      * @return Der Online-Zugang.
      */
-    public static RealmConfiguration getOnlineRealmConfig() {
+    public static RealmConfiguration getOnlineRealmConfig() throws ObjectServerError {
         if (onlineConfig != null) {
             return onlineConfig;
         }
@@ -56,16 +57,6 @@ public class RealmHandler {
                 .name("online.realm")
                 .build();
         return onlineConfig;
-    }
-
-    /**
-     * Gibt Auskunft darüber, ob bereits eine Verbindung zur Online-Realm-Datenbank bestanden hat.
-     * Falls ja ist die Confuguration ungleich null also false;
-     *
-     * @return Boolean, ob Verbindung zur Datenbank vorhanden ist.
-     */
-    public static boolean isOnlineRealmConfigNull() {
-        return onlineConfig == null;
     }
 
 }

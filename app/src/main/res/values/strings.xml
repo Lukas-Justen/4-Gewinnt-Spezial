@@ -19,6 +19,7 @@
     <string name="textView_minutes" tools:ignore="PluralsCandidate">%1$d min. %2$d sec.</string>
     <string name="textView_round">0</string>
     <string name="textView_resultWinnerDraw">Draw</string>
+    <string name="textView_resultWinnerVictoryOnline">Victory</string>
     <string name="textView_resultWinnerVictory">Victory for %s</string>
     <string name="textView_resultWinnerDefeat">Loss</string>
     <string name="textView_resultTime" tools:ignore="PluralsCandidate">%1$02d:%2$02d Minutes</string>

@@ -89,11 +89,7 @@ public class OnlineActivity extends FullscreenActivity implements View.OnClickLi
         if (!checkNetworkForNearby()) {
             buildAlertMessageNoGps();
         } else {
-            if (RealmHandler.isOnlineRealmConfigNull()) {
-                Toast.makeText(this, "Sie haben keine Verbindung zur Online-datenbank und können daher keine Partie spielen!",Toast.LENGTH_LONG).show();
-            } else {
-                startGame();
-            }
+            startGame();
         }
     }
 

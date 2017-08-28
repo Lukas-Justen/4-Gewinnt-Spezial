@@ -32,6 +32,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.game.Game;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Player;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.Playerresult;
 import de.thbingen.movs.lukas.a4gewinntspezial.game.RealmHandler;
+import io.realm.ObjectServerError;
 import io.realm.Realm;
 
 /**
@@ -69,7 +70,13 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Realm.init(this);
-        realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
+        try {
+            realm = Realm.getInstance(RealmHandler.getOnlineRealmConfig());
+        } catch (ObjectServerError ose) {
+            ose.printStackTrace();
+            Toast.makeText(this, "Sie haben keine Internetverbindung und können daher nicht online spielen!",Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     /**
@@ -351,14 +358,14 @@ public class OnlineGameActivity extends GameActivity implements GoogleApiClient.
     protected void getWinnerText() {
         if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("host")) {
             if (game.getWinner() == Player.P1) {
-                textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory));
+                textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictoryOnline));
             } else {
                 textView_resultWinner.setText(getString(R.string.textView_resultWinnerDefeat));
             }
             textView_resultWinner.setTextColor(color_red);
         } else {
             if (game.getWinner() == Player.P2) {
-                textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictory));
+                textView_resultWinner.setText(getString(R.string.textView_resultWinnerVictoryOnline));
             } else {
                 textView_resultWinner.setText(getString(R.string.textView_resultWinnerDefeat));
             }
