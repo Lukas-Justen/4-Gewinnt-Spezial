@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Name der App-->
-    <string name="app_name">4 Gewinnt</string>
+    <string name="app_name">Connect Four</string>
 
-    <!--Buttons-->
-    <string name="button_local">Lokal</string>
+    <!--Buttons, TextViews, ...-->
+    <string name="button_local">Local</string>
     <string name="button_online">Online</string>
     <string name="button_highscores">Highscores</string>
-    <string name="textView_score">0</string>
-    <string name="textView_colon">:</string>
-    <string name="textView_localAction">Am Zug :</string>
-    <string name="textView_minutes">%1$d min %2$d sek</string>
-    <string name="button_start">Starten</string>
+    <string name="button_start">Start</string>
     <string name="button_host">Host</string>
     <string name="button_client">Client</string>
+    <string name="button_newGame">Start new game</string>
 
-    <!--TextViews-->
+    <string name="textView_score">0</string>
+    <string name="textView_colon">:</string>
+    <string name="textView_minutes" tools:ignore="PluralsCandidate">%1$d min. %2$d sec.</string>
     <string name="textView_round">0</string>
-    <string name="textView_wait">Warten …</string>
-    <string name="title_welcome">Herzlich Willkommen</string>
-    <string name="message_welcome">… mit dieser 4-Gewinnt-App kannst du dich wieder in deine Kindheit versetzen und aufregende Partien gegen andere spielen </string>
-    <string name="title_local">Lokale Spielrunde</string>
-    <string name="message_local">… bei lokalen Spielen kannst du auf diesem Gerät gegen eine andere Person spielen ohne eine Internetverbindung zu benötigen</string>
-    <string name="title_online">Online Spielrunde</string>
-    <string name="message_online">… bei online Spielen kannst du dich mit einer anderen Person in deiner Nähe verbinden und jeder spielt auf seinem Geräzt gegen den anderen</string>
+    <string name="textView_resultWinnerDraw">Draw</string>
+    <string name="textView_resultWinnerVictoryOnline">Victory</string>
+    <string name="textView_resultWinnerVictory">Victory for %s</string>
+    <string name="textView_resultWinnerDefeat">Loss</string>
+    <string name="textView_resultTime" tools:ignore="PluralsCandidate">%1$02d:%2$02d Minutes</string>
+    <plurals name="textView_resultRound">
+        <item quantity="one">%1$d Round</item>
+        <item quantity="other">%1$d Rounds</item>
+    </plurals>
+
+    <string name="editText_thisPlayer">Your player name</string>
+    <string name="editText_player1">Player 1</string>
+    <string name="editText_player2">Player 2</string>
+
+    <!--Content Descriptions for ImageViews-->
+    <string name="imageView_applogo" translatable="false">Shows the logo of the app.</string>
+    <string name="imageView_victory" translatable="false">Victories of this Player.</string>
+    <string name="imageView_losses" translatable="false">Losses of this Player.</string>
+    <string name="imageView_draws" translatable="false">Draws of this Player.</string>
+    <string name="imageView_medal" translatable="false">The medal this Player owns.</string>
+    <string name="imageView_round" translatable="false">The rounds this player has played.</string>
+    <string name="imageView_time" translatable="false">The sum of the time all the games took to play.</string>
+    <string name="imageView_games" translatable="false">The number of games this player has played.</string>
+    <string name="imageView_color" translatable="false">The preferred color of this player.</string>
+    <string name="imageView_player" translatable="false">The current player, who is allowed to click onto the field.</string>
+
+    <!--Texte für die Intro-Slides-->
+    <string name="title_welcome">Welcome</string>
+    <string name="message_welcome">… this Connect-Four-App will take you back to your childhood and lets you play games against other powerful gamers.</string>
+    <string name="title_local">Local Game</string>
+    <string name="message_local">… you can play against others on this device without having an internet connection.</string>
+    <string name="title_online">Online Game</string>
+    <string name="message_online">… this type of game gives you the possibility of connecting yourself to others in your area and experience a great game.</string>
     <string name="title_highscore">Highscores</string>
-    <string name="message_highscore">… sehe dir sowohl die lokalen Spielstände auf diesem Gerät als auch die Spielstände aller Nutzer an</string>
-
-    <!--EditTexts-->
-    <string name="editText_thisPlayer">Dein Spielername</string>
-    <string name="editText_player1">Spieler 1</string>
-    <string name="editText_player2">Spieler 2</string>
-
-    <!--ImageViews-->
-    <string name="imageView_applogo">Shows the logo of the app</string>
+    <string name="message_highscore">… all results will be stored in your local and online database</string>
 
 </resources>

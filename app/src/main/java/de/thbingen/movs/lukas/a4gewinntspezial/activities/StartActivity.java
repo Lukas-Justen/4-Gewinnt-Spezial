@@ -2,9 +2,9 @@ package de.thbingen.movs.lukas.a4gewinntspezial.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.View;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 
 /**
@@ -18,7 +18,7 @@ import de.thbingen.movs.lukas.a4gewinntspezial.R;
  *          Lokalen-Games. Neben dem Startenneuer Spiele wird aber auch eine Liste aller Highscores
  *          angeboten, die man über den Button "Highscores" einsehen kann.
  */
-public class StartActivity extends FullscreenActivity implements View.OnClickListener {
+public class StartActivity extends FullscreenActivity {
 
     /**
      * Die Methode wird automatisch umgehend nach dem Starten der Activity aufgerufen und dient als
@@ -30,42 +30,34 @@ public class StartActivity extends FullscreenActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-        // Initialisiert die Buttons auf dem Start-Screen
-        View button_local = findViewById(R.id.button_local);
-        button_local.setOnClickListener(this);
-        View button_online = findViewById(R.id.button_online);
-        button_online.setOnClickListener(this);
-        View button_highscore = findViewById(R.id.button_highscores);
-        button_highscore.setOnClickListener(this);
-
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("firstStart", true)) {
-            Intent startIntroActivity = new Intent(this, IntroActivity.class);
-            startActivity(startIntroActivity);
-        }
+        ButterKnife.bind(this);
     }
 
     /**
-     * Wird automatisch aufgerufen, wenn ein Button innerhalb des Layouts angeclickt wird. Der
-     * Button local Startet die Activity zum Starten eines neuen lokalen Spiels.
-     *
-     * @param view Die View, die angeclickt wurde.
+     * Der Button local startet die Activity zum Starten eines neuen lokalen Spiels.
      */
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_local:
-                Intent intentLocal = new Intent(this,LocalActivity.class);
-                startActivity(intentLocal);
-                break;
-            case R.id.button_online:
-                Intent intentOnline = new Intent(this,OnlineActivity.class);
-                startActivity(intentOnline);
-                break;
-            case R.id.button_highscores:
-                Intent intentHighscores = new Intent(this,HighscoreActivity.class);
-                startActivity(intentHighscores);
-                break;
-        }
+    @OnClick(R.id.button_local)
+    public void startLocal() {
+        Intent intentLocal = new Intent(this, LocalActivity.class);
+        startActivity(intentLocal);
+    }
+
+    /**
+     * Der Button online zum Starten eines neuen Online-games.
+     */
+    @OnClick(R.id.button_online)
+    public void startOnline() {
+        Intent intentOnline = new Intent(this, OnlineActivity.class);
+        startActivity(intentOnline);
+    }
+
+    /**
+     * Der letzten Button mit der Aufschritt Highscores zeigt die Highscores in Tabellenform an.
+     */
+    @OnClick(R.id.button_highscores)
+    public void startHighscore() {
+        Intent intentHighscores = new Intent(this, HighscoreActivity.class);
+        startActivity(intentHighscores);
     }
 
 }

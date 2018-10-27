@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 
+import butterknife.BindColor;
+import butterknife.ButterKnife;
 import de.thbingen.movs.lukas.a4gewinntspezial.R;
 
 /**
@@ -26,6 +28,10 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
     // Die Farben durch die die Linie ersetzt werden sollen
     private int exchangeColor;
     private int standardColor;
+    @BindColor(R.color.windowBackgroundColor)
+    int windowsBackgroundColor;
+    @BindColor(R.color.colorPrimaryDark)
+    int colorPrimaryDark;
 
     /**
      * 1. Custom Ctor legt nur ein CustomEditText ohne spezielle Attribute an
@@ -34,6 +40,7 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
      */
     public CustomEditText(Context context) {
         super(context);
+        ButterKnife.bind(this);
     }
 
     /**
@@ -45,6 +52,7 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
      */
     public CustomEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        ButterKnife.bind(this);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
@@ -52,8 +60,8 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
                 0, 0);
 
         try {
-            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, getResources().getColor(R.color.windowBackgroundColor));
-            standardColor = a.getColor(R.styleable.CustomEditText_standardColor, getResources().getColor(R.color.colorPrimaryDark));
+            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, windowsBackgroundColor);
+            standardColor = a.getColor(R.styleable.CustomEditText_standardColor, colorPrimaryDark);
         } finally {
             a.recycle();
         }
@@ -71,6 +79,7 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
      */
     public CustomEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        ButterKnife.bind(this);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
@@ -78,8 +87,8 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
                 0, 0);
 
         try {
-            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, getResources().getColor(R.color.windowBackgroundColor));
-            standardColor = a.getColor(R.styleable.CustomEditText_standardColor, getResources().getColor(R.color.colorPrimaryDark));
+            exchangeColor = a.getColor(R.styleable.CustomEditText_exchangeColor, windowsBackgroundColor);
+            standardColor = a.getColor(R.styleable.CustomEditText_standardColor, colorPrimaryDark);
         } finally {
             a.recycle();
         }
@@ -87,15 +96,14 @@ public class CustomEditText extends android.support.v7.widget.AppCompatEditText 
         getBackground().mutate().setColorFilter(standardColor, PorterDuff.Mode.SRC_ATOP);
     }
 
-
     /**
      * Wird automatisch aufgerufen sobald sich der Text in dem CustomEditText ändert. Wenn das der
      * Fall ist wird die Linie des EditTexts entsprechend angepasst.
      *
-     * @param text Der Text nach der Veränderung
-     * @param start Start der Veränderung
+     * @param text         Der Text nach der Veränderung
+     * @param start        Start der Veränderung
      * @param lengthBefore Länge vor der Veränderung
-     * @param lengthAfter Länge nach der Veränderung
+     * @param lengthAfter  Länge nach der Veränderung
      */
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);

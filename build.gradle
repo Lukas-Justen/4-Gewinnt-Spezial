@@ -1,15 +1,18 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta3'
         classpath 'io.realm:realm-gradle-plugin:3.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.4-2"
     }
 }
 
 allprojects {
     repositories {
+        maven { url "https://jitpack.io" }
         jcenter()
     }
 }
@@ -17,3 +20,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

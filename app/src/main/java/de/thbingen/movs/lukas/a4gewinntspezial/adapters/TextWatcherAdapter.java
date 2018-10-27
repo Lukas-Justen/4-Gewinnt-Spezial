@@ -19,8 +19,10 @@ public abstract class TextWatcherAdapter implements TextWatcher {
     public abstract void onTextChanged(CharSequence s, int start, int before, int count);
 
     // Werden nicht benötigt daher leer implentiert
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-    
-    public void afterTextChanged(Editable s) {}
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    public void afterTextChanged(Editable s) {
+    }
 
 }
